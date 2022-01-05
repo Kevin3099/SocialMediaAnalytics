@@ -10,11 +10,9 @@ import { MatTableDataSource } from '@angular/material/table';
 })
 export class HomePageComponent implements OnInit {
 
-  table: string[] = ['date','twitter','facebook','total'];
+  table: string[] = ['platforms','averageLikes','averageRetweets','averageComments','totalLikes','totalRetweets','totalComments'];
   dataSource = new MatTableDataSource<any>();
 
-  // @ViewChild(MatPaginator) paginator: MatPaginator =;
-  // @ViewChild(MatSort) sort: MatSort =;
   constructor() { }
 
   ngOnInit(): void {

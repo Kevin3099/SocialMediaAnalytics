@@ -1,0 +1,50 @@
+# compiled output
+AnaylticsProjectApp/dist
+AnaylticsProjectApp/tmp
+AnaylticsProjectApp/out-tsc
+# Only exists if Bazel was run
+AnaylticsProjectApp/bazel-out
+
+# dependencies
+AnaylticsProjectApp/node_modules
+
+# profiling files
+chrome-profiler-events*.json
+
+# IDEs and editors
+AnaylticsProjectApp/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# IDE - VSCode
+AnaylticsProjectApp/.vscode/*
+AnaylticsProjectApp/!.vscode/settings.json
+AnaylticsProjectApp/!.vscode/tasks.json
+AnaylticsProjectApp/!.vscode/launch.json
+AnaylticsProjectApp/!.vscode/extensions.json
+AnaylticsProjectApp/.history/*
+
+# misc
+AnaylticsProjectApp/.sass-cache
+AnaylticsProjectApp/connect.lock
+AnaylticsProjectApp/coverage
+AnaylticsProjectApp/libpeerconnection.log
+npm-debug.log
+yarn-error.log
+testem.log
+AnaylticsProjectApp/typings
+
+# System Files
+.DS_Store
+Thumbs.db
+
+
+#backend
+appsettings.json
+Dependencies/**
+launchSettings.json
+
