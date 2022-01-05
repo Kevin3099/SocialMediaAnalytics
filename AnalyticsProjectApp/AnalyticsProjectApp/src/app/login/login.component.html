@@ -1,0 +1,53 @@
+<div style="height: calc(100vh - 128px); width: 100%;" fxLayoutAlign="center center">
+    <div class="login-panel" *ngIf="!loginBool && !signUpBool">
+        <span class="header-thin">Welcome</span><br />
+        <span>Please Login Or Sign Up</span><br /><br /> 
+    
+        <div >
+    <button (click)="loginBoolean()" class="buttons" type=submit mat-stroked-button>Login</button>
+    <button (click)="signUpBoolean()" class="buttons" type=submit mat-stroked-button>Sign Up</button>
+    </div>
+    </div>
+
+<div class="login-panel" *ngIf="loginBool">
+    <p>Please Enter Your Login Details</p>
+
+    <form #loginForm="ngForm" (ngSubmit)="login()" fxLayout="column">
+        <mat-form-field appearance="fill">
+            <mat-label>Email</mat-label>
+            <input matInput placeholder="Email" [(ngModel)]="email"
+                name="email" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Password</mat-label>
+            <input matInput placeholder="Password" type="password" [(ngModel)]="password"
+                name="password" required>
+        </mat-form-field>
+        <button routerLink='/Home' type=submit mat-stroked-button color="primary" [disabled]="!loginForm.valid">Login</button>
+    </form>
+
+
+</div>
+
+
+<div class="login-panel" *ngIf="signUpBool">
+    <p>Please Enter Your Details To Sign Up</p>
+
+    <form #loginForm="ngForm" (ngSubmit)="login()" fxLayout="column">
+        <mat-form-field appearance="fill">
+            <mat-label>Email</mat-label>
+            <input matInput placeholder="Email" [(ngModel)]="email"
+                name="email" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Password</mat-label>
+            <input matInput placeholder="Password" type="password" [(ngModel)]="password"
+                name="password" required>
+        </mat-form-field>
+        <button routerLink='/Home' type=submit mat-stroked-button color="primary" [disabled]="!loginForm.valid">Login</button>
+    </form>
+
+</div>
+</div>

@@ -1,0 +1,31 @@
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/* table styling */
+.mat-header-row {
+    background-color: #a73359;
+    color:black;
+
+}
+.mat-header-cell {
+    font-weight: bold;
+    font-size: 1em;
+    color: black;
+    text-transform: uppercase;
+}
+.mat-header-cell .mat-form-field-empty.mat-form-field-label,
+.mat-header-cell .mat-datepicker-toggle-default-icon,
+.mat-header-cell .mat-form-field-label,
+.mat-header-cell .mat-select-value,
+.mat-header-cell .mat-select-placeholder,
+.mat-header-cell .mat-select-arrow
+{
+    color: white;
+}
+
+.mat-header-cell .mat-form-field-underline {
+    background-color: white;
+}
+.mat-row:nth-child(even){
+    background-color:lightgray;
+}

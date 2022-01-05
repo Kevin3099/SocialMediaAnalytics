@@ -1,0 +1,14 @@
+.header {
+    position: fixed;
+    z-index: 999;
+    width: 100%;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    background-color: #a73359;
+}
+
+.headerPadding{
+    background-color: lightgray;
+    padding-top: 94px; /* Padding for header*/
+     padding-bottom: 16px; /* Padding for footer will be changed*/
+ }
