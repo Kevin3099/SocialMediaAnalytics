@@ -1,0 +1,25 @@
+<mat-card>
+    <form #filterForm="ngForm" fxLayout="row">
+    <mat-form-field appearance="fill">
+        <mat-label>From Date</mat-label>
+        <input matInput placeholder="From Date" required>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>To Date</mat-label>
+        <input matInput placeholder="To Date" required>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Test</mat-label>
+        <input matInput placeholder="Test" [value]="test" type="text" required>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Platforms</mat-label>
+        <input matInput placeholder="Platform" required>
+        <!-- <input matInput [(ngModel)]="data.username" #userName="ngModel" name="userName" type="text" required> -->
+    </mat-form-field>
+    <button class="filterButton" [disabled]="!filterForm.valid">Filter</button>
+</form>
+</mat-card>

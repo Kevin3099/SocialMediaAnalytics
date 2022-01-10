@@ -1,0 +1,14 @@
+.mat-toolbar.mat-primary {
+  background-color: #a73359;
+}
+.header-item{
+    color: black;
+    cursor: pointer;
+    text-transform: uppercase;
+    margin: 0 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    line-height: 100%;
+    font-size: medium;
+}
