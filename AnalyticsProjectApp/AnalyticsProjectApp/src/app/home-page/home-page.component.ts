@@ -12,7 +12,7 @@ import { FilterComponent } from '../filter/filter.component';
 })
 export class HomePageComponent implements OnInit {
 
-  table: string[] = ['platforms','averageLikes','averageRetweets','averageComments','totalLikes','totalRetweets','totalComments'];
+  table: string[] = ['platforms','averageLikes','averageRetweets','averageComments','totalLikes','totalRetweets','totalComments','moreInfo'];
   dataSource = new MatTableDataSource<any>();
 
   constructor(){}

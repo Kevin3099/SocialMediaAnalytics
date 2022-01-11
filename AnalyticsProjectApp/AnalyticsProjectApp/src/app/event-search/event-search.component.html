@@ -1,1 +1,54 @@
-<p>event-search works!</p>
+<div style="height: calc(100vh - 128px); width: 100%;" fxLayoutAlign="center center">
+<div class="panel" *ngIf="!searchBool">
+    <p>Search for Event</p>
+
+    <form #eventSearchForm="ngForm" (ngSubmit)="search()" fxLayout="column">
+        <mat-form-field appearance="fill">
+            <mat-label>Hashtag</mat-label>
+            <input matInput placeholder="Hashtag Search" [(ngModel)]="hashtag" type="text"
+                name="hashtag" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Start Date</mat-label>
+            <input matInput placeholder="Start Date" type="date" [(ngModel)]="startDate"
+                name="startDate" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>End Date</mat-label>
+            <input matInput placeholder="End Date" type="date" [(ngModel)]="endDate"
+                name="endDate" required>
+        </mat-form-field>
+
+            <mat-form-field appearance="fill">
+                <mat-label>Platforms</mat-label>
+                <mat-select [(value)]="platformSelected" required multiple>
+                    <mat-option value="twitter">Twitter</mat-option>
+                    <mat-option value="facebook">Facebook</mat-option>
+                    <mat-option value="linkedin">LinkedIn</mat-option>
+                  </mat-select>
+            </mat-form-field>
+
+        <button type=submit mat-stroked-button color="primary" [disabled]="!eventSearchForm.valid">Search</button>
+    </form>
+</div>
+
+
+<div class="panel" *ngIf="searchBool">
+    <h1>Search Results</h1>
+    <mat-card *ngIf="!twitterBool">
+        <h3>Twitter</h3>
+    </mat-card>
+    <mat-card *ngIf="!linkedInBool">
+        <h3>LinkedIn</h3>
+    </mat-card>
+    <mat-card *ngIf="!facebookBool">
+        <h3>Facebook</h3>
+    </mat-card>
+    <mat-card>
+        <h3>Total</h3>
+    </mat-card>
+</div>
+
+</div>

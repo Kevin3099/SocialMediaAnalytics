@@ -1,1 +1,12 @@
-<p>event-comparison works!</p>
+<h1>Select Events to Compare</h1>
+<div class="panel">
+<form #eventSearchForm="ngForm" (ngSubmit)="search()" fxLayout="row">
+    <mat-form-field appearance="fill">
+        <mat-label>Select Events to Compare</mat-label>
+        <input matInput placeholder="Hashtag Search" [(ngModel)]="hashtag" type="text"
+            name="hashtag" required>
+    </mat-form-field>
+
+    <button type=submit mat-stroked-button color="primary" [disabled]="!eventSearchForm.valid">Generate Comparison</button>
+</form>
+</div>
