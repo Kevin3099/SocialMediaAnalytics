@@ -7,9 +7,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EventComparisonComponent implements OnInit {
 
+  hashtag: string = "";
+  startDate: string = "";
+  endDate: string = "";
+  platformSelected = ""
+
   constructor() { }
 
   ngOnInit(): void {
   }
+  search(){
 
+  }
 }

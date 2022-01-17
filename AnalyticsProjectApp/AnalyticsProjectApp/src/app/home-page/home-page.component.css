@@ -1,3 +1,8 @@
 table{
     width:100%;
 }
+.filterButton{
+    width:75px;
+    height: 52px;
+    background-color: white;
+}

@@ -12,6 +12,9 @@ import { MatInputModule } from '@angular/material/input';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
 import {MatTableModule} from '@angular/material/table';
+import {MatDialogModule, MatDialogRef} from '@angular/material/dialog';
+import { MatSelectModule } from '@angular/material/select';
+import { MatOptionModule } from '@angular/material/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -60,6 +63,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatPaginatorModule,
     MatSortModule,
     MatTableModule,
+    MatDialogModule,
+    MatSelectModule,
+    MatOptionModule,
 
     FormsModule
   ],

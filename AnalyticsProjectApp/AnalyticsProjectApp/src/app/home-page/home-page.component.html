@@ -1,4 +1,33 @@
+<<<<<<< HEAD
 
+=======
+<!-- <app-filter></app-filter> -->
+<mat-card>
+  <form #filterForm="ngForm" fxLayout="row" (ngSubmit)="OnFormSubmit()">
+  <mat-form-field appearance="fill">
+      <mat-label>From Date</mat-label>
+      <input matInput placeholder="From Date" [value]="fromDate" type="date" required>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+      <mat-label>To Date</mat-label>
+      <input matInput placeholder="To Date" [value]="toDate" type="date" required>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+      <mat-label>Platforms</mat-label>
+      <mat-select [(value)]="platformSelected" required>
+          <mat-option value="allPlatforms">All Platforms</mat-option>
+          <mat-option value="twitter">Twitter</mat-option>
+          <mat-option value="facebook">Facebook</mat-option>
+          <mat-option value="linkedin">LinkedIn</mat-option>
+        </mat-select>
+  </mat-form-field>
+
+  <button class="filterButton" [disabled]="!filterForm.valid" type="submit">Filter</button>
+</form>
+</mat-card>
+>>>>>>> 75d3f69f3c9bcd52e7f34b3800f30af304b87899
 
 <mat-card>
     <div class="mat-elevation-z8">
