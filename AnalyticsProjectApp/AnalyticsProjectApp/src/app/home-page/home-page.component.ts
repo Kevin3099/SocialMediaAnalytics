@@ -2,12 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-<<<<<<< HEAD
-=======
 import { MatDialog } from '@angular/material/dialog';
-import { MatTableDataSource } from '@angular/material/table';
 import { FilterComponent } from '../filter/filter.component';
->>>>>>> 75d3f69f3c9bcd52e7f34b3800f30af304b87899
 
 @Component({
   selector: 'app-home-page',
