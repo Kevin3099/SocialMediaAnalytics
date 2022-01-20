@@ -1,5 +1,6 @@
-export class homeVM  {
-    public name: any;
+export class filterVM  {
+    public sinceDate!: string;
+    public untilDate!: string;
   
     constructor(data?: any) {
       const self = this;

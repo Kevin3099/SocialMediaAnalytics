@@ -131,3 +131,7 @@ C:\Users\Kevin\Desktop\College\Semester5\Project\MyProject\AnalyticsProject\Anal
 C:\Users\Kevin\Desktop\College\Semester5\Project\MyProject\AnalyticsProject\AnalyticsProject\bin\Debug\net5.0\runtimes\osx-x64\native\libMatrixFactorizationNative.dylib
 C:\Users\Kevin\Desktop\College\Semester5\Project\MyProject\AnalyticsProject\AnalyticsProject\bin\Debug\net5.0\runtimes\win-x64\native\MatrixFactorizationNative.dll
 C:\Users\Kevin\Desktop\College\Semester5\Project\MyProject\AnalyticsProject\AnalyticsProject\bin\Debug\net5.0\runtimes\win-x86\native\MatrixFactorizationNative.dll
+C:\Users\Kevin\Desktop\College\Semester5\Project\MyProject\AnalyticsProject\AnalyticsProject\bin\Debug\net5.0\Microsoft.DotNet.PlatformAbstractions.dll
+C:\Users\Kevin\Desktop\College\Semester5\Project\MyProject\AnalyticsProject\AnalyticsProject\bin\Debug\net5.0\Microsoft.Extensions.DependencyModel.dll
+C:\Users\Kevin\Desktop\College\Semester5\Project\MyProject\AnalyticsProject\AnalyticsProject\bin\Debug\net5.0\Microsoft.Extensions.PlatformAbstractions.dll
+C:\Users\Kevin\Desktop\College\Semester5\Project\MyProject\AnalyticsProject\AnalyticsProject\bin\Debug\net5.0\Nancy.dll

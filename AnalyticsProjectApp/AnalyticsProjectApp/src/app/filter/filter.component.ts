@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { filterVM } from '../models/filterVM';
+import { HomeService } from '../services/home-service.service';
 
 @Component({
   selector: 'app-filter',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FilterComponent implements OnInit {
 
-  constructor() { }
+  constructor(   public homeService: HomeService) { }
 
   ngOnInit(): void {
   }
+  // getDataBetweenDates(){
 
+  //   this.homeService.getDataBetweenDates(this.filter)
+  // }
 }

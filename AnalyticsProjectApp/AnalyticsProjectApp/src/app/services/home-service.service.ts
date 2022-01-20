@@ -3,16 +3,22 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { homeVM } from '../models/homeVM';
+import { filterVM } from '../models/filterVM';
 
 @Injectable({
   providedIn: 'root'
 })
-export class HomeServiceService {
+export class HomeService {
 
   constructor(private http: HttpClient) {}
 
-  public getReports = (): Observable<Array<homeVM>> => {
+  public getData = (): Observable<Array<homeVM>> => {
     const url = `${environment.apiHost}api/homePage`;
     return this.http.get<Array<homeVM>>(url);
   }
+
+public getDataBetweenDates = (filter: filterVM): Observable<filterVM> => {
+  const url = `${environment.apiHost}api/homePage`;
+  return this.http.post<filterVM>(url, filter);
+}
 };

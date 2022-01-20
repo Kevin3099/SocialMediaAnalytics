@@ -21,13 +21,13 @@
     </PackageReference>
     <PackageReference Include="Microsoft.ML" Version="1.7.0" />
     <PackageReference Include="Microsoft.ML.AutoML" Version="0.19.0" />
+    <PackageReference Include="Nancy" Version="2.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+    <PackageReference Include="System.Collections" Version="4.3.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-    <Folder Include="Services\" />
-    <Folder Include="ViewModels\" />
+    <Folder Include="System\" />
   </ItemGroup>
 
 </Project>
