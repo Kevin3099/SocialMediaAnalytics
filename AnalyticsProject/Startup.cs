@@ -49,7 +49,7 @@ namespace AnalyticsProject
             services.AddTransient<IFacebookService, FacebookService>();
             services.AddTransient<ILinkedInService, LinkedInService>();
             services.AddTransient<IMachineLearningService, MachineLearningService>();
-            services.AddTransient<ISocialMediaTotalService, SocialMediaTotalService>();
+            services.AddTransient<ISummaryInformationService, SummaryInformation>();
             services.AddTransient<ITwitterService, TwitterService>();
 
         }

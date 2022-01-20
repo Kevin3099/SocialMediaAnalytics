@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace AnalyticsProject.Services
 {
-    public interface ISocialMediaTotalService
+    public interface ISummaryInformationService
     {
         void GetNames();
     }
-    public class SocialMediaTotalService : ServiceBase, ISocialMediaTotalService
+    public class SummaryInformation : ServiceBase, ISummaryInformationService
     {
-        public SocialMediaTotalService(SMAContext ctx) : base(ctx)
+        public SummaryInformation(SMAContext ctx) : base(ctx)
         {
         }
 
