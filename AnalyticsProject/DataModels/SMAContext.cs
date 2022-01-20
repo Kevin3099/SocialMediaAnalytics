@@ -2,7 +2,7 @@
 
 namespace AnalyticsProject.DataModels
 {
-    internal class SMAContext : DbContext
+    public class SMAContext : DbContext
     {
 
             // DB stuff goes here
