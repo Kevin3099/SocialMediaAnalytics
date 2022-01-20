@@ -13,6 +13,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.IO;
+using AnalyticsProject.Services;
 
 namespace AnalyticsProject
 {
@@ -43,7 +44,7 @@ namespace AnalyticsProject
             services.AddDbContext<DataModels.SMAContext>(options => options.UseSqlServer(connection));
 
             //   services.Configure<AppConfig>(Configuration.GetSection("appConfig"));
-            //  services.AddTransient<IHomePageService, HomePageService>();
+        //      services.AddTransient<IHomePageService, HomePageService>();
 
         }
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
