@@ -1,4 +1,5 @@
 ﻿using AnalyticsProject.Services;
+using AnalyticsProject.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Nancy.Json;
@@ -22,22 +23,21 @@ namespace AnalyticsProject.Controllers
             Svc = homePageService;
         }
 
-     /*   [HttpGet()]
+        [HttpGet()]
         [ResponseCache(Duration = 1)]
         [Route("Get")]
-        public ActionResult<List<getVM>> Get()
+        public ActionResult Get()
         {
-            var result = Execute(Svc.Get);
+            var result = Execute(Svc.GetNames);
             return result;
         }
 
-        [HttpPost]
+      /*  [HttpPost]
         [Route("Add")]
         public ActionResult<VM> Add([FromBody] VM add)
         {
             var result = Execute(Svc.Add, add);
             return result;
-        }
-     */
+        }*/
     }
 }
