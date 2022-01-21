@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Kevin Power\\Desktop\\College\\SocialMediaAnalytics-master (1)\\SocialMediaAnalytics\\SocialMediaAnalytics\\AnalyticsProject\\AnalyticsProject.csproj": {}
+    "C:\\Users\\Kevin\\Desktop\\College\\Semester5\\Project\\MyProject\\AnalyticsProject\\AnalyticsProject\\AnalyticsProject.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Kevin Power\\Desktop\\College\\SocialMediaAnalytics-master (1)\\SocialMediaAnalytics\\SocialMediaAnalytics\\AnalyticsProject\\AnalyticsProject.csproj": {
+    "C:\\Users\\Kevin\\Desktop\\College\\Semester5\\Project\\MyProject\\AnalyticsProject\\AnalyticsProject\\AnalyticsProject.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Kevin Power\\Desktop\\College\\SocialMediaAnalytics-master (1)\\SocialMediaAnalytics\\SocialMediaAnalytics\\AnalyticsProject\\AnalyticsProject.csproj",
+        "projectUniqueName": "C:\\Users\\Kevin\\Desktop\\College\\Semester5\\Project\\MyProject\\AnalyticsProject\\AnalyticsProject\\AnalyticsProject.csproj",
         "projectName": "AnalyticsProject",
-        "projectPath": "C:\\Users\\Kevin Power\\Desktop\\College\\SocialMediaAnalytics-master (1)\\SocialMediaAnalytics\\SocialMediaAnalytics\\AnalyticsProject\\AnalyticsProject.csproj",
-        "packagesPath": "C:\\Users\\Kevin Power\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Kevin Power\\Desktop\\College\\SocialMediaAnalytics-master (1)\\SocialMediaAnalytics\\SocialMediaAnalytics\\AnalyticsProject\\obj\\",
+        "projectPath": "C:\\Users\\Kevin\\Desktop\\College\\Semester5\\Project\\MyProject\\AnalyticsProject\\AnalyticsProject\\AnalyticsProject.csproj",
+        "packagesPath": "C:\\Users\\Kevin\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Kevin\\Desktop\\College\\Semester5\\Project\\MyProject\\AnalyticsProject\\AnalyticsProject\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Kevin Power\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Kevin\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -99,6 +99,10 @@
             "System.Collections": {
               "target": "Package",
               "version": "[4.3.0, )"
+            },
+            "TweetinviAPI": {
+              "target": "Package",
+              "version": "[5.0.4, )"
             }
           },
           "imports": [
@@ -119,7 +123,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.404\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     }

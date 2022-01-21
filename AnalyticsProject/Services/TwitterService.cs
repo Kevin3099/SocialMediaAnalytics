@@ -8,7 +8,11 @@ namespace AnalyticsProject.Services
 {
     public interface ITwitterService
     {
-        void GetNames();
+        void GetRecentTweetStats();
+        void GetTweetStatsBetweenDates();
+        void GetTweetStatsForMatchingTerms();
+        void GetTweetBetweenDateForTerm();
+
     }
     public class TwitterService : ServiceBase, ITwitterService
     {
@@ -16,10 +20,24 @@ namespace AnalyticsProject.Services
         {
         }
 
-        public void GetNames()
+        void ITwitterService.GetRecentTweetStats()
         {
+            throw new NotImplementedException();
+        }
 
-            //  return vm;
+        void ITwitterService.GetTweetStatsBetweenDates()
+        {
+            throw new NotImplementedException();
+        }
+
+        void ITwitterService.GetTweetStatsForMatchingTerms()
+        {
+            throw new NotImplementedException();
+        }
+
+        void ITwitterService.GetTweetBetweenDateForTerm()
+        {
+            throw new NotImplementedException();
         }
     }
 }
