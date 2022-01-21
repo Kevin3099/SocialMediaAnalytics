@@ -14,12 +14,12 @@ namespace AnalyticsProject.Controllers
     [Route("api/Home")]
     [ApiController]
     [Authorize]
-    public class HomeController : Controller
+    public class LinkedInController : Controller
     {
-        public IHomePageService Svc { get; }
-        public HomeController(IHomePageService homePageService)
+        public ILinkedInService Svc { get; }
+        public LinkedInController(ILinkedInService linkedInService)
         {
-            Svc = homePageService;
+            Svc = linkedInService;
         }
 
      /*   [HttpGet()]

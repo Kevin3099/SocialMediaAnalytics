@@ -12,7 +12,5 @@ namespace AnalyticsProject.DataModels
         public virtual TwitterSummary TwitterSummarys { get; set; }
         public virtual FacebookSummary FacebookSummarys { get; set; }
         public virtual LinkedInSummary LinkedInSummarys { get; set; }
-
-
     } 
 }

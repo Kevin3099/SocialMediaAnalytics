@@ -14,12 +14,12 @@ namespace AnalyticsProject.Controllers
     [Route("api/Home")]
     [ApiController]
     [Authorize]
-    public class HomeController : Controller
+    public class SummaryInformationController : Controller
     {
-        public IHomePageService Svc { get; }
-        public HomeController(IHomePageService homePageService)
+        public ISummaryInformationService Svc { get; }
+        public SummaryInformationController(ISummaryInformationService summaryInformationService)
         {
-            Svc = homePageService;
+            Svc = summaryInformationService;
         }
 
      /*   [HttpGet()]

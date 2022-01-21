@@ -14,12 +14,12 @@ namespace AnalyticsProject.Controllers
     [Route("api/Home")]
     [ApiController]
     [Authorize]
-    public class HomeController : Controller
+    public class MachineLearningController : Controller
     {
-        public IHomePageService Svc { get; }
-        public HomeController(IHomePageService homePageService)
+        public IMachineLearningService Svc { get; }
+        public MachineLearningController(IMachineLearningService machineLearningService)
         {
-            Svc = homePageService;
+            Svc = machineLearningService;
         }
 
      /*   [HttpGet()]
