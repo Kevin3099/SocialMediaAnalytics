@@ -12,6 +12,8 @@ namespace AnalyticsProject.DataModels
           public DbSet<LinkedInSummary> LinkedInSummarys { get; set; }
           public DbSet<TwitterSummary> TwitterSummarys { get; set; }
           public DbSet<Users> Users { get; set; }
+          public DbSet<FacebookDb> FacebookDbs { get; set; }
+          public DbSet<LinkedInDb> LinkedInDbs { get; set; }
 
 
         public SMAContext(DbContextOptions<SMAContext> options)

@@ -6,6 +6,16 @@ namespace AnalyticsProject.DataModels
     public class FacebookSummary
     {
         public Guid Id { get; set; }
-        public string Name { get; set; }
+        public DateTimeOffset DateFrom { get; set; }
+        public DateTimeOffset DateTo { get; set; }
+        public int CountOfPosts { get; set; }
+        public int totalLikes { get; set; }
+        public int totalRetweets { get; set; }
+        public int totalComments { get; set; }
+        public int averageLikes { get; set; }
+        public int averageRetweets { get; set; }
+        public int averageComments { get; set; }
+        public int followerIncrease { get; set; }
+        public int totalFollowers { get; set; }
     } 
 }
