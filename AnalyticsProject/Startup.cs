@@ -14,6 +14,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.IO;
 using AnalyticsProject.Services;
+using AnalyticsProject.Helpers;
 
 namespace AnalyticsProject
 {
@@ -76,8 +77,6 @@ namespace AnalyticsProject
             {
                 endpoints.MapControllers();
             });
-
-
         }
     }
 }

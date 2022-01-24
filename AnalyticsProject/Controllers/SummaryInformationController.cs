@@ -21,23 +21,5 @@ namespace AnalyticsProject.Controllers
         {
             Svc = summaryInformationService;
         }
-
-     /*   [HttpGet()]
-        [ResponseCache(Duration = 1)]
-        [Route("Get")]
-        public ActionResult<List<getVM>> Get()
-        {
-            var result = Execute(Svc.Get);
-            return result;
-        }
-
-        [HttpPost]
-        [Route("Add")]
-        public ActionResult<VM> Add([FromBody] VM add)
-        {
-            var result = Execute(Svc.Add, add);
-            return result;
-        }
-     */
     }
 }

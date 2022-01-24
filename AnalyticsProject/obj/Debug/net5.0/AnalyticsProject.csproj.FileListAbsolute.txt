@@ -272,3 +272,12 @@ C:\Users\Kevin Power\Desktop\College\SocialMediaAnalytics-master (1)\SocialMedia
 C:\Users\Kevin Power\Desktop\College\SocialMediaAnalytics-master (1)\SocialMediaAnalytics\SocialMediaAnalytics\AnalyticsProject\obj\Debug\net5.0\ref\AnalyticsProject.dll
 C:\Users\Kevin Power\Desktop\College\SocialMediaAnalytics-master (1)\SocialMediaAnalytics\SocialMediaAnalytics\AnalyticsProject\obj\Debug\net5.0\AnalyticsProject.pdb
 C:\Users\Kevin Power\Desktop\College\SocialMediaAnalytics-master (1)\SocialMediaAnalytics\SocialMediaAnalytics\AnalyticsProject\obj\Debug\net5.0\AnalyticsProject.genruntimeconfig.cache
+C:\Users\Kevin\Desktop\College\Semester5\Project\MyProject\AnalyticsProject\AnalyticsProject\bin\Debug\net5.0\Autofac.dll
+C:\Users\Kevin\Desktop\College\Semester5\Project\MyProject\AnalyticsProject\AnalyticsProject\bin\Debug\net5.0\Tweetinvi.Controllers.dll
+C:\Users\Kevin\Desktop\College\Semester5\Project\MyProject\AnalyticsProject\AnalyticsProject\bin\Debug\net5.0\Tweetinvi.Core.dll
+C:\Users\Kevin\Desktop\College\Semester5\Project\MyProject\AnalyticsProject\AnalyticsProject\bin\Debug\net5.0\Tweetinvi.Credentials.dll
+C:\Users\Kevin\Desktop\College\Semester5\Project\MyProject\AnalyticsProject\AnalyticsProject\bin\Debug\net5.0\Tweetinvi.Logic.dll
+C:\Users\Kevin\Desktop\College\Semester5\Project\MyProject\AnalyticsProject\AnalyticsProject\bin\Debug\net5.0\Tweetinvi.Security.dll
+C:\Users\Kevin\Desktop\College\Semester5\Project\MyProject\AnalyticsProject\AnalyticsProject\bin\Debug\net5.0\Tweetinvi.Streams.dll
+C:\Users\Kevin\Desktop\College\Semester5\Project\MyProject\AnalyticsProject\AnalyticsProject\bin\Debug\net5.0\Tweetinvi.WebLogic.dll
+C:\Users\Kevin\Desktop\College\Semester5\Project\MyProject\AnalyticsProject\AnalyticsProject\bin\Debug\net5.0\Tweetinvi.dll

@@ -14,8 +14,8 @@ namespace AnalyticsProject.Controllers
 {
     [Route("api/Home")]
     [ApiController]
-    [Authorize]
-    public class HomeController : Controller
+   // [Authorize]
+    public class HomeController : ControllerBaseX
     {
         public IHomePageService Svc { get; }
         public HomeController(IHomePageService homePageService)
@@ -24,20 +24,27 @@ namespace AnalyticsProject.Controllers
         }
 
         [HttpGet()]
-        [ResponseCache(Duration = 1)]
+       // [ResponseCache(Duration = 1)]
         [Route("Get")]
-        public ActionResult Get()
+        public string Get()
+        {
+            return "Hello";
+        }
+
+    /*    [HttpGet()]
+        [Route("Get1")]
+        public ActionResult<List<HomePageVM>> Get1()
         {
             var result = Execute(Svc.GetNames);
             return result;
         }
 
-      /*  [HttpPost]
-        [Route("Add")]
-        public ActionResult<VM> Add([FromBody] VM add)
-        {
-            var result = Execute(Svc.Add, add);
-            return result;
-        }*/
+          [HttpPost]
+          [Route("Add")]
+          public ActionResult<VM> Add([FromBody] VM add)
+          {
+              var result = Execute(Svc.Add, add);
+              return result;
+          }*/
     }
 }
