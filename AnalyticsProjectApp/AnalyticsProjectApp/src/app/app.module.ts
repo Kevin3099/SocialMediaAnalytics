@@ -31,6 +31,7 @@ import { EventSearchComponent } from './event-search/event-search.component';
 import { EventPredictionComponent } from './event-prediction/event-prediction.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     AppRoutingModule,
     FlexLayoutModule,
     BrowserAnimationsModule,
+    HttpClientModule,
 
     MatButtonModule,
     MatMenuModule,

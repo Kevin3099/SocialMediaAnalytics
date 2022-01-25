@@ -4,6 +4,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatDialog } from '@angular/material/dialog';
 import { FilterComponent } from '../filter/filter.component';
+import { HomeService } from '../services/home-service.service';
+import { summaryInformationVM } from '../models/summaryInformationVM';
 
 @Component({
   selector: 'app-home-page',
@@ -15,7 +17,7 @@ export class HomePageComponent implements OnInit {
   table: string[] = ['platforms','averageLikes','averageRetweets','averageComments','totalLikes','totalRetweets','totalComments','moreInfo'];
   dataSource = new MatTableDataSource<any>();
 
-  constructor(){}
+  constructor(public homeService: HomeService,){}
 
   public today = new Date()
   public lastWeek: Date = new Date(this.today.getDate()-7)
@@ -29,7 +31,12 @@ export class HomePageComponent implements OnInit {
   }
 
   getData(){
-
+    this.homeService.getData().subscribe(
+      (res: Array<summaryInformationVM>) => {
+        console.log(res);
+       res = this.dataSource.data;
+      },
+    );
   }
 
   OnFormSubmit(){
