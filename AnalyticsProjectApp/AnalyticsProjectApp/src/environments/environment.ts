@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   timeout: 900,
-  apiHost: 'https://localhost:43836/'
+  apiHost: 'http://localhost:43836/'
 };
 
 /*

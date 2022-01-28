@@ -1,5 +1,6 @@
 ﻿using AnalyticsProject.DataModels;
 using AnalyticsProject.ViewModels;
+using AnalyticsProject.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace AnalyticsProject.Services
     {
         void GetNames();
     }
-    public class HomePageService : ServiceBase,IHomePageService
+    public class HomePageService : ServiceBase, IHomePageService
     {
         public HomePageService(SMAContext ctx) : base(ctx)
         {
@@ -19,15 +20,15 @@ namespace AnalyticsProject.Services
 
         public void GetNames()
         {
-            var db = Ctx.HomePages.ToList();
-            var vm = new List<HomePageVM>();
+            /*    var db = Ctx.HomePages.ToList();
+                var vm = new List<HomePageVM>();
 
-            foreach (var homePage in db)
-            {
-                var homeVM = new HomePageVM(homePage);
-                vm.Add(homeVM);
-            }
-          //  return vm;
-        }
+                foreach (var homePage in db)
+                {
+                    var homeVM = new HomePageVM(homePage);
+                    vm.Add(homeVM);
+                }*/
+            //  return vm;
+        } 
     }
 }

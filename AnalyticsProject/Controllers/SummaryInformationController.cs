@@ -1,4 +1,5 @@
 ﻿using AnalyticsProject.Services;
+using AnalyticsProject.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Nancy.Json;
@@ -11,10 +12,10 @@ using System.Threading.Tasks;
 
 namespace AnalyticsProject.Controllers
 {
-    [Route("api/Home")]
+    [Route("api/SummaryInformation")]
     [ApiController]
-    [Authorize]
-    public class SummaryInformationController : Controller
+   // [Authorize]
+    public class SummaryInformationController : ControllerBaseX
     {
         public ISummaryInformationService Svc { get; }
         public SummaryInformationController(ISummaryInformationService summaryInformationService)
@@ -22,22 +23,27 @@ namespace AnalyticsProject.Controllers
             Svc = summaryInformationService;
         }
 
-     /*   [HttpGet()]
-        [ResponseCache(Duration = 1)]
-        [Route("Get")]
-        public ActionResult<List<getVM>> Get()
+        [HttpGet]
+        [Route("getAll")]
+        public ActionResult<List<SummaryInformationVM>> getAll()
         {
-            var result = Execute(Svc.Get);
+            var result = Execute(Svc.GetAll);
             return result;
         }
 
-        [HttpPost]
-        [Route("Add")]
-        public ActionResult<VM> Add([FromBody] VM add)
+        [HttpGet]
+        [Route("filteredGet/{toDate}/{fromDate}/{platform}")]
+        public ActionResult<List<SummaryInformationVM>> filteredGet(DateTime toDate,DateTime fromDate,string platform)
         {
-            var result = Execute(Svc.Add, add);
+            var filter = new FilterVM
+            {
+                DateTo = toDate,
+                DateFrom = fromDate,
+                Platform = platform
+            };
+
+            var result = Execute(Svc.filteredGet, filter);
             return result;
         }
-     */
     }
 }

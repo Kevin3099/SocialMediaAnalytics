@@ -14,6 +14,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.IO;
 using AnalyticsProject.Services;
+using AnalyticsProject.Helpers;
 
 namespace AnalyticsProject
 {
@@ -49,7 +50,7 @@ namespace AnalyticsProject
             services.AddTransient<IFacebookService, FacebookService>();
             services.AddTransient<ILinkedInService, LinkedInService>();
             services.AddTransient<IMachineLearningService, MachineLearningService>();
-            services.AddTransient<ISummaryInformationService, SummaryInformation>();
+            services.AddTransient<ISummaryInformationService, SummaryInformationService>();
             services.AddTransient<ITwitterService, TwitterService>();
 
         }
@@ -76,8 +77,6 @@ namespace AnalyticsProject
             {
                 endpoints.MapControllers();
             });
-
-
         }
     }
 }

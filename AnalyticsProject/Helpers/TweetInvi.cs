@@ -10,7 +10,7 @@ namespace AnalyticsProject.Helpers
   //  public const string twitterBearerToken = "AAAAAAAAAAAAAAAAAAAAAEXVWwEAAAAAbGAyeHahb95YzxuwWi%2FzKjFo5ig%3DZxcC16Sq93nS0mQWhyFofxoVOXQmbi7dtzJEDFv8Nz9QJBpD80";
     public class TweetInvi
     {
-        static async Task start(string[] args)
+        public static async Task start()
         {
             var userClient = new TwitterClient(Constants.APIKey, Constants.APIKeySecret, Constants.access_token, Constants.access_token_secret);
             var user = await userClient.Users.GetAuthenticatedUserAsync();
