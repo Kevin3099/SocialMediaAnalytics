@@ -32,7 +32,8 @@ namespace AnalyticsProject.Services
             Console.WriteLine(DateTime.Now.Date);
             Console.WriteLine(DateTime.Now);
             List<SummaryInformationVM> db = new List<SummaryInformationVM>();
-            var SIList = Ctx.SummaryInformations.Where(x => x.DateTo == DateTime.Now.Date && x.DateFrom == DateTime.Now.AddDays(-7).Date).Select(x => new SummaryInformationVM(x)).ToList();
+            //   var SIList = Ctx.SummaryInformations.Where(x => x.DateTo == DateTime.Now.Date && x.DateFrom == DateTime.Now.AddDays(-7).Date).Select(x => new SummaryInformationVM(x)).ToList();
+            var SIList = Ctx.SummaryInformations.Select(x => new SummaryInformationVM(x)).ToList();
             return SIList;
         }
 

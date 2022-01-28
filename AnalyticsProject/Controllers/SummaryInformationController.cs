@@ -32,9 +32,16 @@ namespace AnalyticsProject.Controllers
         }
 
         [HttpGet]
-        [Route("filteredGet")]
-        public ActionResult<List<SummaryInformationVM>> filteredGet([FromBody] FilterVM filter)
+        [Route("filteredGet/{toDate}/{fromDate}/{platform}")]
+        public ActionResult<List<SummaryInformationVM>> filteredGet(DateTime toDate,DateTime fromDate,string platform)
         {
+            var filter = new FilterVM
+            {
+                DateTo = toDate,
+                DateFrom = fromDate,
+                Platform = platform
+            };
+
             var result = Execute(Svc.filteredGet, filter);
             return result;
         }

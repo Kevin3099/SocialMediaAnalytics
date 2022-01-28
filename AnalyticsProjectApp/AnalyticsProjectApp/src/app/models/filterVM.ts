@@ -1,6 +1,7 @@
 export class filterVM  {
-    public sinceDate!: string;
-    public untilDate!: string;
+    public toDate!: Date;
+    public fromDate!: Date;
+    public platform!: string;
   
     constructor(data?: any) {
       const self = this;

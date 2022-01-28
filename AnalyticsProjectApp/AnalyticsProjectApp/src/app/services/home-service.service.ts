@@ -18,8 +18,8 @@ export class HomeService {
     return this.http.get<Array<summaryInformationVM>>(url);
   }
 
-public getDataBetweenDates = (filter: filterVM): Observable<filterVM> => {
-  const url = `${environment.apiHost}api/homePage`;
-  return this.http.post<filterVM>(url, filter);
+public getFilteredData = (filter: filterVM): Observable<Array<summaryInformationVM>> => {
+const url = `${environment.apiHost}api/SummaryInformation/getFilteredData/${filter.toDate}/${filter.fromDate}/${filter.platform}`;
+  return this.http.get<Array<summaryInformationVM>>(url);
 }
 };

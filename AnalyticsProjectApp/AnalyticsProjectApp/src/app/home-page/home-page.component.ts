@@ -6,6 +6,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { FilterComponent } from '../filter/filter.component';
 import { HomeService } from '../services/home-service.service';
 import { summaryInformationVM } from '../models/summaryInformationVM';
+import { Router } from '@angular/router';
+import { filterVM } from '../models/filterVM';
 
 @Component({
   selector: 'app-home-page',
@@ -15,16 +17,17 @@ import { summaryInformationVM } from '../models/summaryInformationVM';
 export class HomePageComponent implements OnInit {
 
   table: string[] = ['platforms','averageLikes','averageRetweets','averageComments','totalLikes','totalRetweets','totalComments','moreInfo'];
-  dataSource = new MatTableDataSource<any>();
+  dataSource = new MatTableDataSource<summaryInformationVM>();
 
-  constructor(public homeService: HomeService,){}
+  constructor(public homeService: HomeService,private router: Router){}
 
   public today = new Date()
   public lastWeek: Date = new Date(this.today.getDate()-7)
  
   public toDate = this.today;
   public fromDate = this.lastWeek;
-  public platformSelected = "All Platforms"
+  public platformSelected = "All Platforms";
+  public filter = new filterVM;
 
   ngOnInit(): void {    
     this.getData();
@@ -34,12 +37,29 @@ export class HomePageComponent implements OnInit {
     this.homeService.getData().subscribe(
       (res: Array<summaryInformationVM>) => {
         console.log(res);
-       res = this.dataSource.data;
+       this.dataSource.data = res;
       },
     );
   }
 
+  getFilteredData(){
+    this.filter.toDate = this.toDate;
+    this.filter.fromDate = this.fromDate;
+    this.filter.platform = this.platformSelected;
+
+    this.homeService.getFilteredData(this.filter).subscribe(
+      (res: Array<summaryInformationVM>) => {
+        console.log(res);
+       this.dataSource.data = res;
+      },
+    );
+  }
   OnFormSubmit(){
-    console.log(this.toDate,this.fromDate,this.platformSelected)
+    this.getFilteredData();
+  }
+
+  GoToPlatformDetails(summaryInformation: summaryInformationVM) {
+    console.log(summaryInformation);
+    this.router.navigate([`/${summaryInformation.Platform}`]);
   }
 }
