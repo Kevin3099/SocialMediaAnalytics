@@ -16,10 +16,11 @@ export class HomeService {
   public getData = (): Observable<Array<summaryInformationVM>> => {
     const url = `${environment.apiHost}api/SummaryInformation/getAll`;
     return this.http.get<Array<summaryInformationVM>>(url);
+    //?toDate=wahtever %20 for spaces encodeURIcomponent
   }
 
 public getFilteredData = (filter: filterVM): Observable<Array<summaryInformationVM>> => {
-const url = `${environment.apiHost}api/SummaryInformation/getFilteredData/${filter.toDate}/${filter.fromDate}/${filter.platform}`;
+const url = `${environment.apiHost}api/SummaryInformation/filteredData?toDate=${filter.toDate.toISOString()}&fromDate=${filter.fromDate.toISOString()}&platform=${filter.platform}`;
   return this.http.get<Array<summaryInformationVM>>(url);
 }
 };

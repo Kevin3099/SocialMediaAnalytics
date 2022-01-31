@@ -32,7 +32,7 @@ namespace AnalyticsProject.Controllers
         }
 
         [HttpGet]
-        [Route("filteredGet/{toDate}/{fromDate}/{platform}")]
+        [Route("filteredData")]
         public ActionResult<List<SummaryInformationVM>> filteredGet(DateTime toDate,DateTime fromDate,string platform)
         {
             var filter = new FilterVM

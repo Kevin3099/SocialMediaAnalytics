@@ -13,6 +13,7 @@ namespace AnalyticsProject
     {
         public static void Main(string[] args)
         {
+
             CreateHostBuilder(args).Build().Run();
         }
 
@@ -22,5 +23,6 @@ namespace AnalyticsProject
                 {
                     webBuilder.UseStartup<Startup>();
                 });
+
     }
 }

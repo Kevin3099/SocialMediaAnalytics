@@ -25,9 +25,21 @@ namespace AnalyticsProject.Services
             clearDB();
             CreateFBSummaryInformation(filter);
             CreateLISummaryInformation(filter);
-            List<SummaryInformationVM> db = new List<SummaryInformationVM>();
-            var SIList = Ctx.SummaryInformations.Where(x => x.DateTo == filter.DateTo && x.DateFrom == filter.DateFrom && filter.Platform == x.Platform).Select(x => new SummaryInformationVM(x)).ToList();
-            return SIList;
+
+            if (filter.Platform == "All Platforms") {
+             
+                var SIList = Ctx.SummaryInformations
+                             .Where(x => x.DateTo == filter.DateTo && x.DateFrom == filter.DateFrom)
+                             .Select(x => new SummaryInformationVM(x)).ToList();
+                return SIList;
+            }
+            else
+            {
+                var SIList = Ctx.SummaryInformations
+                            .Where(x => x.DateTo == filter.DateTo && x.DateFrom == filter.DateFrom && filter.Platform == x.Platform)
+                            .Select(x => new SummaryInformationVM(x)).ToList();
+                return SIList;
+            }
         }
 
         public List<SummaryInformationVM> GetAll()
@@ -43,14 +55,10 @@ namespace AnalyticsProject.Services
 
 
             List<SummaryInformationVM> db = new List<SummaryInformationVM>();
-            var SIList = Ctx.SummaryInformations.Where(x => x.DateTo == DateTime.Now.Date && x.DateFrom == DateTime.Now.AddDays(-7).Date).Select(x => new SummaryInformationVM(x)).ToList();
-         //   var SIList = Ctx.SummaryInformations.Select(x => new SummaryInformationVM(x)).ToList();
+            var SIList = Ctx.SummaryInformations
+                .Where(x => x.DateTo == DateTime.Now.Date && x.DateFrom == DateTime.Now.AddDays(-7).Date)
+                .Select(x => new SummaryInformationVM(x)).ToList();
             return SIList;
-
-
-      //      Twitter twitter = new Twitter(Constants.consumerKey, Constants.consumerKeySecret, Constants.access_token, Constants.access_token_secret);
-      //      var test = twitter.GetTweets("KevsterO98", 5);
-     //       Console.Write(test);
         }
 
         public void CreateFBSummaryInformation(FilterVM filter) {
@@ -158,9 +166,15 @@ namespace AnalyticsProject.Services
 
         public void GetTwitterList()
         {
-          //  Helpers.TweetInvi.start();
-       // https://api.twitter.com/2/tweets/search/recent?query=from:ItColdHearted15
+                  Twitter twitter = new Twitter(Constants.consumerKey, Constants.consumerKeySecret, Constants.access_token, Constants.access_token_secret);
+                  var test = twitter.GetTweets("KevsterO98", 5);
+                   Console.Write(test);
+
+            //  Helpers.TweetInvi.start();
+            // https://api.twitter.com/2/tweets/search/recent?query=from:ItColdHearted15
         }
+
+
         public void clearDB() {
             var rows = from o in Ctx.SummaryInformations
                        select o;
