@@ -1,4 +1,6 @@
 ﻿using AnalyticsProject.DataModels;
+using AnalyticsProject.Helpers;
+using AnalyticsProject.Properties;
 using AnalyticsProject.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -20,6 +22,7 @@ namespace AnalyticsProject.Services
         }
         public List<SummaryInformationVM> filteredGet(FilterVM filter)
         {
+            clearDB();
             CreateFBSummaryInformation(filter);
             CreateLISummaryInformation(filter);
             List<SummaryInformationVM> db = new List<SummaryInformationVM>();
@@ -29,16 +32,28 @@ namespace AnalyticsProject.Services
 
         public List<SummaryInformationVM> GetAll()
         {
-            Console.WriteLine(DateTime.Now.Date);
-            Console.WriteLine(DateTime.Now);
+            FilterVM filter = new FilterVM {
+                DateFrom = DateTime.Now.AddDays(-7).Date,
+                DateTo = DateTime.Now.Date
+            };
+            clearDB();
+            CreateFBSummaryInformation(filter);
+            CreateLISummaryInformation(filter);
+            GetTwitterList();
+
+
             List<SummaryInformationVM> db = new List<SummaryInformationVM>();
-            //   var SIList = Ctx.SummaryInformations.Where(x => x.DateTo == DateTime.Now.Date && x.DateFrom == DateTime.Now.AddDays(-7).Date).Select(x => new SummaryInformationVM(x)).ToList();
-            var SIList = Ctx.SummaryInformations.Select(x => new SummaryInformationVM(x)).ToList();
+            var SIList = Ctx.SummaryInformations.Where(x => x.DateTo == DateTime.Now.Date && x.DateFrom == DateTime.Now.AddDays(-7).Date).Select(x => new SummaryInformationVM(x)).ToList();
+         //   var SIList = Ctx.SummaryInformations.Select(x => new SummaryInformationVM(x)).ToList();
             return SIList;
+
+
+      //      Twitter twitter = new Twitter(Constants.consumerKey, Constants.consumerKeySecret, Constants.access_token, Constants.access_token_secret);
+      //      var test = twitter.GetTweets("KevsterO98", 5);
+     //       Console.Write(test);
         }
 
         public void CreateFBSummaryInformation(FilterVM filter) {
-
             int totalLikes = 0;
             int totalRetweets = 0;
             int totalComments = 0;
@@ -126,21 +141,34 @@ namespace AnalyticsProject.Services
         {
 
             List<LinkedInDbVM> liDb = new List<LinkedInDbVM>();
-            var liList = Ctx.LinkedInDbs
+            liDb = Ctx.LinkedInDbs
                 .Where(x => x.DatePosted <= filter.DateTo && x.DatePosted >= filter.DateFrom)
                 .Select(x => new LinkedInDbVM(x)).ToList();
-
             return liDb;
         }
 
         public List<FacebookDbVM> GetFBList(FilterVM filter) {
 
             List<FacebookDbVM> fbDb = new List<FacebookDbVM>();
-            var fbList = Ctx.FacebookDbs
+            fbDb = Ctx.FacebookDbs
                 .Where(x => x.DatePosted <= filter.DateTo && x.DatePosted >= filter.DateFrom)
                 .Select(x => new FacebookDbVM(x)).ToList();
-
             return fbDb;
+        }
+
+        public void GetTwitterList()
+        {
+          //  Helpers.TweetInvi.start();
+       // https://api.twitter.com/2/tweets/search/recent?query=from:ItColdHearted15
+        }
+        public void clearDB() {
+            var rows = from o in Ctx.SummaryInformations
+                       select o;
+            foreach (var row in rows)
+            {
+                Ctx.SummaryInformations.Remove(row);
+            }
+            Ctx.SaveChanges();
         }
     }
 }
