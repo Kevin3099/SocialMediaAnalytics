@@ -24,7 +24,7 @@ namespace AnalyticsProject.Controllers
         }
 
         [HttpGet]
-        [Route("getAll")]
+        [Route("AllDataLastWeek")]
         public ActionResult<List<SummaryInformationVM>> getAll()
         {
             var result = Execute(Svc.GetAll);
@@ -32,7 +32,7 @@ namespace AnalyticsProject.Controllers
         }
 
         [HttpGet]
-        [Route("filteredData")]
+        [Route("filteredDataByDateAndPlatform")]
         public ActionResult<List<SummaryInformationVM>> filteredGet(DateTime toDate,DateTime fromDate,string platform)
         {
             var filter = new FilterVM

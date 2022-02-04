@@ -49,6 +49,7 @@ namespace AnalyticsProject.Services
                 DateTo = DateTime.Now.Date
             };
             clearDB();
+            GetTwitterList();
             CreateFBSummaryInformation(filter);
             CreateLISummaryInformation(filter);
             GetTwitterList();
@@ -167,11 +168,8 @@ namespace AnalyticsProject.Services
         public void GetTwitterList()
         {
                   Twitter twitter = new Twitter(Constants.consumerKey, Constants.consumerKeySecret, Constants.access_token, Constants.access_token_secret);
-                  var test = twitter.GetTweets("KevsterO98", 5);
+                  var test = twitter.GetTweetsContaining("rlcs");
                    Console.Write(test);
-
-            //  Helpers.TweetInvi.start();
-            // https://api.twitter.com/2/tweets/search/recent?query=from:ItColdHearted15
         }
 
 
