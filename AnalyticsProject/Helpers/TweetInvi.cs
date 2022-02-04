@@ -53,6 +53,7 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using AnalyticsProject.Properties;
 using Newtonsoft.Json.Linq;
+using AnalyticsProject.DataModels;
 
 namespace AnalyticsProject.Helpers
 {
@@ -97,7 +98,7 @@ namespace AnalyticsProject.Helpers
             return result;
         }
 
-        public String GetTweetsContaining(String hashtag)
+        public SummaryInformation GetSummaryInformation(String hashtag)
         {
             var url = "https://api.twitter.com/1.1/search/tweets.json?q='" + hashtag + "'+&result_type=popular";
             var httpRequest = (HttpWebRequest)WebRequest.Create(url);
@@ -114,16 +115,49 @@ namespace AnalyticsProject.Helpers
             }
 
             Console.WriteLine(httpResponse.StatusCode);
-
-            return result;
+            SummaryInformation Summary = JSONParser(result);
+            return Summary;
         }
 
-        public string JSONParser(String result) {
+        public SummaryInformation JSONParser(String result) {
 
             dynamic data = JObject.Parse(result);
-            var id = data.statuses[0];
-            id = (id == null) ? null : id.ToString();
-            return id;
+            int totalLikes = 0;
+            int totalRetweets = 0;
+            int totalComments = 0;
+            int averageComments = 0;
+
+            foreach (var post in data.statuses)
+            {
+                totalLikes = post.favorite_count + totalLikes;
+                totalRetweets = post.retweet_count + totalRetweets;
+                totalComments = 0;
+            }
+
+            //Need to convert type before doing any calculations on it
+            int averageLikes =  data.search_metadata.count;
+            averageLikes = totalLikes / averageLikes;
+            int averageRetweets = data.search_metadata.count;
+            averageRetweets = totalRetweets / averageRetweets;
+
+            var Summary = new SummaryInformation()
+            {
+                Id = new Guid(),
+                Platform = "Twitter",
+                DateFrom = DateTime.Now.AddDays(-7).Date,
+                DateTo = DateTime.Now.Date,
+                CountOfPosts = data.statuses.Count,
+                totalLikes = totalLikes,
+                totalRetweets = totalRetweets,
+                totalComments = totalComments,
+                averageLikes = averageLikes,
+                averageRetweets = averageRetweets,
+                averageComments = averageComments,
+                followerIncrease = 5,
+                totalFollowers = 50
+            };
+
+            return Summary;
         }
 
     }

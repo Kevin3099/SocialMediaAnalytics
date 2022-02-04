@@ -23,6 +23,7 @@ namespace AnalyticsProject.Services
         public List<SummaryInformationVM> filteredGet(FilterVM filter)
         {
             clearDB();
+            GetTwitterList();
             CreateFBSummaryInformation(filter);
             CreateLISummaryInformation(filter);
 
@@ -48,11 +49,11 @@ namespace AnalyticsProject.Services
                 DateFrom = DateTime.Now.AddDays(-7).Date,
                 DateTo = DateTime.Now.Date
             };
+
             clearDB();
             GetTwitterList();
             CreateFBSummaryInformation(filter);
             CreateLISummaryInformation(filter);
-            GetTwitterList();
 
 
             List<SummaryInformationVM> db = new List<SummaryInformationVM>();
@@ -168,8 +169,9 @@ namespace AnalyticsProject.Services
         public void GetTwitterList()
         {
                   Twitter twitter = new Twitter(Constants.consumerKey, Constants.consumerKeySecret, Constants.access_token, Constants.access_token_secret);
-                  var test = twitter.GetTweetsContaining("rlcs");
-                   Console.Write(test);
+                  Ctx.SummaryInformations.Add(twitter.GetSummaryInformation("rlcs"));
+                  Ctx.SaveChanges();
+                
         }
 
 
