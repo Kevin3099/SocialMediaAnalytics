@@ -22,11 +22,7 @@ namespace AnalyticsProject.Services
         }
         public List<SummaryInformationVM> filteredGet(FilterVM filter)
         {
-            clearDB();
-            GetTwitterList();
-            CreateFBSummaryInformation(filter);
-            CreateLISummaryInformation(filter);
-
+           
             if (filter.Platform == "All Platforms") {
              
                 var SIList = Ctx.SummaryInformations
@@ -45,22 +41,24 @@ namespace AnalyticsProject.Services
 
         public List<SummaryInformationVM> GetAll()
         {
-            FilterVM filter = new FilterVM {
-                DateFrom = DateTime.Now.AddDays(-7).Date,
-                DateTo = DateTime.Now.Date
-            };
-
-            clearDB();
-            GetTwitterList();
-            CreateFBSummaryInformation(filter);
-            CreateLISummaryInformation(filter);
-
 
             List<SummaryInformationVM> db = new List<SummaryInformationVM>();
             var SIList = Ctx.SummaryInformations
                 .Where(x => x.DateTo == DateTime.Now.Date && x.DateFrom == DateTime.Now.AddDays(-7).Date)
                 .Select(x => new SummaryInformationVM(x)).ToList();
             return SIList;
+        }
+        public void GenerateData()
+        {
+            FilterVM filter = new FilterVM
+            {
+                DateFrom = DateTime.Now.AddDays(-7).Date,
+                DateTo = DateTime.Now.Date
+            };
+            clearDB();
+            GetTwitterList();
+            CreateFBSummaryInformation(filter);
+            CreateLISummaryInformation(filter);
         }
 
         public void CreateFBSummaryInformation(FilterVM filter) {

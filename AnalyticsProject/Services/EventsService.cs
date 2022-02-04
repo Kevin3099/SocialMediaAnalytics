@@ -14,6 +14,8 @@ namespace AnalyticsProject.Services
         List<TwitterSummary> searchHashtagTwitter();
         List<LinkedInSummary> searchHashtagLinkedIn();
         List<FacebookSummary> searchHashtagFacebook();
+
+        List<SummaryInformation> searchHashtagAll();
     }
     public class EventsService : ServiceBase, IEventsService
     {
@@ -30,6 +32,12 @@ namespace AnalyticsProject.Services
         {
             throw new NotImplementedException();
         }
+
+        public List<SummaryInformation> searchHashtagAll()
+        {
+            throw new NotImplementedException();
+        }
+
         public List<FacebookSummary> searchHashtagFacebook()
         {
             throw new NotImplementedException();

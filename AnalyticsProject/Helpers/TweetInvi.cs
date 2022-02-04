@@ -47,10 +47,6 @@
 using System;
 using System.IO;
 using System.Net;
-using System.Text;
-using System.Diagnostics;
-using System.Collections.Generic;
-using System.Security.Cryptography;
 using AnalyticsProject.Properties;
 using Newtonsoft.Json.Linq;
 using AnalyticsProject.DataModels;
@@ -76,6 +72,8 @@ namespace AnalyticsProject.Helpers
         public string AccessToken { set; get; }
         public string AccessTokenSecret { set; get; }
 
+
+        // Doesn't get Stats back
         public String GetRecentTweets(String user)
         {
             var url = "https://api.twitter.com/2/tweets/search/recent?query=from:'" + user + "'";
@@ -98,7 +96,28 @@ namespace AnalyticsProject.Helpers
             return result;
         }
 
-        public SummaryInformation GetSummaryInformation(String hashtag)
+        public SummaryInformation GetSummaryInformation(String user)
+        {
+            var url = "https://api.twitter.com/1.1/search/tweets.json?q='" + user + "'+&result_type=popular";
+            var httpRequest = (HttpWebRequest)WebRequest.Create(url);
+
+            httpRequest.Accept = "application/json";
+            httpRequest.Headers["Authorization"] = Constants.twitterBearerToken;
+            var result = "";
+
+            var httpResponse = (HttpWebResponse)httpRequest.GetResponse();
+            using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+            {
+                result = streamReader.ReadToEnd();
+                Console.WriteLine(result);
+            }
+
+            Console.WriteLine(httpResponse.StatusCode);
+            SummaryInformation Summary = JSONParserForSummaryInformation(result);
+            return Summary;
+        }
+
+        public Event GetEventTweetsFromUser(String hashtag)
         {
             var url = "https://api.twitter.com/1.1/search/tweets.json?q='" + hashtag + "'+&result_type=popular";
             var httpRequest = (HttpWebRequest)WebRequest.Create(url);
@@ -115,11 +134,11 @@ namespace AnalyticsProject.Helpers
             }
 
             Console.WriteLine(httpResponse.StatusCode);
-            SummaryInformation Summary = JSONParser(result);
-            return Summary;
+            Event myEvent = JSONParserForEvents(result);
+            return myEvent;
         }
 
-        public SummaryInformation JSONParser(String result) {
+        public SummaryInformation JSONParserForSummaryInformation(String result) {
 
             dynamic data = JObject.Parse(result);
             int totalLikes = 0;
@@ -160,5 +179,9 @@ namespace AnalyticsProject.Helpers
             return Summary;
         }
 
+        public Event JSONParserForEvents(String result) {
+            var customEvent = new Event();
+            return customEvent;
+        }
     }
 }
