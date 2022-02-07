@@ -22,8 +22,8 @@ const url = `${environment.apiHost}api/Event/filteredEvents/?toDate=${event.filt
   return this.http.get<Array<eventVM>>(url);
 }
 
-public CreateEvent = (event: eventVM): Observable<eventVM> => {
-  const url = `${environment.apiHost}api/Event/CreateEvent/?toDate=${event.filter.toDate.toISOString()}&fromDate=${event.filter.fromDate.toISOString()}&platform=${event.filter.platform}&hashtag=${event.hashtag}`
+public SearchEvent = (event: eventVM): Observable<eventVM> => {
+  const url = `${environment.apiHost}api/Event/SearchEvent/?toDate=${event.filter.toDate.toISOString()}&fromDate=${event.filter.fromDate.toISOString()}&platform=${event.filter.platform}&hashtag=${event.hashtag}`
   return this.http.get<eventVM>(url);
 }
 

@@ -10,6 +10,7 @@ namespace AnalyticsProject.ViewModels
     public class FilterVM
     {
         [Required]
+        public Guid Id { get; set; }
         public DateTimeOffset DateFrom { get; set; }
         public DateTimeOffset DateTo { get; set; }
         public string Platform { get; set; }
@@ -19,6 +20,7 @@ namespace AnalyticsProject.ViewModels
 
         public FilterVM(SummaryInformation filter)
         {
+            Id = filter.Id;
             DateTo = filter.DateTo;
             DateFrom = filter.DateFrom;
             Platform = filter.Platform;

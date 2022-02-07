@@ -11,12 +11,9 @@ namespace AnalyticsProject.ViewModels
     {
         [Required]
         public Guid Id { get; set; }
-        public string SearchedTerm { get; set; }
-        public DateTimeOffset DateFrom { get; set; }
-        public DateTimeOffset DateTo { get; set; }
-        public virtual TwitterSummary TwitterSummarys { get; set; }
-        public virtual FacebookSummary FacebookSummarys { get; set; }
-        public virtual LinkedInSummary LinkedInSummarys { get; set; }
+        public string Hashtag { get; set; }
+        public virtual FilterVM Filter { get; set; }
+        public virtual List<SummaryInformationVM> EventStats { get; set; }
 
         public EventsVM() {
         }
@@ -24,12 +21,9 @@ namespace AnalyticsProject.ViewModels
         public EventsVM(Event events)
         {
             Id = events.Id;
-            SearchedTerm = events.SearchedTerm;
-            DateFrom = events.DateFrom;
-            DateTo = events.DateTo;
-            TwitterSummarys = events.TwitterSummarys;
-            FacebookSummarys = events.FacebookSummarys;
-            LinkedInSummarys = events.LinkedInSummarys;
+            Hashtag = events.Hashtag;
+            Filter = events.Filter;
+            EventStats = events.EventStats;
         }
     }
 }

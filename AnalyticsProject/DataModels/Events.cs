@@ -1,4 +1,6 @@
-﻿using System;
+﻿using AnalyticsProject.ViewModels;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace AnalyticsProject.DataModels
@@ -6,11 +8,9 @@ namespace AnalyticsProject.DataModels
     public class Event
     {
         public Guid Id { get; set; }
-        public string SearchedTerm { get; set; }
-        public DateTimeOffset DateFrom { get; set; }
-        public DateTimeOffset DateTo { get; set; }
-        public virtual TwitterSummary TwitterSummarys { get; set; }
-        public virtual FacebookSummary FacebookSummarys { get; set; }
-        public virtual LinkedInSummary LinkedInSummarys { get; set; }
+        public string Hashtag { get; set; }
+        public virtual FilterVM Filter { get; set; }
+        public virtual List<SummaryInformationVM> EventStats { get; set; }
+
     } 
 }

@@ -1,4 +1,5 @@
 ﻿using AnalyticsProject.Services;
+using AnalyticsProject.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Nancy.Json;
@@ -11,10 +12,10 @@ using System.Threading.Tasks;
 
 namespace AnalyticsProject.Controllers
 {
-    [Route("api/Home")]
+    [Route("api/Event")]
     [ApiController]
-    [Authorize]
-    public class EventsController : Controller
+  //  [Authorize]
+    public class EventsController : ControllerBaseX
     {
         public IEventsService Svc { get; }
         public EventsController(IEventsService eventsService)
@@ -22,22 +23,40 @@ namespace AnalyticsProject.Controllers
             Svc = eventsService;
         }
 
-     /*   [HttpGet()]
-        [ResponseCache(Duration = 1)]
-        [Route("Get")]
-        public ActionResult<List<getVM>> Get()
+        [HttpGet]
+        [Route("SearchEvent")]
+        public ActionResult<EventsVM> SearchEvent(DateTime toDate, DateTime fromDate, string platform, string hashtag)
         {
-            var result = Execute(Svc.Get);
+            FilterVM filter = new FilterVM()
+            {
+                DateTo = toDate,
+                DateFrom = fromDate,
+                Platform = platform
+            };
+
+            EventsVM newEvent = new EventsVM() { 
+            Hashtag = hashtag,
+            Filter = filter,
+            };
+
+            var result = Execute(Svc.SearchEvent, newEvent);
             return result;
         }
 
-        [HttpPost]
-        [Route("Add")]
-        public ActionResult<VM> Add([FromBody] VM add)
+        [HttpGet]
+        [Route("MyEvents")]
+        public ActionResult<List<EventsVM>> MyEvents()
         {
-            var result = Execute(Svc.Add, add);
+            var result = Execute(Svc.MyEvents);
             return result;
         }
-     */
+
+        [HttpGet]
+        [Route("FilteredMyEvents")]
+        public ActionResult<List<EventsVM>> FilteredMyEvents()
+        {
+            var result = Execute(Svc.FilteredMyEvents);
+            return result;
+        }
     }
 }

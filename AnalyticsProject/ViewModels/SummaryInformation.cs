@@ -40,6 +40,7 @@ namespace AnalyticsProject.ViewModels
         public int averageComments { get; set; }
         public int followerIncrease { get; set; }
         public int totalFollowers { get; set; }
+        public string eventName { get; set; }
     
 
     public SummaryInformationVM()
@@ -61,6 +62,7 @@ namespace AnalyticsProject.ViewModels
         averageLikes = SI.averageLikes;
         averageRetweets = SI.averageRetweets;
         averageComments = SI.averageComments;
+        eventName = SI.eventName;
     }
     }
 }

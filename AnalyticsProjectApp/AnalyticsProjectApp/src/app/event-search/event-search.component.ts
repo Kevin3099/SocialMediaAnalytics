@@ -39,7 +39,7 @@ export class EventSearchComponent implements OnInit {
     this.event.filter = filter;
     this.event.hashtag = this.hashtag;
 
-    this.eventService.CreateEvent(this.event).subscribe(
+    this.eventService.SearchEvent(this.event).subscribe(
       (res: eventVM) => {
         console.log(res);
       this.event = res;

@@ -111,13 +111,13 @@ namespace AnalyticsProject.Helpers
                 result = streamReader.ReadToEnd();
                 Console.WriteLine(result);
             }
-
+            var hashtag = "";
             Console.WriteLine(httpResponse.StatusCode);
-            SummaryInformation Summary = JSONParserForSummaryInformation(result);
+            SummaryInformation Summary = JSONParserForSummaryInformation(result,hashtag);
             return Summary;
         }
 
-        public Event GetEventTweetsFromUser(String hashtag)
+        public SummaryInformation GetEventTweetsFromUser(String hashtag)
         {
             var url = "https://api.twitter.com/1.1/search/tweets.json?q='" + hashtag + "'+&result_type=popular";
             var httpRequest = (HttpWebRequest)WebRequest.Create(url);
@@ -134,11 +134,12 @@ namespace AnalyticsProject.Helpers
             }
 
             Console.WriteLine(httpResponse.StatusCode);
-            Event myEvent = JSONParserForEvents(result);
-            return myEvent;
+            //  Event myEvent = JSONParserForEvents(result);
+            // return myEvent;
+            return JSONParserForSummaryInformation(result,hashtag);
         }
 
-        public SummaryInformation JSONParserForSummaryInformation(String result) {
+        public SummaryInformation JSONParserForSummaryInformation(string result,string hashtag) {
 
             dynamic data = JObject.Parse(result);
             int totalLikes = 0;
@@ -173,7 +174,8 @@ namespace AnalyticsProject.Helpers
                 averageRetweets = averageRetweets,
                 averageComments = averageComments,
                 followerIncrease = 5,
-                totalFollowers = 50
+                totalFollowers = 50,
+                eventName = hashtag
             };
 
             return Summary;

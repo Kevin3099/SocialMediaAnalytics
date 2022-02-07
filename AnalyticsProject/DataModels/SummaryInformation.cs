@@ -18,5 +18,6 @@ namespace AnalyticsProject.DataModels
         public int averageComments { get; set; }
         public int followerIncrease { get; set; }
         public int totalFollowers { get; set; }
+        public string eventName { get; set; }
     } 
 }

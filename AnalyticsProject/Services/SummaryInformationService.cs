@@ -57,20 +57,23 @@ namespace AnalyticsProject.Services
             };
             clearDB();
             GetTwitterList();
-            CreateFBSummaryInformation(filter);
-            CreateLISummaryInformation(filter);
+
+            List<FacebookDbVM> fbList = new List<FacebookDbVM>();
+            fbList = GetFBList(filter);
+            CreateFBSummaryInformation(filter,fbList);
+
+            List<LinkedInDbVM> LiList = new List<LinkedInDbVM>();
+            LiList = GetLiList(filter);
+            CreateLISummaryInformation(filter,LiList);
         }
 
-        public void CreateFBSummaryInformation(FilterVM filter) {
+        public void CreateFBSummaryInformation(FilterVM filter, List<FacebookDbVM> fbList) {
             int totalLikes = 0;
             int totalRetweets = 0;
             int totalComments = 0;
             int averageLikes = 0;
             int averageRetweets = 0;
             int averageComments = 0;
-
-            List<FacebookDbVM> fbList = new List<FacebookDbVM>();
-            fbList = GetFBList(filter);
 
             foreach (FacebookDbVM post in fbList)
             {
@@ -102,7 +105,7 @@ namespace AnalyticsProject.Services
             Ctx.SaveChanges();
         }
 
-        public void CreateLISummaryInformation(FilterVM filter)
+        public void CreateLISummaryInformation(FilterVM filter, List<LinkedInDbVM> LiList)
         {
 
             int totalLikes = 0;
@@ -111,9 +114,6 @@ namespace AnalyticsProject.Services
             int averageLikes = 0;
             int averageRetweets = 0;
             int averageComments = 0;
-
-            List<LinkedInDbVM> LiList = new List<LinkedInDbVM>();
-            LiList = GetLiList(filter);
 
             foreach (LinkedInDbVM post in LiList)
             {
@@ -169,7 +169,6 @@ namespace AnalyticsProject.Services
                   Twitter twitter = new Twitter(Constants.consumerKey, Constants.consumerKeySecret, Constants.access_token, Constants.access_token_secret);
                   Ctx.SummaryInformations.Add(twitter.GetSummaryInformation("rlcs"));
                   Ctx.SaveChanges();
-                
         }
 
 
