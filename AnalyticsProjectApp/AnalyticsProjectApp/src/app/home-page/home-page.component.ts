@@ -34,7 +34,7 @@ export class HomePageComponent implements OnInit {
   }
 
   getData(){
-    this.homeService.getData().subscribe(
+    this.homeService.allData().subscribe(
       (res: Array<summaryInformationVM>) => {
         console.log(res);
        this.dataSource.data = res;
@@ -47,7 +47,7 @@ export class HomePageComponent implements OnInit {
     this.filter.fromDate = this.fromDate;
     this.filter.platform = this.platformSelected;
 
-    this.homeService.getFilteredData(this.filter).subscribe(
+    this.homeService.filteredDataByDateAndPlatform(this.filter).subscribe(
       (res: Array<summaryInformationVM>) => {
         console.log(res);
        this.dataSource.data = res;

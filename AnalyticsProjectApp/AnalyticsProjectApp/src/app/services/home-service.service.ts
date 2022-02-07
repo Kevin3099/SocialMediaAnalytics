@@ -13,13 +13,13 @@ export class HomeService {
 
   constructor(private http: HttpClient) {}
 
-  public getData = (): Observable<Array<summaryInformationVM>> => {
+  public allData = (): Observable<Array<summaryInformationVM>> => {
     const url = `${environment.apiHost}api/SummaryInformation/AllDataLastWeek`;
     return this.http.get<Array<summaryInformationVM>>(url);
     //?toDate=wahtever %20 for spaces encodeURIcomponent
   }
 
-public getFilteredData = (filter: filterVM): Observable<Array<summaryInformationVM>> => {
+public filteredDataByDateAndPlatform = (filter: filterVM): Observable<Array<summaryInformationVM>> => {
 const url = `${environment.apiHost}api/SummaryInformation/filteredDataByDateAndPlatform?toDate=${filter.toDate.toISOString()}&fromDate=${filter.fromDate.toISOString()}&platform=${filter.platform}`;
   return this.http.get<Array<summaryInformationVM>>(url);
 }

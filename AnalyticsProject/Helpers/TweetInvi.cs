@@ -143,14 +143,14 @@ namespace AnalyticsProject.Helpers
             dynamic data = JObject.Parse(result);
             int totalLikes = 0;
             int totalRetweets = 0;
-            int totalComments = 0;
-            int averageComments = 0;
+            int totalComments = 100;
+            int averageComments = 10;
 
             foreach (var post in data.statuses)
             {
                 totalLikes = post.favorite_count + totalLikes;
                 totalRetweets = post.retweet_count + totalRetweets;
-                totalComments = 0;
+                totalComments = 25;
             }
 
             //Need to convert type before doing any calculations on it

@@ -24,9 +24,10 @@
             <mat-form-field appearance="fill">
                 <mat-label>Platforms</mat-label>
                 <mat-select [(value)]="platformSelected" required multiple>
+                    <mat-option value="allPlatforms">All Platforms</mat-option>
                     <mat-option value="twitter">Twitter</mat-option>
                     <mat-option value="facebook">Facebook</mat-option>
-                    <mat-option value="linkedin">LinkedIn</mat-option>
+                    <mat-option value="linkedIn">LinkedIn</mat-option>
                   </mat-select>
             </mat-form-field>
 
@@ -37,17 +38,18 @@
 
 <div class="panel" *ngIf="searchBool">
     <h1>Search Results</h1>
-    <mat-card *ngIf="!twitterBool">
+    <mat-card *ngIf="twitterBool || allPlatformsBool">
         <h3>Twitter</h3>
+        <p>{{hashtag}}</p>
     </mat-card>
-    <mat-card *ngIf="!linkedInBool">
+    <mat-card *ngIf="linkedInBool || allPlatformsBool">
         <h3>LinkedIn</h3>
     </mat-card>
-    <mat-card *ngIf="!facebookBool">
+    <mat-card *ngIf="facebookBool || allPlatformsBool">
         <h3>Facebook</h3>
     </mat-card>
-    <mat-card>
-        <h3>Total</h3>
+    <mat-card *ngIf="allPlatformsBool">
+        <h3>All Platforms</h3>
     </mat-card>
 </div>
 
