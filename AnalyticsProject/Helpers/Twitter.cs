@@ -1,50 +1,4 @@
-﻿//using AnalyticsProject.Properties;
-//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Threading.Tasks;
-//using Tweetinvi;
-
-//namespace AnalyticsProject.Helpers
-//{
-//    public class TweetInvi
-//    {
-//        public static async Task start()
-//        {
-//            // we create a client with your user's credentials
-//            var userClient = new TwitterClient("CONSUMER_KEY", "CONSUMER_SECRET", "ACCESS_TOKEN", "ACCESS_TOKEN_SECRET");
-
-//            // request the user's information from Twitter API
-//            var user = await userClient.Users.GetAuthenticatedUserAsync();
-//            Console.WriteLine("Hello " + user);
-
-//            // publish a tweet
-//            var tweet = await userClient.Tweets.PublishTweetAsync("Hello tweetinvi world!");
-//            Console.WriteLine("You published the tweet : " + tweet);
-
-//            //  https://api.twitter.com/2/tweets/search/recent?query=from:ItColdHearted15
-//        }
-//        public static async test2() {
-//            var twitter = new Twitter(MvcApplication.OauthConsumerKey,
-//                              MvcApplication.OauthConsumerKeySecret,
-//                              MvcApplication.OauthAccesToken,
-//                              MvcApplication.OauthAccessTokenSecret);
-
-//            //twitter.PostStatusUpdate(status, 54.35,-0.2);
-//            var response = twitter.GetTweets("johnnewcombeuk", 5);
-
-//            dynamic timeline = System.Web.Helpers.Json.Decode(response);
-
-//            foreach (var tweet in timeline)
-//            {
-//                string text = timeLineMention["text"].ToString();
-//                model.Timeline.Add(text);
-//            }
-//        }
-//    }
-//}
-
-using System;
+﻿using System;
 using System.IO;
 using System.Net;
 using AnalyticsProject.Properties;
@@ -72,33 +26,9 @@ namespace AnalyticsProject.Helpers
         public string AccessToken { set; get; }
         public string AccessTokenSecret { set; get; }
 
-
-        // Doesn't get Stats back
-        public String GetRecentTweets(String user)
+        public SummaryInformation GetSummaryInformationForUser(String user)
         {
-            var url = "https://api.twitter.com/2/tweets/search/recent?query=from:'" + user + "'";
-             var httpRequest = (HttpWebRequest)WebRequest.Create(url);
-
-            httpRequest.Accept = "application/json";
-            httpRequest.Headers["Authorization"] = Constants.twitterBearerToken;
-            var result = "";
-
-            var httpResponse = (HttpWebResponse)httpRequest.GetResponse();
-            using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
-            {
-                result = streamReader.ReadToEnd();
-                Console.WriteLine(result);
-            }
-
-            Console.WriteLine(httpResponse.StatusCode);
-
-
-            return result;
-        }
-
-        public SummaryInformation GetSummaryInformation(String user)
-        {
-            var url = "https://api.twitter.com/1.1/search/tweets.json?q='" + user + "'+&result_type=popular";
+            var url = "https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name='" + user + "'&exclude_replies=true";
             var httpRequest = (HttpWebRequest)WebRequest.Create(url);
 
             httpRequest.Accept = "application/json";
@@ -117,9 +47,9 @@ namespace AnalyticsProject.Helpers
             return Summary;
         }
 
-        public SummaryInformation GetEventTweetsFromUser(String hashtag)
+        public SummaryInformation GetSummaryInformationForEvent(String hashtag)
         {
-            var url = "https://api.twitter.com/1.1/search/tweets.json?q='" + hashtag + "'+&result_type=popular";
+            var url = "https://api.twitter.com/1.1/search/tweets.json?q='" + hashtag + "'&result_type=popular";
             var httpRequest = (HttpWebRequest)WebRequest.Create(url);
 
             httpRequest.Accept = "application/json";
@@ -134,12 +64,10 @@ namespace AnalyticsProject.Helpers
             }
 
             Console.WriteLine(httpResponse.StatusCode);
-            //  Event myEvent = JSONParserForEvents(result);
-            // return myEvent;
             return JSONParserForSummaryInformation(result,hashtag);
         }
 
-        public SummaryInformation JSONParserForSummaryInformation(string result,string hashtag) {
+        private SummaryInformation JSONParserForSummaryInformation(string result,string hashtag) {
 
             dynamic data = JObject.Parse(result);
             int totalLikes = 0;
@@ -180,10 +108,28 @@ namespace AnalyticsProject.Helpers
 
             return Summary;
         }
-
-        public Event JSONParserForEvents(String result) {
-            var customEvent = new Event();
-            return customEvent;
-        }
     }
 }
+
+//public String GetRecentTweetsFromUserWithoutStats(String user)
+//{
+//    var url = "https://api.twitter.com/2/tweets/search/recent?query=from:'" + user + "'";
+//    var httpRequest = (HttpWebRequest)WebRequest.Create(url);
+
+//    httpRequest.Accept = "application/json";
+//    httpRequest.Headers["Authorization"] = Constants.twitterBearerToken;
+//    var result = "";
+
+//    var httpResponse = (HttpWebResponse)httpRequest.GetResponse();
+//    using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+//    {
+//        result = streamReader.ReadToEnd();
+//        Console.WriteLine(result);
+//    }
+
+//    Console.WriteLine(httpResponse.StatusCode);
+
+
+//    return result;
+//}
+

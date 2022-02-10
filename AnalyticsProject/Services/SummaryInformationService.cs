@@ -13,6 +13,8 @@ namespace AnalyticsProject.Services
     {
         public List<SummaryInformationVM> filteredGet(FilterVM filter);
         public List<SummaryInformationVM> GetAll();
+        public void DeleteAll();
+        public void GenerateData(FilterVM filter, string user);
 
     }
     public class SummaryInformationService : ServiceBase, ISummaryInformationService
@@ -20,9 +22,18 @@ namespace AnalyticsProject.Services
         public SummaryInformationService(SMAContext ctx) : base(ctx)
         {
         }
+
+        public List<SummaryInformationVM> GetAll()
+        {
+            List<SummaryInformationVM> db = new List<SummaryInformationVM>();
+            var SIList = Ctx.SummaryInformations
+                .Where(x => x.DateTo == DateTime.Now.Date && x.DateFrom == DateTime.Now.AddDays(-7).Date)
+                .Select(x => new SummaryInformationVM(x)).ToList();
+            return SIList;
+        }
+
         public List<SummaryInformationVM> filteredGet(FilterVM filter)
         {
-           
             if (filter.Platform == "All Platforms") {
              
                 var SIList = Ctx.SummaryInformations
@@ -39,140 +50,28 @@ namespace AnalyticsProject.Services
             }
         }
 
-        public List<SummaryInformationVM> GetAll()
+        //Note this Method has to call a lot of different endpoints and API's so may take some time.
+        public void GenerateData(FilterVM filter, string user)
         {
+            Facebook facebook = new Facebook();
+            LinkedIn linkedIn = new LinkedIn();
+            Twitter twitter = new Twitter(Constants.consumerKey, Constants.consumerKeySecret, Constants.access_token, Constants.access_token_secret);
+           
+            var fbList = Ctx.FacebookDbs
+              .Where(x => x.DatePosted <= filter.DateTo && x.DatePosted >= filter.DateFrom)
+              .Select(x => new FacebookDbVM(x)).ToList();
 
-            List<SummaryInformationVM> db = new List<SummaryInformationVM>();
-            var SIList = Ctx.SummaryInformations
-                .Where(x => x.DateTo == DateTime.Now.Date && x.DateFrom == DateTime.Now.AddDays(-7).Date)
-                .Select(x => new SummaryInformationVM(x)).ToList();
-            return SIList;
-        }
-        public void GenerateData()
-        {
-            FilterVM filter = new FilterVM
-            {
-                DateFrom = DateTime.Now.AddDays(-7).Date,
-                DateTo = DateTime.Now.Date
-            };
-            clearDB();
-            GetTwitterList();
+            var LiList = Ctx.LinkedInDbs
+               .Where(x => x.DatePosted <= filter.DateTo && x.DatePosted >= filter.DateFrom)
+               .Select(x => new LinkedInDbVM(x)).ToList();
 
-            List<FacebookDbVM> fbList = new List<FacebookDbVM>();
-            fbList = GetFBList(filter);
-            CreateFBSummaryInformation(filter,fbList);
-
-            List<LinkedInDbVM> LiList = new List<LinkedInDbVM>();
-            LiList = GetLiList(filter);
-            CreateLISummaryInformation(filter,LiList);
-        }
-
-        public void CreateFBSummaryInformation(FilterVM filter, List<FacebookDbVM> fbList) {
-            int totalLikes = 0;
-            int totalRetweets = 0;
-            int totalComments = 0;
-            int averageLikes = 0;
-            int averageRetweets = 0;
-            int averageComments = 0;
-
-            foreach (FacebookDbVM post in fbList)
-            {
-                totalLikes = post.likes + totalLikes;
-                totalRetweets = totalRetweets + post.retweets;
-                totalComments = totalComments + post.comments;
-                averageLikes = totalLikes / fbList.Count;
-                averageRetweets = totalRetweets / fbList.Count;
-                averageComments = totalComments / fbList.Count;
-            }
-            var Summary = new SummaryInformation()
-            {
-                Platform = "Facebook",
-                Id = new Guid(),
-                DateFrom = filter.DateFrom,
-                DateTo = filter.DateTo,
-                CountOfPosts = fbList.Count,
-                totalLikes = totalLikes,
-                totalRetweets = totalRetweets,
-                totalComments = totalComments,
-                averageLikes = averageLikes,
-                averageRetweets = averageRetweets,
-                averageComments = averageComments,
-                followerIncrease = 5,
-                totalFollowers = 50
-            };
-
-            Ctx.SummaryInformations.Add(Summary);
+            Ctx.SummaryInformations.Add(facebook.GetSummaryInformationForUser(user, filter, fbList));
+            Ctx.SummaryInformations.Add(linkedIn.GetSummaryInformationForUser(user, filter,LiList));
+            Ctx.SummaryInformations.Add(twitter.GetSummaryInformationForUser(user));
             Ctx.SaveChanges();
         }
 
-        public void CreateLISummaryInformation(FilterVM filter, List<LinkedInDbVM> LiList)
-        {
-
-            int totalLikes = 0;
-            int totalRetweets = 0;
-            int totalComments = 0;
-            int averageLikes = 0;
-            int averageRetweets = 0;
-            int averageComments = 0;
-
-            foreach (LinkedInDbVM post in LiList)
-            {
-                totalLikes = post.likes + totalLikes;
-                totalRetweets = totalRetweets + post.retweets;
-                totalComments = totalComments + post.comments;
-                averageLikes = totalLikes / LiList.Count;
-                averageRetweets = totalRetweets / LiList.Count;
-                averageComments = totalComments / LiList.Count;
-            }
-            var Summary = new SummaryInformation()
-            {
-                Id = new Guid(),
-                Platform = "LinkedIn",
-                DateFrom = filter.DateFrom,
-                DateTo = filter.DateTo,
-                CountOfPosts = LiList.Count,
-                totalLikes = totalLikes,
-                totalRetweets = totalRetweets,
-                totalComments = totalComments,
-                averageLikes = averageLikes,
-                averageRetweets = averageRetweets,
-                averageComments = averageComments,
-                followerIncrease = 5,
-                totalFollowers = 50
-            };
-
-            Ctx.SummaryInformations.Add(Summary);
-            Ctx.SaveChanges();
-        }
-
-        public List<LinkedInDbVM> GetLiList(FilterVM filter)
-        {
-
-            List<LinkedInDbVM> liDb = new List<LinkedInDbVM>();
-            liDb = Ctx.LinkedInDbs
-                .Where(x => x.DatePosted <= filter.DateTo && x.DatePosted >= filter.DateFrom)
-                .Select(x => new LinkedInDbVM(x)).ToList();
-            return liDb;
-        }
-
-        public List<FacebookDbVM> GetFBList(FilterVM filter) {
-
-            List<FacebookDbVM> fbDb = new List<FacebookDbVM>();
-            fbDb = Ctx.FacebookDbs
-                .Where(x => x.DatePosted <= filter.DateTo && x.DatePosted >= filter.DateFrom)
-                .Select(x => new FacebookDbVM(x)).ToList();
-            return fbDb;
-        }
-
-        public void GetTwitterList()
-        {
-                  Twitter twitter = new Twitter(Constants.consumerKey, Constants.consumerKeySecret, Constants.access_token, Constants.access_token_secret);
-                  Ctx.SummaryInformations.Add(twitter.GetSummaryInformation("rlcs"));
-                  Ctx.SaveChanges();
-        }
-
-
-        public void clearDB() {
+        public void DeleteAll() {
             var rows = from o in Ctx.SummaryInformations
                        select o;
             foreach (var row in rows)
