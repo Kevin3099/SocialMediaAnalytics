@@ -64,8 +64,43 @@ namespace AnalyticsProject.Helpers
             return Summary;
         }
 
-        public SummaryInformation GetSummaryInformationForEvents(String hashtag)
+        public SummaryInformation GetSummaryInformationForEvents(EventsVM newEvent, List<LinkedInDbVM> LiList)
         {
+            var totalLikes = 0;
+            var totalRetweets = 0;
+            var totalComments = 0;
+            var averageLikes = 0;
+            var averageRetweets = 0;
+            var averageComments = 0;
+
+            foreach (LinkedInDbVM post in LiList)
+            {
+                totalLikes = post.likes + totalLikes;
+                totalRetweets = totalRetweets + post.retweets;
+                totalComments = totalComments + post.comments;
+                averageLikes = totalLikes / LiList.Count;
+                averageRetweets = totalRetweets / LiList.Count;
+                averageComments = totalComments / LiList.Count;
+            }
+            var Summary = new SummaryInformation()
+            {
+                Id = new Guid(),
+                Platform = "LinkedIn",
+                DateFrom = newEvent.DateFrom,
+                DateTo = newEvent.DateTo,
+                CountOfPosts = LiList.Count,
+                totalLikes = totalLikes,
+                totalRetweets = totalRetweets,
+                totalComments = totalComments,
+                averageLikes = averageLikes,
+                averageRetweets = averageRetweets,
+                averageComments = averageComments,
+                followerIncrease = 5,
+                totalFollowers = 50,
+                eventName = newEvent.Hashtag
+            };
+
+            return Summary;
         }
     }
 }

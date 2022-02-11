@@ -10,20 +10,35 @@ namespace AnalyticsProject.ViewModels
     public class EventsVM
     {
         [Required]
-        public Guid Id { get; set; }
+        public Guid EventsId { get; set; }
         public string Hashtag { get; set; }
-        public virtual FilterVM Filter { get; set; }
-        public virtual List<SummaryInformationVM> EventStats { get; set; }
+        public DateTimeOffset DateFrom { get; set; }
+        public DateTimeOffset DateTo { get; set; }
+        public List<SummaryInformationVM> SummaryInformations { get; set; }
 
         public EventsVM() {
         }
 
         public EventsVM(Event events)
         {
-            Id = events.Id;
+            EventsId = events.EventId;
             Hashtag = events.Hashtag;
-            Filter = events.Filter;
-            EventStats = events.EventStats;
+            DateFrom = events.DateFrom;
+            DateTo = events.DateTo;
+            SummaryInformations = new List<SummaryInformationVM>();
+
+            if (events.SummaryInformations != null)
+            {
+              //  EventStats = (List<SummaryInformationVM>)events.EventStats;
+            }
+        }
+        public EventsVM(List<SummaryInformationVM> eventsList, Event events)
+        {
+            EventsId = events.EventId;
+            Hashtag = events.Hashtag;
+            DateFrom = events.DateFrom;
+            DateTo = events.DateTo;
+            SummaryInformations = eventsList;
         }
     }
 }

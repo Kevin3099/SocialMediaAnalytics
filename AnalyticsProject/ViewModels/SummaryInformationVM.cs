@@ -7,23 +7,6 @@ using System.Threading.Tasks;
 
 namespace AnalyticsProject.ViewModels
 {
- /*  public class SummaryInformationVM
-    {
-        [Required]
-        public virtual TwitterSummary TwitterSummarys { get; set; }
-        public virtual FacebookSummary FacebookSummarys { get; set; }
-        public virtual LinkedInSummary LinkedInSummarys { get; set; }
-
-        public SummaryInformationVM() {
-        }
-
-        public SummaryInformationVM(TwitterSummary twitter,FacebookSummary facebook, LinkedInSummary linkedIn)
-        {
-            TwitterSummarys = twitter;
-            FacebookSummarys = facebook;
-            LinkedInSummarys = linkedIn;
-        }
-    }*/
 
     public class SummaryInformationVM
     {
@@ -41,9 +24,10 @@ namespace AnalyticsProject.ViewModels
         public int followerIncrease { get; set; }
         public int totalFollowers { get; set; }
         public string eventName { get; set; }
-    
+        public Guid? EventsId { get; set; }
 
-    public SummaryInformationVM()
+
+        public SummaryInformationVM()
     {
     }
 
@@ -63,6 +47,7 @@ namespace AnalyticsProject.ViewModels
         averageRetweets = SI.averageRetweets;
         averageComments = SI.averageComments;
         eventName = SI.eventName;
+        EventsId = SI.EventsId;
     }
     }
 }

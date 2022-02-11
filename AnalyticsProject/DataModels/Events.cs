@@ -7,10 +7,11 @@ namespace AnalyticsProject.DataModels
 {
     public class Event
     {
-        public Guid Id { get; set; }
+        public Guid EventId { get; set; }
         public string Hashtag { get; set; }
-        public virtual FilterVM Filter { get; set; }
-        public virtual List<SummaryInformationVM> EventStats { get; set; }
+        public DateTimeOffset DateFrom { get; set; }
+        public DateTimeOffset DateTo { get; set; }
+        public virtual IList<SummaryInformationVM> SummaryInformations { get; set; }
 
     } 
 }

@@ -36,7 +36,8 @@ namespace AnalyticsProject.Controllers
 
             EventsVM newEvent = new EventsVM() { 
             Hashtag = hashtag,
-            Filter = filter,
+            DateFrom = filter.DateFrom,
+            DateTo = filter.DateTo
             };
 
             var result = Execute(Svc.SearchEvent, newEvent);
