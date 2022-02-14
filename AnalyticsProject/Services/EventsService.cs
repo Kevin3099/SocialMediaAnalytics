@@ -14,7 +14,7 @@ namespace AnalyticsProject.Services
     {
         EventsVM SearchEvent(EventsVM newEvent);
         List<EventsVM> MyEvents();
-        List<EventsVM> FilteredMyEvents();
+        List<EventsVM> FilteredMyEvents(FilterVM filter);
         EventsVM CompareEvents();
     }
     public class EventsService : ServiceBase, IEventsService
@@ -28,21 +28,47 @@ namespace AnalyticsProject.Services
             throw new NotImplementedException();
         }
 
-        public List<EventsVM> FilteredMyEvents()
+        public List<EventsVM> FilteredMyEvents(FilterVM filter)
         {
-            throw new NotImplementedException();
+            var myEventList = Ctx.Events
+                .Where(x => x.DateTo == filter.DateTo && x.DateFrom == filter.DateFrom)
+                .Include(x => x.SummaryInformations)
+                .Select(x => new EventsVM(x)).ToList();
+            
+            //Temporary Fix bad practice
+            foreach(EventsVM x in myEventList)
+            {
+                x.SummaryInformations = Ctx.SummaryInformations
+                   .Where(y => y.eventName == x.Hashtag)
+                   .Select(x => new SummaryInformationVM(x))
+                   .ToList();
+            }
+            return myEventList;
         }
 
         public List<EventsVM> MyEvents()
         {
-            throw new NotImplementedException();
+            var myEventList = Ctx.Events
+                 .Include(x => x.SummaryInformations)
+                 .Select(x => new EventsVM(x)).ToList();
+
+            //Temporary Fix Bad Practice
+            foreach (EventsVM x in myEventList)
+            {
+                x.SummaryInformations = Ctx.SummaryInformations
+                   .Where(y => y.eventName == x.Hashtag)
+                   .Select(x => new SummaryInformationVM(x))
+                   .ToList();
+            }
+            return myEventList;
         }
 
         public EventsVM SearchEvent(EventsVM newEvent)
         {
-            var searchedEvent = Ctx.Events.Include(x => x.SummaryInformations)
+            var searchedEvent = Ctx.Events
                 .Where(x => x.Hashtag == newEvent.Hashtag)
-                .Select(x => new EventsVM(x)).FirstOrDefault();
+                .Include(x => x.SummaryInformations) // Include not adding Summary list
+                .Select(x => new EventsVM(x)).FirstOrDefault(); // Fix at later point
 
             if (searchedEvent == null )
             {
@@ -61,14 +87,16 @@ namespace AnalyticsProject.Services
                     .Where(x => x.DatePosted <= newEvent.DateTo && x.DatePosted >= newEvent.DateFrom && x.content.Contains(newEvent.Hashtag))
                     .Select(x => new FacebookDbVM(x)).ToList();
 
+                List<SummaryInformation> SumInfoList = new List<SummaryInformation>();
+                SumInfoList.Add(facebook.GetSummaryInformationForEvents(newEvent, fbList));
+                SumInfoList.Add(linkedIn.GetSummaryInformationForEvents(newEvent, LiList));
+                SumInfoList.Add(twitter.GetSummaryInformationForEvent(newEvent.Hashtag));
 
-                Ctx.SummaryInformations.Add(facebook.GetSummaryInformationForEvents(newEvent, fbList));
-                Ctx.SummaryInformations.Add(linkedIn.GetSummaryInformationForEvents(newEvent, LiList));
-                Ctx.SummaryInformations.Add(twitter.GetSummaryInformationForEvent(newEvent.Hashtag));
+                foreach(SummaryInformation x in SumInfoList)
+                {
+                    Ctx.SummaryInformations.Add(x);
+                }
                 Ctx.SaveChanges();
-
-                //create summary info list instead of adding them all to database individually, create list and then for each in list add to 
-                //database then use the same list to be the summary information list in event, add all to database and save changes and upload
 
                 var SIList = Ctx.SummaryInformations
                    .Where(x => x.eventName == newEvent.Hashtag)
@@ -83,7 +111,7 @@ namespace AnalyticsProject.Services
                 {
                     EventId = newEvent.EventsId,
                     Hashtag = newEvent.Hashtag,
-                    SummaryInformations = newEvent.SummaryInformations,
+                    SummaryInformations = SumInfoList,
                     DateTo = newEvent.DateTo,
                     DateFrom = newEvent.DateFrom
 
@@ -94,6 +122,10 @@ namespace AnalyticsProject.Services
             }
             else
             {
+                searchedEvent.SummaryInformations = Ctx.SummaryInformations
+                   .Where(x => x.eventName == newEvent.Hashtag)
+                   .Select(x => new SummaryInformationVM(x))
+                   .ToList();
                 return searchedEvent;
             }
 
