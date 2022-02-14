@@ -29,9 +29,9 @@ namespace AnalyticsProject.Services
             int averageCommentIncrease = 0;
             int averageRetweetIncrease = 0;
 
-           // List<string> mostCommonEffectiveWords = null;
-           // DateTime bestPostTime = new DateTime();
-
+            // List<string> mostCommonEffectiveWords = null;
+            // DateTime bestPostTime = new DateTime();
+            var mostCommonWords = new List<string>();
             var orderedList = eventList.OrderBy(x => x.DateTo);
             foreach(var x in orderedList)
             {
@@ -39,14 +39,17 @@ namespace AnalyticsProject.Services
                 if (platform == "Twitter")
                 {
                     info = x.SummaryInformations.Where(x => x.Platform == "Twitter").FirstOrDefault();
+                    mostCommonWords = CalculateMostCommonWords("Twitter");
                 }
                 else if (platform == "Facebook")
                 {
                     info = x.SummaryInformations.Where(x => x.Platform == "Facebook").FirstOrDefault();
+                    mostCommonWords = CalculateMostCommonWords("Facebook");
                 }
                 else
                 {
                     info = x.SummaryInformations.Where(x => x.Platform == "LinkedIn").FirstOrDefault();
+                    mostCommonWords = CalculateMostCommonWords("LinkedIn");
                 }
                 averageLikeIncrease = averageLikeIncrease + info.averageLikes;
                 averageRetweetIncrease = averageRetweetIncrease + info.averageRetweets;
@@ -57,7 +60,7 @@ namespace AnalyticsProject.Services
             averageLikeIncrease = averageLikeIncrease / orderedList.Count();
             averageRetweetIncrease = averageRetweetIncrease / orderedList.Count();
 
-            var mostCommentWords = CalculateMostCommonWords();
+            
             var bestPostTimes = CalculateBestPostTimes();
 
             var comparedEvents = new ComparedStatsVM()
@@ -68,7 +71,7 @@ namespace AnalyticsProject.Services
                 averageRetweetsIncrease = 0,
                 averageCommentsIncrease = 0,
                 bestPostTime = bestPostTimes,
-                mostCommonEffectiveWords = mostCommentWords,
+                mostCommonEffectiveWords = mostCommonWords,
                 top5Posts = null
             };
             return comparedEvents;
@@ -177,10 +180,22 @@ namespace AnalyticsProject.Services
 
         }
 
-        private List<string> CalculateMostCommonWords() {
+        private List<string> CalculateMostCommonWords(string platform) {
+            // get event
+            // if statement for each platform
+            // if linkedIn
+            // get all content string values 
+            // https://stackoverflow.com/questions/62037874/find-the-5-most-common-words-in-a-string follow this
+
+            // for twitter get tweet text list
+            // do same thing
             return null;
         }
         private List<DateTime> CalculateBestPostTimes() {
+            // figure out way to convert to 24 hour clock and ignore data .getHour??
+            // loop over posts if above average - check time - add to count for that hour
+            // highest counted hour, average posts in that hour 
+            // that's best time to post
             throw new NotImplementedException();
         }
     }

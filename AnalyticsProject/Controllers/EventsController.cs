@@ -54,9 +54,17 @@ namespace AnalyticsProject.Controllers
 
         [HttpGet]
         [Route("FilteredMyEvents")]
-        public ActionResult<List<EventsVM>> FilteredMyEvents()
+        public ActionResult<List<EventsVM>> FilteredMyEvents(FilterVM filter, string hashtag)
         {
-            var result = Execute(Svc.FilteredMyEvents);
+
+            var result = Execute(Svc.FilteredMyEvents,filter,hashtag);
+            return result;
+        }
+        [HttpGet]
+        [Route("CompareEvents")]
+        public ActionResult<ComparedStatsVM> CompareEvents(List<EventsVM> eventsList, string platform)
+        {
+            var result = Execute(Svc.CompareEvents,eventsList,platform);
             return result;
         }
     }
