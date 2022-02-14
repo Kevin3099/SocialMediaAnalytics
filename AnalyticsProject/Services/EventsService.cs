@@ -14,8 +14,8 @@ namespace AnalyticsProject.Services
     {
         EventsVM SearchEvent(EventsVM newEvent);
         List<EventsVM> MyEvents();
-        List<EventsVM> FilteredMyEvents(FilterVM filter);
-        EventsVM CompareEvents();
+        List<EventsVM> FilteredMyEvents(FilterVM filter, string? hashtag);
+        ComparedStatsVM CompareEvents(List<EventsVM> eventList, string platform);
     }
     public class EventsService : ServiceBase, IEventsService
     {
@@ -23,15 +23,61 @@ namespace AnalyticsProject.Services
         {
         }
 
-        public EventsVM CompareEvents()
+        public ComparedStatsVM CompareEvents(List<EventsVM> eventList, string platform)
         {
-            throw new NotImplementedException();
+            int averageLikeIncrease = 0;
+            int averageCommentIncrease = 0;
+            int averageRetweetIncrease = 0;
+
+           // List<string> mostCommonEffectiveWords = null;
+           // DateTime bestPostTime = new DateTime();
+
+            var orderedList = eventList.OrderBy(x => x.DateTo);
+            foreach(var x in orderedList)
+            {
+                var info = new SummaryInformationVM();
+                if (platform == "Twitter")
+                {
+                    info = x.SummaryInformations.Where(x => x.Platform == "Twitter").FirstOrDefault();
+                }
+                else if (platform == "Facebook")
+                {
+                    info = x.SummaryInformations.Where(x => x.Platform == "Facebook").FirstOrDefault();
+                }
+                else
+                {
+                    info = x.SummaryInformations.Where(x => x.Platform == "LinkedIn").FirstOrDefault();
+                }
+                averageLikeIncrease = averageLikeIncrease + info.averageLikes;
+                averageRetweetIncrease = averageRetweetIncrease + info.averageRetweets;
+                averageCommentIncrease = averageCommentIncrease + info.averageComments;
+            }
+
+            averageCommentIncrease = averageCommentIncrease / orderedList.Count();
+            averageLikeIncrease = averageLikeIncrease / orderedList.Count();
+            averageRetweetIncrease = averageRetweetIncrease / orderedList.Count();
+
+            var mostCommentWords = CalculateMostCommonWords();
+            var bestPostTimes = CalculateBestPostTimes();
+
+            var comparedEvents = new ComparedStatsVM()
+            {
+                Id = new Guid(),
+                averageFollowerIncrease = 0,
+                averageLikesIncrease = 0,
+                averageRetweetsIncrease = 0,
+                averageCommentsIncrease = 0,
+                bestPostTime = bestPostTimes,
+                mostCommonEffectiveWords = mostCommentWords,
+                top5Posts = null
+            };
+            return comparedEvents;
         }
 
-        public List<EventsVM> FilteredMyEvents(FilterVM filter)
+        public List<EventsVM> FilteredMyEvents(FilterVM filter, string? hashtag)
         {
             var myEventList = Ctx.Events
-                .Where(x => x.DateTo == filter.DateTo && x.DateFrom == filter.DateFrom)
+                .Where(x => x.DateTo == filter.DateTo && x.DateFrom == filter.DateFrom || x.Hashtag == hashtag)
                 .Include(x => x.SummaryInformations)
                 .Select(x => new EventsVM(x)).ToList();
             
@@ -129,6 +175,13 @@ namespace AnalyticsProject.Services
                 return searchedEvent;
             }
 
+        }
+
+        private List<string> CalculateMostCommonWords() {
+            return null;
+        }
+        private List<DateTime> CalculateBestPostTimes() {
+            throw new NotImplementedException();
         }
     }
 }
