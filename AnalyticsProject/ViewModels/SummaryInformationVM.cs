@@ -47,7 +47,7 @@ namespace AnalyticsProject.ViewModels
         averageRetweets = SI.averageRetweets;
         averageComments = SI.averageComments;
         eventName = SI.eventName;
-        EventsId = SI.EventsId;
+        EventsId = SI.EventId;
     }
     }
 }

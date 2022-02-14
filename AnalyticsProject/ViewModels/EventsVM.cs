@@ -29,7 +29,11 @@ namespace AnalyticsProject.ViewModels
 
             if (events.SummaryInformations != null)
             {
-              //  EventStats = (List<SummaryInformationVM>)events.EventStats;
+                foreach (var i in events.SummaryInformations)
+                {
+                    var summaryInfo = new SummaryInformationVM(i);
+                    SummaryInformations.Add(summaryInfo);
+                }
             }
         }
         public EventsVM(List<SummaryInformationVM> eventsList, Event events)

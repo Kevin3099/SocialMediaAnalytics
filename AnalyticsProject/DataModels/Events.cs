@@ -11,7 +11,7 @@ namespace AnalyticsProject.DataModels
         public string Hashtag { get; set; }
         public DateTimeOffset DateFrom { get; set; }
         public DateTimeOffset DateTo { get; set; }
-        public virtual IList<SummaryInformationVM> SummaryInformations { get; set; }
+        public virtual IList<SummaryInformation> SummaryInformations { get; set; }
 
     } 
 }

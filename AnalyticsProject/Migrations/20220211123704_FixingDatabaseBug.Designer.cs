@@ -4,14 +4,16 @@ using AnalyticsProject.DataModels;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AnalyticsProject.Migrations
 {
     [DbContext(typeof(SMAContext))]
-    partial class SMAContextModelSnapshot : ModelSnapshot
+    [Migration("20220211123704_FixingDatabaseBug")]
+    partial class FixingDatabaseBug
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -243,8 +245,6 @@ namespace AnalyticsProject.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EventId");
-
                     b.ToTable("SummaryInformations");
                 });
 
@@ -312,7 +312,65 @@ namespace AnalyticsProject.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("AnalyticsProject.DataModels.SummaryInformation", b =>
+            modelBuilder.Entity("AnalyticsProject.ViewModels.SummaryInformationVM", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("CountOfPosts")
+                        .HasColumnType("int");
+
+                    b.Property<DateTimeOffset>("DateFrom")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<DateTimeOffset>("DateTo")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<Guid?>("EventId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("EventsId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Platform")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("averageComments")
+                        .HasColumnType("int");
+
+                    b.Property<int>("averageLikes")
+                        .HasColumnType("int");
+
+                    b.Property<int>("averageRetweets")
+                        .HasColumnType("int");
+
+                    b.Property<string>("eventName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("followerIncrease")
+                        .HasColumnType("int");
+
+                    b.Property<int>("totalComments")
+                        .HasColumnType("int");
+
+                    b.Property<int>("totalFollowers")
+                        .HasColumnType("int");
+
+                    b.Property<int>("totalLikes")
+                        .HasColumnType("int");
+
+                    b.Property<int>("totalRetweets")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EventId");
+
+                    b.ToTable("SummaryInformationVM");
+                });
+
+            modelBuilder.Entity("AnalyticsProject.ViewModels.SummaryInformationVM", b =>
                 {
                     b.HasOne("AnalyticsProject.DataModels.Event", null)
                         .WithMany("SummaryInformations")

@@ -4,14 +4,16 @@ using AnalyticsProject.DataModels;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AnalyticsProject.Migrations
 {
     [DbContext(typeof(SMAContext))]
-    partial class SMAContextModelSnapshot : ModelSnapshot
+    [Migration("20220211124807_FixingAttempt2")]
+    partial class FixingAttempt2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
