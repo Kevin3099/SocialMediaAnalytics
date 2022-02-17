@@ -23,3 +23,16 @@ namespace AnalyticsProject.Services
         }
     }
 }
+
+// STEPS 
+// Get Data in, Get Parameters off User - Time planned to post - Hashtags - User - Followers
+// Check for sufficient data to make a prediction 
+// if yes continue if no stop
+// if yes - bring in all data, (All posts using hashtag within time limit by users with similar following) 
+// split into train and test
+// remove outliers on train
+// Check a few models
+// Use best predictor
+// test all on test data
+// return percentage accuracy
+// Generate prediction for users post

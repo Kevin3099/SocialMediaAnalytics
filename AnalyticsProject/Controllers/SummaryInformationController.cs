@@ -33,7 +33,7 @@ namespace AnalyticsProject.Controllers
 
         [HttpGet]
         [Route("filteredDataByDateAndPlatform")]
-        public ActionResult<List<SummaryInformationVM>> filteredGet(DateTime toDate,DateTime fromDate,string platform)
+        public ActionResult<List<SummaryInformationVM>> FilteredGet(DateTime toDate,DateTime fromDate,string platform)
         {
             var filter = new FilterVM
             {
@@ -42,8 +42,35 @@ namespace AnalyticsProject.Controllers
                 Platform = platform
             };
 
-            var result = Execute(Svc.filteredGet, filter);
+            var result = Execute(Svc.FilteredGet, filter);
             return result;
         }
+    
+
+    [HttpGet]
+    [Route("DeleteData")]
+    public void DeleteAll()
+    {
+        Execute(Svc.DeleteAll);
+    }
+
+    [HttpGet]
+    [Route("GenerateData")]
+    public ActionResult<List<SummaryInformationVM>> GenerateData(DateTime toDate, DateTime fromDate, string platform,string user)
+    {
+        var filter = new FilterVM
+        {
+                DateTo = toDate,
+                DateFrom = fromDate,
+                Platform = platform
+        };
+
+        var result = Execute(Svc.GenerateData, filter, user);
+        return result;
+    }
     }
 }
+//getall
+//filteredGet
+//deleteAll
+//generate data

@@ -11,7 +11,7 @@ namespace AnalyticsProject.Services
 {
     public interface ISummaryInformationService
     {
-        public List<SummaryInformationVM> filteredGet(FilterVM filter);
+        public List<SummaryInformationVM> FilteredGet(FilterVM filter);
         public List<SummaryInformationVM> GetAll();
         public void DeleteAll();
         public void GenerateData(FilterVM filter, string user);
@@ -32,7 +32,7 @@ namespace AnalyticsProject.Services
             return SIList;
         }
 
-        public List<SummaryInformationVM> filteredGet(FilterVM filter)
+        public List<SummaryInformationVM> FilteredGet(FilterVM filter)
         {
             if (filter.Platform == "All Platforms") {
              

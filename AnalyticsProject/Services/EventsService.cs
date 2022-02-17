@@ -23,9 +23,16 @@ namespace AnalyticsProject.Services
         {
         }
 
-        public ComparedStatsVM CompareEvents(List<EventsVM> eventList, string platform)
+        public ComparedStatsVM CompareEvents(List<EventsVM> myEventList, string platform)
         {
-            int averageLikeIncrease = 0;
+            var eventList = new List<EventsVM>();
+            foreach (var myEvent in myEventList)
+            {
+                var hashtag = myEvent.Hashtag;
+                eventList.Add(Ctx.Events.Where(x => x.Hashtag == hashtag).Select(x => new EventsVM(x)).FirstOrDefault());
+            }
+            
+                int averageLikeIncrease = 0;
             int averageCommentIncrease = 0;
             int averageRetweetIncrease = 0;
 
