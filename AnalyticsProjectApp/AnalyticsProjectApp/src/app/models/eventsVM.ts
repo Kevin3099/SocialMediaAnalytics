@@ -1,9 +1,11 @@
 import { filterVM } from "./filterVM";
 import { summaryInformationVM } from "./summaryInformationVM";
 
-export class eventVM  {
+export class eventsVM  {
+    public eventsId: any;
+    public fromDate!: Date;
+    public toDate!: Date;
     public hashtag!: string;
-    public filter!: filterVM;
     public eventStats!: Array<summaryInformationVM>;
   
     constructor(data?: any) {

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl} from '@angular/forms';
 import { Router } from '@angular/router';
-import { eventVM } from '../models/eventVM';
+import { eventsVM } from '../models/eventsVM';
 import { filterVM } from '../models/filterVM';
 import { EventsService } from '../services/events.service';
 
@@ -23,7 +23,7 @@ export class EventSearchComponent implements OnInit {
   facebookBool: Boolean = false;
   linkedInBool: Boolean = false;
   allPlatformsBool: Boolean = false;
-  event = new eventVM();
+  event = new eventsVM();
 
   constructor(public eventService: EventsService,private router: Router) { }
 
@@ -31,16 +31,13 @@ export class EventSearchComponent implements OnInit {
   }
 
   searchEvents(){
-    var filter = new filterVM()
-    filter.fromDate = this.startDate;
-    filter.toDate = this.endDate;
-    filter.platform = this.platformSelected;
+    this.event.fromDate = this.startDate;
+    this.event.toDate = this.endDate;
 
-    this.event.filter = filter;
     this.event.hashtag = this.hashtag;
 
     this.eventService.SearchEvent(this.event).subscribe(
-      (res: eventVM) => {
+      (res: eventsVM) => {
         console.log(res);
       this.event = res;
       },

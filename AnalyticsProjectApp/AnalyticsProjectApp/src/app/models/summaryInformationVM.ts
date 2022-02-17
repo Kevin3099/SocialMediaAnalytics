@@ -11,10 +11,6 @@ export class summaryInformationVM  {
     public averageRetweets!: number;
     public averageComments!: number;
 
-    
-
-    
-  
     constructor(data?: any) {
       const self = this;
 
