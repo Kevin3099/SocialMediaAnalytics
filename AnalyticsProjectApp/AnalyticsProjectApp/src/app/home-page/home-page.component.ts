@@ -68,6 +68,11 @@ export class HomePageComponent implements OnInit {
     this.filter.fromDate = this.fromDate;
     this.filter.platform = this.platformSelected;
     console.log("test");
-    this.homeService.GenerateData(this.filter).subscribe();
+    this.homeService.GenerateData(this.filter).subscribe(
+      (res: any) => {
+        this.getData();
+      },
+    );
+    
   }
 }

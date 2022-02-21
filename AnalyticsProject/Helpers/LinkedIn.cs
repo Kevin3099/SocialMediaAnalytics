@@ -47,8 +47,8 @@ namespace AnalyticsProject.Helpers
             {
                 Id = new Guid(),
                 Platform = "LinkedIn",
-                DateFrom = filter.DateFrom,
-                DateTo = filter.DateTo,
+                DateFrom = filter.DateFrom.Date,
+                DateTo = filter.DateTo.Date,
                 CountOfPosts = LiList.Count,
                 totalLikes = totalLikes,
                 totalRetweets = totalRetweets,

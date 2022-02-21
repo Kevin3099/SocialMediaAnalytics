@@ -54,21 +54,21 @@ namespace AnalyticsProject.Controllers
         Execute(Svc.DeleteAll);
     }
 
-    //[HttpGet]
-    //[Route("GenerateData")]
-    //public ActionResult<List<SummaryInformationVM>> GenerateData(DateTime toDate, DateTime fromDate, string platform,string user)
-    //{
-    //    var filter = new FilterVM
-    //    {
-    //            DateTo = toDate,
-    //            DateFrom = fromDate,
-    //            Platform = platform
-    //    };
-    //        user = "KevsterO98";
+        [HttpGet]
+        [Route("GenerateData")]
+        public ActionResult<List<SummaryInformationVM>> GenerateData(DateTime toDate, DateTime fromDate, string platform, string user)
+        {
+            var filter = new FilterVM
+            {
+                DateTo = toDate,
+                DateFrom = fromDate,
+                Platform = platform
+            };
+            user = "KevsterO98";
 
-    //    var result = Execute(Svc.GenerateData, filter, user);
-    //    return result;
-    //}
+            var result = Execute(Svc.GenerateData, filter, user);
+            return result;
+        }
     }
 }
 //getall

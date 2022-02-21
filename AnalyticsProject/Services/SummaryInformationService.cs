@@ -67,9 +67,7 @@ namespace AnalyticsProject.Services
                .Select(x => new LinkedInDbVM(x)).ToList();
 
             Ctx.SummaryInformations.Add(facebook.GetSummaryInformationForUser(user, filter, fbList));
-            Ctx.SaveChanges();
             Ctx.SummaryInformations.Add(linkedIn.GetSummaryInformationForUser(user, filter,LiList));
-            Ctx.SaveChanges();
             Ctx.SummaryInformations.Add(twitter.GetSummaryInformationForUser(user));
             Ctx.SaveChanges();
         }
