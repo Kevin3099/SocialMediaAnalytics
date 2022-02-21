@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { comparedStatsVM } from '../models/comparedStatsVM';
 import { eventsVM } from '../models/eventsVM';
 import { filterVM } from '../models/filterVM';
 
@@ -27,8 +28,8 @@ public SearchEvent = (event: eventsVM): Observable<eventsVM> => {
   return this.http.get<eventsVM>(url);
 }
 
-public CompareEvents = (hashTagList: Array<string>): Observable<Array<eventsVM>> => {
-  var url = `${environment.apiHost}api/SummaryInformation/AllDataLastWeek`;
+public CompareEvents = (hashTagList: Array<string>): Observable<comparedStatsVM> => {
+  var url = `${environment.apiHost}api/Event/CompareEvents`;
   var x = 0;
   hashTagList.forEach(element => {
     if(x==0){
@@ -42,7 +43,7 @@ public CompareEvents = (hashTagList: Array<string>): Observable<Array<eventsVM>>
     }
     x++;
   });
-  return this.http.get<Array<eventsVM>>(url);
+  return this.http.get<comparedStatsVM>(url);
 }
 
 public PredictEvent = (): Observable<Array<eventsVM>> => {

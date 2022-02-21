@@ -27,7 +27,7 @@ namespace AnalyticsProject.Services
         {
             List<SummaryInformationVM> db = new List<SummaryInformationVM>();
             var SIList = Ctx.SummaryInformations
-                .Where(x => x.DateTo == DateTime.Now.Date && x.DateFrom == DateTime.Now.AddDays(-7).Date)
+                .Where(x => x.DateTo.Date == DateTime.Now.Date && x.DateFrom.Date == DateTime.Now.AddDays(-7).Date)
                 .Select(x => new SummaryInformationVM(x)).ToList();
             return SIList;
         }
@@ -37,22 +37,23 @@ namespace AnalyticsProject.Services
             if (filter.Platform == "All Platforms") {
              
                 var SIList = Ctx.SummaryInformations
-                             .Where(x => x.DateTo == filter.DateTo && x.DateFrom == filter.DateFrom)
+                             .Where(x => x.DateTo.Date == filter.DateTo.Date && x.DateFrom.Date == filter.DateFrom.Date)
                              .Select(x => new SummaryInformationVM(x)).ToList();
                 return SIList;
             }
             else
             {
                 var SIList = Ctx.SummaryInformations
-                            .Where(x => x.DateTo == filter.DateTo && x.DateFrom == filter.DateFrom && filter.Platform == x.Platform)
+                            .Where(x => x.DateTo.Date == filter.DateTo.Date && x.DateFrom.Date == filter.DateFrom.Date && filter.Platform == x.Platform)
                             .Select(x => new SummaryInformationVM(x)).ToList();
                 return SIList;
             }
         }
 
         //Note this Method has to call a lot of different endpoints and API's so may take some time.
-        public void GenerateData(FilterVM filter, string user)
+        public async void GenerateData(FilterVM filter, string user)
         {
+            user = "KevsterO98";
             Facebook facebook = new Facebook();
             LinkedIn linkedIn = new LinkedIn();
             Twitter twitter = new Twitter(Constants.consumerKey, Constants.consumerKeySecret, Constants.access_token, Constants.access_token_secret);
@@ -66,7 +67,9 @@ namespace AnalyticsProject.Services
                .Select(x => new LinkedInDbVM(x)).ToList();
 
             Ctx.SummaryInformations.Add(facebook.GetSummaryInformationForUser(user, filter, fbList));
+            Ctx.SaveChanges();
             Ctx.SummaryInformations.Add(linkedIn.GetSummaryInformationForUser(user, filter,LiList));
+            Ctx.SaveChanges();
             Ctx.SummaryInformations.Add(twitter.GetSummaryInformationForUser(user));
             Ctx.SaveChanges();
         }

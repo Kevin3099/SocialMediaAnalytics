@@ -28,7 +28,7 @@ namespace AnalyticsProject.Helpers
 
         public SummaryInformation GetSummaryInformationForUser(String user)
         {
-            var url = "https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name='" + user + "'&exclude_replies=true";
+            var url = $"https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name={user}&exclude_replies=true";
             var httpRequest = (HttpWebRequest)WebRequest.Create(url);
 
             httpRequest.Accept = "application/json";
@@ -43,7 +43,7 @@ namespace AnalyticsProject.Helpers
             }
             var hashtag = "";
             Console.WriteLine(httpResponse.StatusCode);
-            SummaryInformation Summary = JSONParserForSummaryInformation(result,hashtag);
+            var Summary = JSONParserForSummaryInformation(result,hashtag);
             return Summary;
         }
 
@@ -69,13 +69,14 @@ namespace AnalyticsProject.Helpers
 
         private SummaryInformation JSONParserForSummaryInformation(string result,string hashtag) {
 
-            dynamic data = JObject.Parse(result);
+            dynamic dataArray = JArray.Parse(result);
             int totalLikes = 0;
             int totalRetweets = 0;
             int totalComments = 100;
             int averageComments = 10;
-
-            foreach (var post in data.statuses)
+            var test = dataArray[0];
+            Console.WriteLine(dataArray[0]);
+            foreach (var post in dataArray)
             {
                 totalLikes = post.favorite_count + totalLikes;
                 totalRetweets = post.retweet_count + totalRetweets;
@@ -83,9 +84,9 @@ namespace AnalyticsProject.Helpers
             }
 
             //Need to convert type before doing any calculations on it
-            int averageLikes =  data.search_metadata.count;
+            int averageLikes =  dataArray.Count;
             averageLikes = totalLikes / averageLikes;
-            int averageRetweets = data.search_metadata.count;
+            int averageRetweets = dataArray.Count;
             averageRetweets = totalRetweets / averageRetweets;
 
             var Summary = new SummaryInformation()
@@ -94,7 +95,7 @@ namespace AnalyticsProject.Helpers
                 Platform = "Twitter",
                 DateFrom = DateTime.Now.AddDays(-7).Date,
                 DateTo = DateTime.Now.Date,
-                CountOfPosts = data.statuses.Count,
+                CountOfPosts = dataArray.Count,
                 totalLikes = totalLikes,
                 totalRetweets = totalRetweets,
                 totalComments = totalComments,

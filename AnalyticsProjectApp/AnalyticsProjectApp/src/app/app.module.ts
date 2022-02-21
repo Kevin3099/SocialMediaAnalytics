@@ -32,6 +32,7 @@ import { EventPredictionComponent } from './event-prediction/event-prediction.co
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { HighchartsChartModule } from 'highcharts-angular';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,7 @@ import { HttpClientModule } from '@angular/common/http';
     MyEventsComponent,
     EventComparisonComponent,
     EventSearchComponent,
-    EventPredictionComponent
+    EventPredictionComponent,
   ],
   imports: [
     BrowserModule,
@@ -68,6 +69,7 @@ import { HttpClientModule } from '@angular/common/http';
     MatDialogModule,
     MatSelectModule,
     MatOptionModule,
+    HighchartsChartModule,
 
     FormsModule
   ],
