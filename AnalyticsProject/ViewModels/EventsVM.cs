@@ -14,6 +14,8 @@ namespace AnalyticsProject.ViewModels
         public string Hashtag { get; set; }
         public DateTimeOffset DateFrom { get; set; }
         public DateTimeOffset DateTo { get; set; }
+        public string DateFromDisplay { get { return DateFrom.ToString("dd MMM yyyy"); } set { } }
+        public string DateToDisplay { get { return DateTo.ToString("dd MMM yyyy"); } set { } }
         public List<SummaryInformationVM> SummaryInformations { get; set; }
 
         public EventsVM() {
@@ -25,6 +27,8 @@ namespace AnalyticsProject.ViewModels
             Hashtag = events.Hashtag;
             DateFrom = events.DateFrom;
             DateTo = events.DateTo;
+            DateFromDisplay = this.DateFromDisplay;
+            DateFromDisplay = this.DateToDisplay;
             SummaryInformations = new List<SummaryInformationVM>();
 
             if (events.SummaryInformations != null)

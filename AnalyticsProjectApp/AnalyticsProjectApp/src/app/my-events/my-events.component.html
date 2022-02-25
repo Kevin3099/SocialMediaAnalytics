@@ -1,1 +1,27 @@
-<p>my-events works!</p>
+    <mat-card>
+      <div class="mat-elevation-z8">
+    
+        <table mat-table matSort [dataSource]="dataSource">
+    
+          <ng-container matColumnDef="hashtag">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Event Hashtag </th>
+            <td mat-cell *matCellDef="let data"> {{data.hashtag}} </td>
+          </ng-container>
+    
+          <ng-container matColumnDef="DateToDisplay">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Date To </th>
+            <td mat-cell *matCellDef="let data"> {{data.dateToDisplay}} </td>
+          </ng-container>
+    
+          <ng-container matColumnDef="DateFromDisplay">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Date From </th>
+            <td mat-cell *matCellDef="let data"> {{data.dateFromDisplay}} </td>
+          </ng-container>
+    
+          <tr mat-header-row *matHeaderRowDef="table"></tr>
+          <tr mat-row *matRowDef="let row; columns: table;"></tr>
+        </table>
+    
+        <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+      </div>
+    </mat-card>

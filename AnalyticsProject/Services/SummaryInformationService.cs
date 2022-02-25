@@ -25,6 +25,7 @@ namespace AnalyticsProject.Services
 
         public List<SummaryInformationVM> GetAll()
         {
+           // GenerateData()
             List<SummaryInformationVM> db = new List<SummaryInformationVM>();
             var SIList = Ctx.SummaryInformations
                 .Where(x => x.DateTo.Date == DateTime.Now.Date && x.DateFrom.Date == DateTime.Now.AddDays(-7).Date)

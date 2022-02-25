@@ -5,6 +5,8 @@ export class eventsVM  {
     public eventsId: any;
     public fromDate!: Date;
     public toDate!: Date;
+    public fromDateDisplay!: string;
+    public toDateDisplay!: string;
     public hashtag!: string;
     public eventStats!: Array<summaryInformationVM>;
   
