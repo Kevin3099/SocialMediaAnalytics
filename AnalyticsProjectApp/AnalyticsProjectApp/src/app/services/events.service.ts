@@ -28,14 +28,11 @@ public SearchEvent = (event: eventsVM): Observable<eventsVM> => {
   return this.http.get<eventsVM>(url);
 }
 
-public CompareEvents = (hashTagList: string[]): Observable<comparedStatsVM> => {
-  var myUrl = `${environment.apiHost}api/Event/CompareEvents`;
+public CompareEvents = (platform: string, hashTagList: string[]): Observable<comparedStatsVM> => {
+  var myUrl = `${environment.apiHost}api/Event/CompareEvents?platform=`+platform+"&";
   var x = 0;
   hashTagList.forEach(element => {
-    if(x==0){
-    myUrl = myUrl +"?hashtag0="+element+"&"
-    }
-    else if(x<hashTagList.length-1){
+    if(x<hashTagList.length-1){
     myUrl = myUrl +"hashTag"+x+ "=" + element+"&"
     }
     else if (x==hashTagList.length-1){

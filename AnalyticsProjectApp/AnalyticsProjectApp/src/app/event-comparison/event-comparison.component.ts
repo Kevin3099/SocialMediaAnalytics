@@ -15,6 +15,7 @@ export class EventComparisonComponent implements OnInit {
   //myEventList: Array<eventsVM> = new Array<eventsVM>();
   myEventList: string[] = [];
   selectedEvents: string[] = [];
+  platformSelected = "";
   comparedStats: comparedStatsVM = new comparedStatsVM();
   eventsPickedBool: Boolean = false;
 
@@ -27,7 +28,7 @@ export class EventComparisonComponent implements OnInit {
     console.log(this.selectedEvents);
     console.log(this.myEventList);
 
-    this.eventService.CompareEvents(this.selectedEvents).subscribe(
+    this.eventService.CompareEvents(this.platformSelected,this.selectedEvents).subscribe(
       (res: comparedStatsVM) => {
        this.comparedStats = res;
        console.log(res);

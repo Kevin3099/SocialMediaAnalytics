@@ -45,30 +45,28 @@ namespace AnalyticsProject.Services
             // DateTime bestPostTime = new DateTime();
             var mostCommonWords = new List<string>();
             var orderedList = eventList.OrderBy(x => x.DateTo.Date).ToList();
-          //  var orderedList = eventList;
             foreach (var x in orderedList)
             {
-                var twitterInfo = new SummaryInformationVM();
-                var fbInfo = new SummaryInformationVM();
-                var liInfo = new SummaryInformationVM();
-                if (platform == "Twitter")
+                var info = new SummaryInformationVM();
+                if (platform == "twitter")
                 {
-                    twitterInfo = x.SummaryInformations.Where(x => x.Platform == "Twitter").FirstOrDefault();
+                    info = x.SummaryInformations.Where(x => x.Platform == "Twitter").FirstOrDefault();
                     mostCommonWords = CalculateMostCommonWords("Twitter");
                 }
-                else if (platform == "Facebook")
+                else if (platform == "facebook")
                 {
-                    fbInfo = x.SummaryInformations.Where(x => x.Platform == "Facebook").FirstOrDefault();
-                    mostCommonWords = CalculateMostCommonWords("Facebook");
+                    info = x.SummaryInformations.Where(x => x.Platform == "facebook").FirstOrDefault();
+                    mostCommonWords = CalculateMostCommonWords("facebook");
                 }
-                else
+                else if (platform == "linkedIn")
                 {
-                    liInfo = x.SummaryInformations.Where(x => x.Platform == "LinkedIn").FirstOrDefault();
+                    info = x.SummaryInformations.Where(x => x.Platform == "LinkedIn").FirstOrDefault();
                     mostCommonWords = CalculateMostCommonWords("LinkedIn");
                 }
-                averageLikeIncrease = averageLikeIncrease + twitterInfo.averageLikes;
-                averageRetweetIncrease = averageRetweetIncrease + twitterInfo.averageRetweets;
-                averageCommentIncrease = averageCommentIncrease + twitterInfo.averageComments;
+                //Change to increased numbers so get average off each event then minus it from previous then add increases and divide
+                averageLikeIncrease = averageLikeIncrease + info.averageLikes;
+                averageRetweetIncrease = averageRetweetIncrease + info.averageRetweets;
+                averageCommentIncrease = averageCommentIncrease + info.averageComments;
             }
 
             averageCommentIncrease = averageCommentIncrease / orderedList.Count();

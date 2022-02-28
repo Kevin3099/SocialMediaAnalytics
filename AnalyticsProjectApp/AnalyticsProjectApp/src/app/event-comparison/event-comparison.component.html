@@ -6,6 +6,14 @@
         <mat-label>Select Events to Compare</mat-label>
         <mat-select [(value)]="selectedEvents" required multiple>
             <mat-option *ngFor="let event of myEventList" value="{{event}}">{{event}}</mat-option>  
+        </mat-select>      
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+        <mat-label>Platforms</mat-label>
+        <mat-select [(value)]="platformSelected" required>
+            <mat-option value="twitter">Twitter</mat-option>
+            <mat-option value="facebook">Facebook</mat-option>
+            <mat-option value="linkedIn">LinkedIn</mat-option>
           </mat-select>
     </mat-form-field>
 
