@@ -1,6 +1,7 @@
 import { getLocaleDateFormat } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import * as Highcharts from 'highcharts';
+import { comparedStatsVM } from '../models/comparedStatsVM';
 import { eventsVM } from '../models/eventsVM';
 import { EventsService } from '../services/events.service';
 
@@ -11,8 +12,10 @@ import { EventsService } from '../services/events.service';
 })
 export class EventComparisonComponent implements OnInit {
 
-  myEventList: Array<eventsVM> = new Array<eventsVM>();
-  selectedEvents = []
+  //myEventList: Array<eventsVM> = new Array<eventsVM>();
+  myEventList: string[] = [];
+  selectedEvents: string[] = [];
+  comparedStats: comparedStatsVM = new comparedStatsVM();
   eventsPickedBool: Boolean = false;
 
   constructor(public eventService: EventsService) { }
@@ -23,12 +26,23 @@ export class EventComparisonComponent implements OnInit {
   search(){
     console.log(this.selectedEvents);
     console.log(this.myEventList);
+
+    this.eventService.CompareEvents(this.selectedEvents).subscribe(
+      (res: comparedStatsVM) => {
+       this.comparedStats = res;
+       console.log(res);
+      },
+    )
     this.eventsPickedBool = true;
+
   }
   getData(){
     this.eventService.MyEvents().subscribe(
       (res: Array<eventsVM>) => {
-        this.myEventList = res;
+      //  this.myEventList = res;
+      res.forEach(event=> {
+        this.myEventList.push(event.hashtag) 
+      });
       },
     );
     }
@@ -63,9 +77,9 @@ export class EventComparisonComponent implements OnInit {
           type: 'pie',
           name: 'Percentage Share',
           data: [
-             ['Likes',   45.0],
-             ['Retweets',       26.8],
-             ['Comments',    8.5],
+             ['Average Like Increase',   this.comparedStats.averageLikesIncrease],
+             ['Average Retweet Increase',       this.comparedStats.averageRetweetIncrease],
+             ['Average Comment Increase',    this.comparedStats.averageCommentsIncrease],
           ]
        }]
     };

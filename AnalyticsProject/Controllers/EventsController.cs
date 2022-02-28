@@ -62,16 +62,28 @@ namespace AnalyticsProject.Controllers
         }
         [HttpGet]
         [Route("CompareEvents")]
-        public ActionResult<ComparedStatsVM> CompareEvents(List<string> hashtagList, string platform)
-        {
+        public ActionResult<ComparedStatsVM> CompareEvents(string platform, string hashtag0, string hashtag1, string hashtag2, string hashtag3) {
             List<EventsVM> myEventsList = new List<EventsVM>();
-            foreach(string hashtag in hashtagList)
-            {
-                EventsVM myEvent = new EventsVM();
-                myEvent.Hashtag = hashtag;
-                myEventsList.Add(myEvent);
-            }
-            var result = Execute(Svc.CompareEvents,myEventsList,platform);
+
+            EventsVM myEvent = new EventsVM();
+            EventsVM myEvent1 = new EventsVM();
+            EventsVM myEvent2 = new EventsVM();
+            EventsVM myEvent3 = new EventsVM();
+            EventsVM myEvent4 = new EventsVM();
+
+            myEvent.Hashtag = hashtag0;
+            myEventsList.Add(myEvent);
+
+            myEvent2.Hashtag = hashtag1;
+            myEventsList.Add(myEvent2);
+
+            myEvent3.Hashtag = hashtag2;
+            myEventsList.Add(myEvent3);
+
+            myEvent4.Hashtag = hashtag3;
+            myEventsList.Add(myEvent4);
+
+            var result = Execute(Svc.CompareEvents, myEventsList, platform);
             return result;
         }
     }

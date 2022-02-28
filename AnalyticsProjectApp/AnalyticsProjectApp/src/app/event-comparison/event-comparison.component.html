@@ -5,7 +5,7 @@
     <mat-form-field appearance="fill">
         <mat-label>Select Events to Compare</mat-label>
         <mat-select [(value)]="selectedEvents" required multiple>
-            <mat-option *ngFor="let event of myEventList" value="{{event}}}">{{event.hashtag}}</mat-option>  
+            <mat-option *ngFor="let event of myEventList" value="{{event}}">{{event}}</mat-option>  
           </mat-select>
     </mat-form-field>
 

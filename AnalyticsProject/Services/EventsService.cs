@@ -29,38 +29,46 @@ namespace AnalyticsProject.Services
             foreach (var myEvent in myEventList)
             {
                 var hashtag = myEvent.Hashtag;
-                eventList.Add(Ctx.Events.Where(x => x.Hashtag == hashtag).Select(x => new EventsVM(x)).FirstOrDefault());
+                var foundEvent = Ctx.Events.Where(x => x.Hashtag == hashtag).Select(x => new EventsVM(x)).FirstOrDefault();
+                if(foundEvent != null) { 
+                foundEvent.SummaryInformations = Ctx.SummaryInformations.Where(x => x.eventName == hashtag).Select(x => new SummaryInformationVM(x)).ToList();
+                eventList.Add(foundEvent);
+                }
+                
             }
             
-                int averageLikeIncrease = 0;
+            int averageLikeIncrease = 0;
             int averageCommentIncrease = 0;
             int averageRetweetIncrease = 0;
 
             // List<string> mostCommonEffectiveWords = null;
             // DateTime bestPostTime = new DateTime();
             var mostCommonWords = new List<string>();
-            var orderedList = eventList.OrderBy(x => x.DateTo);
-            foreach(var x in orderedList)
+            var orderedList = eventList.OrderBy(x => x.DateTo.Date).ToList();
+          //  var orderedList = eventList;
+            foreach (var x in orderedList)
             {
-                var info = new SummaryInformationVM();
+                var twitterInfo = new SummaryInformationVM();
+                var fbInfo = new SummaryInformationVM();
+                var liInfo = new SummaryInformationVM();
                 if (platform == "Twitter")
                 {
-                    info = x.SummaryInformations.Where(x => x.Platform == "Twitter").FirstOrDefault();
+                    twitterInfo = x.SummaryInformations.Where(x => x.Platform == "Twitter").FirstOrDefault();
                     mostCommonWords = CalculateMostCommonWords("Twitter");
                 }
                 else if (platform == "Facebook")
                 {
-                    info = x.SummaryInformations.Where(x => x.Platform == "Facebook").FirstOrDefault();
+                    fbInfo = x.SummaryInformations.Where(x => x.Platform == "Facebook").FirstOrDefault();
                     mostCommonWords = CalculateMostCommonWords("Facebook");
                 }
                 else
                 {
-                    info = x.SummaryInformations.Where(x => x.Platform == "LinkedIn").FirstOrDefault();
+                    liInfo = x.SummaryInformations.Where(x => x.Platform == "LinkedIn").FirstOrDefault();
                     mostCommonWords = CalculateMostCommonWords("LinkedIn");
                 }
-                averageLikeIncrease = averageLikeIncrease + info.averageLikes;
-                averageRetweetIncrease = averageRetweetIncrease + info.averageRetweets;
-                averageCommentIncrease = averageCommentIncrease + info.averageComments;
+                averageLikeIncrease = averageLikeIncrease + twitterInfo.averageLikes;
+                averageRetweetIncrease = averageRetweetIncrease + twitterInfo.averageRetweets;
+                averageCommentIncrease = averageCommentIncrease + twitterInfo.averageComments;
             }
 
             averageCommentIncrease = averageCommentIncrease / orderedList.Count();
@@ -68,17 +76,15 @@ namespace AnalyticsProject.Services
             averageRetweetIncrease = averageRetweetIncrease / orderedList.Count();
 
             
-            var bestPostTimes = CalculateBestPostTimes();
+           // var bestPostTimes = CalculateBestPostTimes();
 
             var comparedEvents = new ComparedStatsVM()
             {
+                averageFollowerIncrease = 20,
                 Id = new Guid(),
-                averageFollowerIncrease = 0,
-                averageLikesIncrease = 0,
-                averageRetweetsIncrease = 0,
-                averageCommentsIncrease = 0,
-                bestPostTime = bestPostTimes,
-                mostCommonEffectiveWords = mostCommonWords,
+                averageLikesIncrease = averageLikeIncrease,
+                averageRetweetsIncrease = averageRetweetIncrease,
+                averageCommentsIncrease = averageCommentIncrease,
                 top5Posts = null
             };
             return comparedEvents;

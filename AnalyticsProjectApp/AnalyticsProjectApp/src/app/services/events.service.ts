@@ -28,21 +28,22 @@ public SearchEvent = (event: eventsVM): Observable<eventsVM> => {
   return this.http.get<eventsVM>(url);
 }
 
-public CompareEvents = (hashTagList: Array<string>): Observable<comparedStatsVM> => {
-  var url = `${environment.apiHost}api/Event/CompareEvents`;
+public CompareEvents = (hashTagList: string[]): Observable<comparedStatsVM> => {
+  var myUrl = `${environment.apiHost}api/Event/CompareEvents`;
   var x = 0;
   hashTagList.forEach(element => {
     if(x==0){
-    url = url +"?"
+    myUrl = myUrl +"?hashtag0="+element+"&"
     }
-    else if(x<hashTagList.length){
-    url = url +"hashTag"+x+ "=" + element+"&"
+    else if(x<hashTagList.length-1){
+    myUrl = myUrl +"hashTag"+x+ "=" + element+"&"
     }
-    else if (x==hashTagList.length){
-    url = url +"?hashTag"+x+ "=" + element
+    else if (x==hashTagList.length-1){
+    myUrl = myUrl +"hashTag"+x+ "=" + element
     }
     x++;
   });
+  const url = myUrl;
   return this.http.get<comparedStatsVM>(url);
 }
 

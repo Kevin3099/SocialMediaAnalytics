@@ -49,7 +49,7 @@ namespace AnalyticsProject.Helpers
 
         public SummaryInformation GetSummaryInformationForEvent(String hashtag)
         {
-            var url = "https://api.twitter.com/1.1/search/tweets.json?q='" + hashtag + "'&result_type=popular";
+            var url = $"https://api.twitter.com/1.1/search/tweets.json?q={hashtag}&result_type=popular";
             var httpRequest = (HttpWebRequest)WebRequest.Create(url);
 
             httpRequest.Accept = "application/json";
@@ -64,7 +64,7 @@ namespace AnalyticsProject.Helpers
             }
 
             Console.WriteLine(httpResponse.StatusCode);
-            return JSONParserForSummaryInformation(result,hashtag);
+            return JSONParserForSummaryInformationForEvent(result,hashtag);
         }
 
         private SummaryInformation JSONParserForSummaryInformation(string result,string hashtag) {
@@ -109,6 +109,50 @@ namespace AnalyticsProject.Helpers
 
             return Summary;
         }
+
+        private SummaryInformation JSONParserForSummaryInformationForEvent(string result, string hashtag)
+        {
+
+            dynamic dataArray = JObject.Parse(result);
+            int totalLikes = 0;
+            int totalRetweets = 0;
+            int totalComments = 100;
+            int averageComments = 10;
+            foreach (var post in dataArray.statuses)
+            {
+                totalLikes = post.favorite_count + totalLikes;
+                totalRetweets = post.retweet_count + totalRetweets;
+                totalComments = 25;
+            }
+
+            //Need to convert type before doing any calculations on it
+            int averageLikes = dataArray.search_metadata.count;
+            averageLikes = totalLikes / averageLikes;
+            int averageRetweets = dataArray.search_metadata.count;
+            averageRetweets = totalRetweets / averageRetweets;
+
+            var Summary = new SummaryInformation()
+            {
+                Id = new Guid(),
+                Platform = "Twitter",
+                DateFrom = DateTime.Now.AddDays(-7).Date,
+                DateTo = DateTime.Now.Date,
+                CountOfPosts = dataArray.search_metadata.count,
+                totalLikes = totalLikes,
+                totalRetweets = totalRetweets,
+                totalComments = totalComments,
+                averageLikes = averageLikes,
+                averageRetweets = averageRetweets,
+                averageComments = averageComments,
+                followerIncrease = 5,
+                totalFollowers = 50,
+                eventName = hashtag
+            };
+
+            return Summary;
+        }
+
+
     }
 }
 

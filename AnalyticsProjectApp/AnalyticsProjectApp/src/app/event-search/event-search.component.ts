@@ -137,6 +137,7 @@ export class EventSearchComponent implements OnInit {
   }
 
   search(){
+     this.searchEvents();
     this.searchBool = true;
     console.log(this.platformSelected)
 
