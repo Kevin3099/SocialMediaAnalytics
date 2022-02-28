@@ -1,4 +1,7 @@
+import { getLocaleDateFormat } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { eventsVM } from '../models/eventsVM';
+import { EventsService } from '../services/events.service';
 
 @Component({
   selector: 'app-event-comparison',
@@ -7,16 +10,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EventComparisonComponent implements OnInit {
 
-  hashtag: string = "";
-  startDate: string = "";
-  endDate: string = "";
-  platformSelected = ""
+  myEventList: string[] = []
+  selectedEvents = []
 
-  constructor() { }
+  constructor(public eventService: EventsService) { }
 
   ngOnInit(): void {
+    this.getData();
   }
   search(){
-
+    console.log(this.selectedEvents)
   }
-}
+  getData(){
+    this.eventService.MyEvents().subscribe(
+      (res: Array<eventsVM>) => {
+        res.forEach(event => {
+          this.myEventList.push(event.hashtag)
+        });
+      },
+    );
+    }
+  }

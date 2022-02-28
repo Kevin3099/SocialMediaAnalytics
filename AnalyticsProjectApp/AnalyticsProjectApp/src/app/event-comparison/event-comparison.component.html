@@ -1,12 +1,15 @@
-<h1>Select Events to Compare</h1>
+<div style="height: calc(100vh - 128px); width: 100%;" fxLayoutAlign="center center">
 <div class="panel">
+    <h1>Select Events to Compare</h1>
 <form #eventSearchForm="ngForm" (ngSubmit)="search()" fxLayout="row">
     <mat-form-field appearance="fill">
         <mat-label>Select Events to Compare</mat-label>
-        <input matInput placeholder="Hashtag Search" [(ngModel)]="hashtag" type="text"
-            name="hashtag" required>
+        <mat-select [(value)]="selectedEvents" required multiple>
+            <mat-option *ngFor="let event of myEventList" value="{{event}}}">{{event}}</mat-option>  
+          </mat-select>
     </mat-form-field>
 
-    <button type=submit mat-stroked-button color="primary" [disabled]="!eventSearchForm.valid">Generate Comparison</button>
+    <button type=submit mat-stroked-button color="primary" [disabled]="!eventSearchForm.valid">Compare</button>
 </form>
+</div>
 </div>
