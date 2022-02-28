@@ -1,15 +1,28 @@
-<div style="height: calc(100vh - 128px); width: 100%;" fxLayoutAlign="center center">
+<div style="width: 100%; margin: 5px;" fxLayoutAlign="center center">
 <div class="panel">
     <h1>Select Events to Compare</h1>
 <form #eventSearchForm="ngForm" (ngSubmit)="search()" fxLayout="row">
     <mat-form-field appearance="fill">
         <mat-label>Select Events to Compare</mat-label>
         <mat-select [(value)]="selectedEvents" required multiple>
-            <mat-option *ngFor="let event of myEventList" value="{{event}}}">{{event}}</mat-option>  
+            <mat-option *ngFor="let event of myEventList" value="{{event}}}">{{event.hashtag}}</mat-option>  
           </mat-select>
     </mat-form-field>
 
     <button type=submit mat-stroked-button color="primary" [disabled]="!eventSearchForm.valid">Compare</button>
 </form>
 </div>
+</div>
+
+<div *ngIf="eventsPickedBool" fxLayoutAlign = "row">
+    <highcharts-chart
+    [Highcharts] = "pieHighcharts" 
+    [options]="pieChartOptions"
+    style = "width: 50%; height: 400px; display: block;">
+ </highcharts-chart>
+ <highcharts-chart
+ [Highcharts] = "barHighCharts" 
+ [options]="barChartOptions"
+ style = "width: 50%; height: 400px; display: block;">
+</highcharts-chart>
 </div>

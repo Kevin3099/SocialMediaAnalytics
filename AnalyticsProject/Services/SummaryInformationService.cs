@@ -25,7 +25,11 @@ namespace AnalyticsProject.Services
 
         public List<SummaryInformationVM> GetAll()
         {
-           // GenerateData()
+            DeleteAll();
+            FilterVM filter = new FilterVM() { 
+            DateFrom = DateTime.Now.AddDays(-7).Date,
+            DateTo = DateTime.Now.Date};
+            GenerateData(filter, "kevsterO98");
             List<SummaryInformationVM> db = new List<SummaryInformationVM>();
             var SIList = Ctx.SummaryInformations
                 .Where(x => x.DateTo.Date == DateTime.Now.Date && x.DateFrom.Date == DateTime.Now.AddDays(-7).Date)
