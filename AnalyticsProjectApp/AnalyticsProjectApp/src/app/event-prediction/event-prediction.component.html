@@ -1,1 +1,32 @@
-<p>event-prediction works!</p>
+<div class="panel">
+    <p>Event Details</p>
+    <form #eventPredictForm="ngForm" (ngSubmit)="createEvent()" fxLayout="row">
+        <mat-form-field appearance="fill">
+            <mat-label>Event Name</mat-label>
+            <input matInput placeholder="Event Name" [(ngModel)]="eventName" type="text"
+                name="eventName" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Start Date</mat-label>
+            <input matInput placeholder="Start Date" type="date" [(ngModel)]="startDate"
+                name="startDate" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>End Date</mat-label>
+            <input matInput placeholder="End Date" type="date" [(ngModel)]="endDate"
+                name="endDate" required>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Post Count</mat-label>
+            <input matInput placeholder="Post Count" [(ngModel)]="postCount" type="number"
+                name="postCount" required>
+        </mat-form-field>
+
+        <button class="buttons" type=submit color="primary">Create</button>
+    </form>
+</div>
+<div *ngFor="let x of postCountArray">
+    <p>hello</p>
+</div>

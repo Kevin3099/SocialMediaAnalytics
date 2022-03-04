@@ -1,0 +1,12 @@
+.panel {
+    border-radius: 10px;
+    padding: 16px;
+    background-color: white;
+}
+.buttons{
+    width:100px;
+    height: 52px;
+}
+.margin{
+    margin:10px;
+}
