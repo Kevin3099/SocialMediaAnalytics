@@ -1,7 +1,7 @@
-<div style="height: calc(100vh - 128px); width: 100%;" fxLayoutAlign="center center">
-<div class="panel" *ngIf="!searchBool">
+<!-- <div style="height: calc(100vh - 128px); width: 100%;" class="margin"> -->
+<div class="panel">
     <p>Search for Event</p>
-    <form #eventSearchForm="ngForm" (ngSubmit)="search()" fxLayout="column">
+    <form #eventSearchForm="ngForm" (ngSubmit)="search()" fxLayout="row">
         <mat-form-field appearance="fill">
             <mat-label>Hashtag</mat-label>
             <input matInput placeholder="Hashtag Search" [(ngModel)]="hashtag" type="text"
@@ -30,9 +30,10 @@
                   </mat-select>
             </mat-form-field>
 
-        <button type=submit mat-stroked-button color="primary" [disabled]="!eventSearchForm.valid">Search</button>
+        <button class="buttons" type=submit color="primary" [disabled]="!eventSearchForm.valid">Search</button>
     </form>
 </div>
+
 
 <div class="panelWidth" *ngIf="searchBool">
     <h1>Search Results</h1>
@@ -44,46 +45,43 @@
         [options]="pieChartOptions"
         style = "width: 50%; height: 400px; display: block;">
      </highcharts-chart>
-     <!-- <highcharts-chart
+     <highcharts-chart
      [Highcharts] = "barHighCharts" 
      [options]="barChartOptions"
      style = "width: 50%; height: 400px; display: block;">
-  </highcharts-chart> -->
+  </highcharts-chart>
 </div>
         <!-- <p>{{hashtag}}</p> -->
     </mat-card>
     <mat-card *ngIf="linkedInBool || allPlatformsBool">
         <h3>LinkedIn</h3>
         <div fxLayoutAlign = row>
-        <!-- <highcharts-chart
+        <highcharts-chart
         [Highcharts] = "pieHighcharts" 
         [options]="pieChartOptions"
         style = "width: 50%; height: 400px; display: block;">
-     </highcharts-chart> -->
-     <!-- <highcharts-chart
+     </highcharts-chart>
+     <highcharts-chart
      [Highcharts] = "barHighCharts" 
      [options]="barChartOptions"
      style = "width: 50%; height: 400px; display: block;">
-  </highcharts-chart> -->
+  </highcharts-chart>
 </div>
     </mat-card>
     <mat-card *ngIf="facebookBool || allPlatformsBool">
         <h3>Facebook</h3>
         <div fxLayoutAlign = row>
-        <!-- <highcharts-chart
+        <highcharts-chart
         [Highcharts] = "pieHighcharts" 
         [options]="pieChartOptions"
         style = "width: 50%; height: 400px; display: block;">
-     </highcharts-chart> -->
-     <!-- <highcharts-chart
+     </highcharts-chart>
+     <highcharts-chart
      [Highcharts] = "barHighCharts" 
      [options]="barChartOptions"
      style = "width: 50%; height: 400px; display: block;">
-  </highcharts-chart> -->
+  </highcharts-chart>
 </div>
     </mat-card>
-    <mat-card *ngIf="allPlatformsBool">
-        <h3>All Platforms</h3>
-    </mat-card>
 </div>
-</div>
+<!-- </div> -->

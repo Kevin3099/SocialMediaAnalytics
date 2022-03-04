@@ -1,5 +1,4 @@
 .panel {
-    width: 300px;
     border-radius: 10px;
     padding: 16px;
     background-color: white;
@@ -9,7 +8,12 @@
     border-radius: 10px;
     padding: 16px;
     background-color: white;
+    margin:5px;
 }
 .buttons{
-    margin: 5px;
+    width:100px;
+    height: 52px;
+}
+.margin{
+    margin:10px;
 }

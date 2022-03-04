@@ -18,7 +18,6 @@ export class EventSearchComponent implements OnInit {
   endDate: Date = new Date;
   platformSelected = "";
   testData: any;
-  test: number = 5;
 
   searchBool: Boolean =  false;
   twitterBool: Boolean = false;
@@ -27,6 +26,13 @@ export class EventSearchComponent implements OnInit {
   allPlatformsBool: Boolean = false;
   event = new eventsVM();
 
+
+  averageLikes: number = 5;
+  averageRetweets: number = 5;
+  averageComments: number = 5;
+  totalLikes: number = 5;
+  totalRetweets: number = 5;
+  totalComments: number = 5;
 
   pieHighcharts = Highcharts;
   pieChartOptions: any = {   
@@ -58,12 +64,67 @@ export class EventSearchComponent implements OnInit {
         type: 'pie',
         name: 'Percentage Share',
         data: [
-           ['Likes',   this.test],
-           ['Retweets', 2],
-           ['Comments',  3],
+           ['Likes',   this.totalLikes],
+           ['Retweets', this.totalRetweets],
+           ['Comments',  this.totalComments],
         ]
      }]
   };
+
+    barHighCharts = Highcharts;
+  barChartOptions: any ={chart: {
+     type: 'bar'
+  },
+  title: {
+     text: 'Average and Total Statistics'
+  },
+  legend : {
+     layout: 'vertical',
+     align: 'left',
+     verticalAlign: 'top',
+     x: 250,
+     y: 100,
+     floating: true,
+     borderWidth: 1,
+    
+     backgroundColor: (
+        (Highcharts.theme) || 
+          '#FFFFFF'), shadow: true
+     },
+     xAxis:{
+        categories: ['Likes','Retweets', 'Comments'], title: {
+        text: null
+     } 
+  },
+  yAxis : {
+     min: 0, title: {
+        text: 'Amount', align: 'high'
+     },
+     labels: {
+        overflow: 'justify'
+     }
+  },
+  plotOptions : {
+     bar: {
+        dataLabels: {
+           enabled: true
+        }
+     }
+  },
+  credits:{
+     enabled: false
+  },
+  series: [
+     {
+        name: 'Averages',
+      //  data: [ this.event.eventStats[0].averageLikes, this.event.eventStats[0].averageRetweets, this.event.eventStats[0].averageComments]
+     }, 
+     {
+        name: 'Totals',
+     //   data: [ this.event.eventStats[0].totalLikes,  this.event.eventStats[0].totalRetweets, this.event.eventStats[0].totalComments]
+     }
+  ]
+};
 
 
   constructor(public eventService: EventsService,private router: Router) { }
@@ -81,7 +142,7 @@ export class EventSearchComponent implements OnInit {
       (res: eventsVM) => {
         console.log(res);
       this.event = res;
-      this.test = this.event.eventStats[0].totalLikes;
+      this.totalLikes = this.event.eventStats[0].totalLikes;
       },
     );
   }
@@ -104,61 +165,6 @@ export class EventSearchComponent implements OnInit {
       this.allPlatformsBool = true;
     }
   }
-
-//   barHighCharts = Highcharts;
-//   barChartOptions: any ={chart: {
-//      type: 'bar'
-//   },
-//   title: {
-//      text: 'Average and Total Statistics'
-//   },
-//   legend : {
-//      layout: 'vertical',
-//      align: 'left',
-//      verticalAlign: 'top',
-//      x: 250,
-//      y: 100,
-//      floating: true,
-//      borderWidth: 1,
-    
-//      backgroundColor: (
-//         (Highcharts.theme) || 
-//           '#FFFFFF'), shadow: true
-//      },
-//      xAxis:{
-//         categories: ['Likes','Retweets', 'Comments'], title: {
-//         text: null
-//      } 
-//   },
-//   yAxis : {
-//      min: 0, title: {
-//         text: 'Amount', align: 'high'
-//      },
-//      labels: {
-//         overflow: 'justify'
-//      }
-//   },
-//   plotOptions : {
-//      bar: {
-//         dataLabels: {
-//            enabled: true
-//         }
-//      }
-//   },
-//   credits:{
-//      enabled: false
-//   },
-//   series: [
-//      {
-//         name: 'Averages',
-//         data: [ this.event.eventStats[0].averageLikes, this.event.eventStats[0].averageRetweets, this.event.eventStats[0].averageComments]
-//      }, 
-//      {
-//         name: 'Totals',
-//         data: [ this.event.eventStats[0].totalLikes,  this.event.eventStats[0].totalRetweets, this.event.eventStats[0].totalComments]
-//      }
-//   ]
-// };
 }
 //this.persons =  this.personService.getPersons().find(x => x.id == this.personId);
 //this.persons =  this.personService.getPersons().filter(x => x.id == this.personId)[0];
