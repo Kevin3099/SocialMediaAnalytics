@@ -1,4 +1,4 @@
-<div class="panel">
+<!-- <div class="panel">
     <p>Event Details</p>
     <form #eventPredictForm="ngForm" (ngSubmit)="createEvent()" fxLayout="row">
         <mat-form-field appearance="fill">
@@ -26,7 +26,60 @@
 
         <button class="buttons" type=submit color="primary">Create</button>
     </form>
+</div> -->
+<!-- <div class="panel" *ngFor="let x of postCountArray; let i = index"> -->
+    <!-- <p>Post number {{i}}</p> -->
+    
+    <div class="panel">
+    <form #postPredictForm="ngForm" (ngSubmit)="predictPost()" fxLayout="row">      
+        <mat-form-field appearance="fill">
+            <mat-label>Post Content</mat-label>
+            <input matInput placeholder="Post Content" [(ngModel)]="postContent" type="text"
+                name="postContent" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Post Date</mat-label>
+            <input matInput placeholder="Post Date" type="date" [(ngModel)]="postDate"
+                name="postDate" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Post Time</mat-label>
+            <input matInput placeholder="Post Time" type="time" [(ngModel)]="postTime"
+                name="postTime" required>
+        </mat-form-field>
+
+        <button class="buttons" type=submit color="primary">Predict</button>
+    </form>
 </div>
-<div *ngFor="let x of postCountArray">
-    <p>hello</p>
+<div *ngIf="postBool">
+<div fxLayout="row">
+<mat-card style="width:33%; margin:5px;">
+    <mat-card-title>5</mat-card-title>
+    <mat-card-subtitle>Predicted Likes</mat-card-subtitle>
+</mat-card>
+<mat-card style="width:33%; margin:5px;">
+    <mat-card-title>5</mat-card-title>
+    <mat-card-subtitle>Predicted Retweets</mat-card-subtitle>
+</mat-card>
+<mat-card style="width:33%; margin:5px;">
+    <mat-card-title>5</mat-card-title>
+    <mat-card-subtitle>Predicted Comments</mat-card-subtitle>
+</mat-card>
+</div>
+<div fxLayout="row">
+<mat-card style="width:33%; margin:5px;">
+    <mat-card-title>5</mat-card-title>
+    <mat-card-subtitle>Time Recommendation</mat-card-subtitle>
+</mat-card>
+<mat-card style="width:33%; margin:5px;">
+    <mat-card-title>5</mat-card-title>
+    <mat-card-subtitle>Include Hashtags</mat-card-subtitle>
+</mat-card>
+<mat-card style="width:33%; margin:5px;">
+    <mat-card-title>5</mat-card-title>
+    <mat-card-subtitle>Prediction Accuracy</mat-card-subtitle>
+</mat-card>
+</div>
 </div>

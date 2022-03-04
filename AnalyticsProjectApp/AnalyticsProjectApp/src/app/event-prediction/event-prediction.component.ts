@@ -13,17 +13,34 @@ export class EventPredictionComponent implements OnInit {
   endDate: Date = new Date;
   postCount: number = 0;
   postCountArray: Array<number> = [];
+  postCountTuple: [number,boolean] = [0,false];
+
+  postTime: any;
+  postDate: Date = new Date;
+  postContent: string = "";
+  postBool: Boolean = false;
   
   constructor(public eventService: EventsService) { }
 
   ngOnInit(): void {
   }
 
-  createEvent(){
-    this.postCountArray = this.numSequence(this.postCount)
+  predictPost(){
+  this.postBool = true;
   }
 
-  numSequence(n: number): Array<number> {
-    return Array(n);
-  }
+  // createEvent(){
+  //   this.numSequence(this.postCount).forEach(x => {
+  //     this.postCountTuple = [x,false];
+  //   });
+  //   this.postCountArray = this.numSequence(this.postCount);
+  // }
+
+  // numSequence(n: number): Array<number> {
+  //   return Array(n);
+  // }
+
+  // predictPost(i:number){
+  //   console.log(i);
+  // }
 }
