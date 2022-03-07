@@ -25,15 +25,20 @@ namespace AnalyticsProject.Services
 
         public List<SummaryInformationVM> GetAll()
         {
-            DeleteAll();
-            FilterVM filter = new FilterVM() { 
-            DateFrom = DateTime.Now.AddDays(-7).Date,
-            DateTo = DateTime.Now.Date};
-            GenerateData(filter, "kevsterO98");
+          
             List<SummaryInformationVM> db = new List<SummaryInformationVM>();
             var SIList = Ctx.SummaryInformations
                 .Where(x => x.DateTo.Date == DateTime.Now.Date && x.DateFrom.Date == DateTime.Now.AddDays(-7).Date)
                 .Select(x => new SummaryInformationVM(x)).ToList();
+
+            if (SIList.Count == 0) {
+                FilterVM filter = new FilterVM()
+                {
+                    DateFrom = DateTime.Now.AddDays(-7).Date,
+                    DateTo = DateTime.Now.Date
+                };
+                GenerateData(filter, "kevsterO98");
+            }
             return SIList;
         }
 
@@ -42,15 +47,24 @@ namespace AnalyticsProject.Services
             if (filter.Platform == "All Platforms") {
              
                 var SIList = Ctx.SummaryInformations
-                             .Where(x => x.DateTo.Date == filter.DateTo.Date && x.DateFrom.Date == filter.DateFrom.Date)
+                             .Where(x => x.DateTo.Date <= filter.DateTo.Date && x.DateFrom.Date >= filter.DateFrom.Date)
                              .Select(x => new SummaryInformationVM(x)).ToList();
+                if (SIList.Count == 0)
+                {
+                    GenerateData(filter, "kevsterO98");
+                }
                 return SIList;
             }
             else
             {
                 var SIList = Ctx.SummaryInformations
-                            .Where(x => x.DateTo.Date == filter.DateTo.Date && x.DateFrom.Date == filter.DateFrom.Date && filter.Platform == x.Platform)
+                            .Where(x => x.DateTo.Date <= filter.DateTo.Date && x.DateFrom.Date >= filter.DateFrom.Date && filter.Platform == x.Platform)
                             .Select(x => new SummaryInformationVM(x)).ToList();
+               
+                if(SIList.Count == 0)
+                {
+                    GenerateData(filter, "kevsterO98");
+                }
                 return SIList;
             }
         }

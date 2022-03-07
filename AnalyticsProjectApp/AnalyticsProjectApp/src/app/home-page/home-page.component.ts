@@ -8,6 +8,7 @@ import { HomeService } from '../services/home-service.service';
 import { summaryInformationVM } from '../models/summaryInformationVM';
 import { Router } from '@angular/router';
 import { filterVM } from '../models/filterVM';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-home-page',
@@ -16,13 +17,14 @@ import { filterVM } from '../models/filterVM';
 })
 export class HomePageComponent implements OnInit {
 
-  table: string[] = ['platforms','averageLikes','averageRetweets','averageComments','totalLikes','totalRetweets','totalComments','moreInfo'];
+  table: string[] = ['dateFrom','dateTo','platforms','countOfPosts','averageLikes','averageRetweets','averageComments','totalLikes','totalRetweets','totalComments','moreInfo'];
   dataSource = new MatTableDataSource<summaryInformationVM>();
 
   constructor(public homeService: HomeService,private router: Router){}
 
+  now = new Date();
   public today = new Date()
-  public lastWeek: Date = new Date(this.today.getDate()-7)
+  public lastWeek: Date = new Date(this.now.getFullYear(), this.now.getMonth(), this.now.getDate() - 7);
  
   public toDate = this.today;
   public fromDate = this.lastWeek;
@@ -43,6 +45,7 @@ export class HomePageComponent implements OnInit {
   }
 
   getFilteredData(){
+  
     this.filter.toDate = this.toDate;
     this.filter.fromDate = this.fromDate;
     this.filter.platform = this.platformSelected;

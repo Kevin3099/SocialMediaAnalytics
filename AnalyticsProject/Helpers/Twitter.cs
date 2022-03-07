@@ -28,7 +28,7 @@ namespace AnalyticsProject.Helpers
 
         public SummaryInformation GetSummaryInformationForUser(String user)
         {
-            var url = $"https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name={user}&exclude_replies=true";
+            var url = $"https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name={user}&exclude_replies=true&include_rts=false";
             var httpRequest = (HttpWebRequest)WebRequest.Create(url);
 
             httpRequest.Accept = "application/json";
@@ -86,6 +86,7 @@ namespace AnalyticsProject.Helpers
             //Need to convert type before doing any calculations on it
             int averageLikes =  dataArray.Count;
             averageLikes = totalLikes / averageLikes;
+
             int averageRetweets = dataArray.Count;
             averageRetweets = totalRetweets / averageRetweets;
 

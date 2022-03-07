@@ -10,12 +10,12 @@
     
           <ng-container matColumnDef="DateToDisplay">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Date To </th>
-            <td mat-cell *matCellDef="let data"> {{data.dateToDisplay}} </td>
+            <td mat-cell *matCellDef="let data"> {{data.toDateDisplay}} </td>
           </ng-container>
     
           <ng-container matColumnDef="DateFromDisplay">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Date From </th>
-            <td mat-cell *matCellDef="let data"> {{data.dateFromDisplay}} </td>
+            <td mat-cell *matCellDef="let data"> {{data.fromDateDisplay}} </td>
           </ng-container>
     
           <tr mat-header-row *matHeaderRowDef="table"></tr>

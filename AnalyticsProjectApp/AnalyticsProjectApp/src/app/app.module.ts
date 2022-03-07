@@ -15,6 +15,8 @@ import {MatTableModule} from '@angular/material/table';
 import {MatDialogModule, MatDialogRef} from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -69,7 +71,9 @@ import { HighchartsChartModule } from 'highcharts-angular';
     MatDialogModule,
     MatSelectModule,
     MatOptionModule,
+    MatDatepickerModule,
     HighchartsChartModule,
+    MatNativeDateModule,
 
     FormsModule
   ],

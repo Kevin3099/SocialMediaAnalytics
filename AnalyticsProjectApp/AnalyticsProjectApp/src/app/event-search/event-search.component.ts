@@ -117,11 +117,11 @@ export class EventSearchComponent implements OnInit {
   series: [
      {
         name: 'Averages',
-      //  data: [ this.event.eventStats[0].averageLikes, this.event.eventStats[0].averageRetweets, this.event.eventStats[0].averageComments]
+        data: [ this.averageLikes, this.averageRetweets, this.averageComments]
      }, 
      {
         name: 'Totals',
-     //   data: [ this.event.eventStats[0].totalLikes,  this.event.eventStats[0].totalRetweets, this.event.eventStats[0].totalComments]
+        data: [ this.totalLikes,  this.totalRetweets, this.totalComments]
      }
   ]
 };
@@ -142,7 +142,14 @@ export class EventSearchComponent implements OnInit {
       (res: eventsVM) => {
         console.log(res);
       this.event = res;
+
       this.totalLikes = this.event.eventStats[0].totalLikes;
+      this.totalRetweets = this.event.eventStats[0].totalRetweets;
+      this.totalComments = this.event.eventStats[0].totalComments;
+
+      this.averageLikes = this.event.eventStats[0].averageLikes;
+      this.averageRetweets = this.event.eventStats[0].averageRetweets;
+      this.averageComments = this.event.eventStats[0].averageComments;
       },
     );
   }
