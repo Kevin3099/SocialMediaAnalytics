@@ -1,5 +1,5 @@
 export class summaryInformationVM  {
-    public Platform: any;
+    public platform: any;
     public Id: any;
     public DateFrom!: string;
     public DateTo!: string;

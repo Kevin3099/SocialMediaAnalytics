@@ -63,7 +63,7 @@ export class HomePageComponent implements OnInit {
 
   GoToPlatformDetails(summaryInformation: summaryInformationVM) {
     console.log(summaryInformation);
-    this.router.navigate([`/${summaryInformation.Platform}`]);
+    this.router.navigate([`/${summaryInformation.platform}`]);
   }
 
   GenerateData(){

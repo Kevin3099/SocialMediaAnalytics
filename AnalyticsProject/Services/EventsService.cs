@@ -130,21 +130,29 @@ namespace AnalyticsProject.Services
                 .Include(x => x.SummaryInformations) // Include not adding Summary list
                 .Select(x => new EventsVM(x)).FirstOrDefault(); // Fix at later point
 
-            if (searchedEvent == null )
+            if (searchedEvent != null && searchedEvent.DateTo == newEvent.DateTo && searchedEvent.DateFrom == newEvent.DateFrom)
             {
 
+                searchedEvent.SummaryInformations = Ctx.SummaryInformations
+                  .Where(x => x.eventName == newEvent.Hashtag)
+                  .Select(x => new SummaryInformationVM(x))
+                  .ToList();
+                return searchedEvent;
+            }
+            else {
                 Twitter twitter = new Twitter(Constants.consumerKey, Constants.consumerKeySecret, Constants.access_token, Constants.access_token_secret);
                 Facebook facebook = new Facebook();
                 LinkedIn linkedIn = new LinkedIn();
 
                 List<LinkedInDbVM> LiList = new List<LinkedInDbVM>();
                 LiList = Ctx.LinkedInDbs
+
                     .Where(x => x.DatePosted <= newEvent.DateTo && x.DatePosted >= newEvent.DateFrom && x.content.Contains(newEvent.Hashtag))
                     .Select(x => new LinkedInDbVM(x)).ToList();
 
                 List<FacebookDbVM> fbList = new List<FacebookDbVM>();
                 fbList = Ctx.FacebookDbs
-                    .Where(x => x.DatePosted <= newEvent.DateTo && x.DatePosted >= newEvent.DateFrom && x.content.Contains(newEvent.Hashtag))
+                    .Where(x => x.DatePosted >= newEvent.DateTo && x.DatePosted <= newEvent.DateFrom && x.content.Contains(newEvent.Hashtag))
                     .Select(x => new FacebookDbVM(x)).ToList();
 
                 List<SummaryInformation> SumInfoList = new List<SummaryInformation>();
@@ -152,7 +160,7 @@ namespace AnalyticsProject.Services
                 SumInfoList.Add(linkedIn.GetSummaryInformationForEvents(newEvent, LiList));
                 SumInfoList.Add(twitter.GetSummaryInformationForEvent(newEvent.Hashtag));
 
-                foreach(SummaryInformation x in SumInfoList)
+                foreach (SummaryInformation x in SumInfoList)
                 {
                     Ctx.SummaryInformations.Add(x);
                 }
@@ -180,15 +188,6 @@ namespace AnalyticsProject.Services
                 Ctx.SaveChanges();
                 return newEvent;
             }
-            else
-            {
-                searchedEvent.SummaryInformations = Ctx.SummaryInformations
-                   .Where(x => x.eventName == newEvent.Hashtag)
-                   .Select(x => new SummaryInformationVM(x))
-                   .ToList();
-                return searchedEvent;
-            }
-
         }
 
         private List<string> CalculateMostCommonWords(string platform) {

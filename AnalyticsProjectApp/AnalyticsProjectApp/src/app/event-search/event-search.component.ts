@@ -56,17 +56,40 @@ export class EventSearchComponent implements OnInit {
         console.log(res);
       this.event = res;
 
-      this.totalLikes = this.event.summaryInformations[0].totalLikes;
-      this.totalRetweets = this.event.summaryInformations[0].totalRetweets;
-      this.totalComments = this.event.summaryInformations[0].totalComments;
-
-      this.averageLikes = this.event.summaryInformations[0].averageLikes;
-      this.averageRetweets = this.event.summaryInformations[0].averageRetweets;
-      this.averageComments = this.event.summaryInformations[0].averageComments;
+      this.event.summaryInformations.forEach(summaryInfo => {
+         if(this.twitterBool == true && summaryInfo.platform == "Twitter"){
+            this.totalLikes = summaryInfo.totalLikes;
+            this.totalRetweets = summaryInfo.totalRetweets;
+            this.totalComments = summaryInfo.totalComments;
+      
+            this.averageLikes = summaryInfo.averageLikes;
+            this.averageRetweets = summaryInfo.averageRetweets;
+            this.averageComments = summaryInfo.averageComments;
+         }
+         else if(this.facebookBool == true && summaryInfo.platform == "Facebook"){
+            this.totalLikes = summaryInfo.totalLikes;
+            this.totalRetweets = summaryInfo.totalRetweets;
+            this.totalComments = summaryInfo.totalComments;
+      
+            this.averageLikes = summaryInfo.averageLikes;
+            this.averageRetweets = summaryInfo.averageRetweets;
+            this.averageComments = summaryInfo.averageComments;
+         }
+         else if(this.linkedInBool == true && summaryInfo.platform == "LinkedIn"){
+            this.totalLikes = summaryInfo.totalLikes;
+            this.totalRetweets = summaryInfo.totalRetweets;
+            this.totalComments = summaryInfo.totalComments;
+      
+            this.averageLikes = summaryInfo.averageLikes;
+            this.averageRetweets = summaryInfo.averageRetweets;
+            this.averageComments = summaryInfo.averageComments;
+         }
+      });
+      this.loadChart();
       },
     );
 
-    this.loadChart();
+  
   }
 
   search(){
