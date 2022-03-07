@@ -123,6 +123,8 @@ namespace AnalyticsProject.Services
             return myEventList;
         }
 
+
+        // DATES NOT PASSED DOWN PROPERLY
         public EventsVM SearchEvent(EventsVM newEvent)
         {
             var searchedEvent = Ctx.Events
@@ -147,12 +149,12 @@ namespace AnalyticsProject.Services
                 List<LinkedInDbVM> LiList = new List<LinkedInDbVM>();
                 LiList = Ctx.LinkedInDbs
 
-                    .Where(x => x.DatePosted <= newEvent.DateTo && x.DatePosted >= newEvent.DateFrom && x.content.Contains(newEvent.Hashtag))
+                    .Where(x => x.DatePosted.Date <= newEvent.DateTo.Date && x.DatePosted.Date >= newEvent.DateFrom.Date && x.content.Contains(newEvent.Hashtag))
                     .Select(x => new LinkedInDbVM(x)).ToList();
 
                 List<FacebookDbVM> fbList = new List<FacebookDbVM>();
                 fbList = Ctx.FacebookDbs
-                    .Where(x => x.DatePosted >= newEvent.DateTo && x.DatePosted <= newEvent.DateFrom && x.content.Contains(newEvent.Hashtag))
+                    .Where(x => x.DatePosted.Date >= newEvent.DateTo.Date && x.DatePosted.Date <= newEvent.DateFrom.Date && x.content.Contains(newEvent.Hashtag))
                     .Select(x => new FacebookDbVM(x)).ToList();
 
                 List<SummaryInformation> SumInfoList = new List<SummaryInformation>();
