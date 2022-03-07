@@ -14,10 +14,16 @@ import * as Highcharts from 'highcharts';
 export class EventSearchComponent implements OnInit {
   
   hashtag: string = "";
-  startDate: Date = new Date;
-  endDate: Date = new Date;
+  public startDate: Date = new Date;
+  public endDate: Date = new Date;
   platformSelected = "";
-  testData: any;
+
+//   now = new Date();
+//   public today = new Date()
+//   public lastWeek: Date = new Date(this.now.getFullYear(), this.now.getMonth(), this.now.getDate() - 7);
+ 
+//   public toDate = this.today;
+//   public fromDate = this.lastWeek;
 
   searchBool: Boolean =  false;
   twitterBool: Boolean = false;
@@ -93,6 +99,8 @@ export class EventSearchComponent implements OnInit {
   }
 
   search(){
+   // console.log(this.startDate);
+    // console.log(this.fromDate);
      this.searchEvents();
     this.searchBool = true;
     console.log(this.platformSelected)
