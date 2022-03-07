@@ -17,7 +17,7 @@ import { FormControl } from '@angular/forms';
 })
 export class HomePageComponent implements OnInit {
 
-  table: string[] = ['dateFrom','dateTo','platforms','countOfPosts','averageLikes','averageRetweets','averageComments','totalLikes','totalRetweets','totalComments','moreInfo'];
+  table: string[] = ['dateFrom','dateTo','platforms','countOfPosts','averageLikes','averageRetweets','averageComments','totalLikes','totalRetweets','totalComments'];//,'moreInfo'
   dataSource = new MatTableDataSource<summaryInformationVM>();
 
   constructor(public homeService: HomeService,private router: Router){}

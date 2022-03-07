@@ -8,7 +8,7 @@ export class eventsVM  {
     public fromDateDisplay!: string;
     public toDateDisplay!: string;
     public hashtag!: string;
-    public eventStats!: Array<summaryInformationVM>;
+    public summaryInformations!: Array<summaryInformationVM>;
   
     constructor(data?: any) {
       const self = this;

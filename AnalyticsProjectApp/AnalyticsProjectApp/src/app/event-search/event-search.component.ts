@@ -35,97 +35,10 @@ export class EventSearchComponent implements OnInit {
   totalComments: number = 5;
 
   pieHighcharts = Highcharts;
-  pieChartOptions: any = {   
-     chart : {
-        plotBorderWidth: null,
-        plotShadow: false
-     },
-     title : {
-        text: 'Comparison of Total Likes, Retweets and Comments'   
-     },
-     tooltip : {
-        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-     },
-     plotOptions : {
-        pie: {
-           allowPointSelect: true,
-           cursor: 'pointer',
-           dataLabels: {
-              enabled: true,
-              format: '<b>{point.name}%</b>: {point.percentage:.1f} %',
-              style: {
-                 color: (Highcharts.theme)||
-                 'black'
-              }
-           }
-        }
-     },
-     series : [{
-        type: 'pie',
-        name: 'Percentage Share',
-        data: [
-           ['Likes',   this.totalLikes],
-           ['Retweets', this.totalRetweets],
-           ['Comments',  this.totalComments],
-        ]
-     }]
-  };
+  pieChartOptions: any;
 
-    barHighCharts = Highcharts;
-  barChartOptions: any ={chart: {
-     type: 'bar'
-  },
-  title: {
-     text: 'Average and Total Statistics'
-  },
-  legend : {
-     layout: 'vertical',
-     align: 'left',
-     verticalAlign: 'top',
-     x: 250,
-     y: 100,
-     floating: true,
-     borderWidth: 1,
-    
-     backgroundColor: (
-        (Highcharts.theme) || 
-          '#FFFFFF'), shadow: true
-     },
-     xAxis:{
-        categories: ['Likes','Retweets', 'Comments'], title: {
-        text: null
-     } 
-  },
-  yAxis : {
-     min: 0, title: {
-        text: 'Amount', align: 'high'
-     },
-     labels: {
-        overflow: 'justify'
-     }
-  },
-  plotOptions : {
-     bar: {
-        dataLabels: {
-           enabled: true
-        }
-     }
-  },
-  credits:{
-     enabled: false
-  },
-  series: [
-     {
-        name: 'Averages',
-        data: [ this.averageLikes, this.averageRetweets, this.averageComments]
-     }, 
-     {
-        name: 'Totals',
-        data: [ this.totalLikes,  this.totalRetweets, this.totalComments]
-     }
-  ]
-};
-
+  barHighCharts = Highcharts;
+  barChartOptions: any ;
 
   constructor(public eventService: EventsService,private router: Router) { }
 
@@ -143,15 +56,17 @@ export class EventSearchComponent implements OnInit {
         console.log(res);
       this.event = res;
 
-      this.totalLikes = this.event.eventStats[0].totalLikes;
-      this.totalRetweets = this.event.eventStats[0].totalRetweets;
-      this.totalComments = this.event.eventStats[0].totalComments;
+      this.totalLikes = this.event.summaryInformations[0].totalLikes;
+      this.totalRetweets = this.event.summaryInformations[0].totalRetweets;
+      this.totalComments = this.event.summaryInformations[0].totalComments;
 
-      this.averageLikes = this.event.eventStats[0].averageLikes;
-      this.averageRetweets = this.event.eventStats[0].averageRetweets;
-      this.averageComments = this.event.eventStats[0].averageComments;
+      this.averageLikes = this.event.summaryInformations[0].averageLikes;
+      this.averageRetweets = this.event.summaryInformations[0].averageRetweets;
+      this.averageComments = this.event.summaryInformations[0].averageComments;
       },
     );
+
+    this.loadChart();
   }
 
   search(){
@@ -172,6 +87,100 @@ export class EventSearchComponent implements OnInit {
       this.allPlatformsBool = true;
     }
   }
+
+
+loadChart() {
+   console.log(this.totalRetweets);
+   this.pieChartOptions = { 
+         chart : {
+            plotBorderWidth: null,
+            plotShadow: false
+         },
+         title : {
+            text: 'Comparison of Total Likes, Retweets and Comments'   
+         },
+         tooltip : {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+         },
+         plotOptions : {
+            pie: {
+               allowPointSelect: true,
+               cursor: 'pointer',
+               dataLabels: {
+                  enabled: true,
+                  format: '<b>{point.name}%</b>: {point.percentage:.1f} %',
+                  style: {
+                     color: (Highcharts.theme)||
+                     'black'
+                  }
+               }
+            }
+         },
+         series : [{
+            type: 'pie',
+            name: 'Percentage Share',
+            data: [
+               ['Likes',   this.totalLikes],
+               ['Retweets', this.totalRetweets],
+               ['Comments',  this.totalComments],
+            ]
+         }]
+      };
+
+      this.barChartOptions ={chart: {
+         type: 'bar'
+      },
+      title: {
+         text: 'Average and Total Statistics'
+      },
+      legend : {
+         layout: 'vertical',
+         align: 'left',
+         verticalAlign: 'top',
+         x: 250,
+         y: 100,
+         floating: true,
+         borderWidth: 1,
+        
+         backgroundColor: (
+            (Highcharts.theme) || 
+              '#FFFFFF'), shadow: true
+         },
+         xAxis:{
+            categories: ['Likes','Retweets', 'Comments'], title: {
+            text: null
+         } 
+      },
+      yAxis : {
+         min: 0, title: {
+            text: 'Amount', align: 'high'
+         },
+         labels: {
+            overflow: 'justify'
+         }
+      },
+      plotOptions : {
+         bar: {
+            dataLabels: {
+               enabled: true
+            }
+         }
+      },
+      credits:{
+         enabled: false
+      },
+      series: [
+         {
+            name: 'Averages',
+            data: [ this.averageLikes, this.averageRetweets, this.averageComments]
+         }, 
+         {
+            name: 'Totals',
+            data: [ this.totalLikes,  this.totalRetweets, this.totalComments]
+         }
+      ]
+    };
+   }
 }
 //this.persons =  this.personService.getPersons().find(x => x.id == this.personId);
 //this.persons =  this.personService.getPersons().filter(x => x.id == this.personId)[0];
