@@ -105,13 +105,13 @@ export class EventSearchComponent implements OnInit {
     this.searchBool = true;
     console.log(this.platformSelected)
 
-    if(this.platformSelected.includes("twitter")){
+    if(this.platformSelected.includes("Twitter")){
       this.twitterBool = true;
     }
-    else if(this.platformSelected.includes("facebook")){
+    else if(this.platformSelected.includes("Facebook")){
       this.facebookBool = true;
     }
-    else if(this.platformSelected.includes("linkedIn")){
+    else if(this.platformSelected.includes("LinkedIn")){
       this.linkedInBool = true;
     }
     else{

@@ -27,6 +27,7 @@ export class EventComparisonComponent implements OnInit {
   barChartOptions: any;
   barChartOptions2: any;
   barChartOptions3: any;
+  barChartOptions4: any;
 
   likesIncrease: number = 5;
   retweetsIncrease: number = 5;
@@ -39,6 +40,10 @@ export class EventComparisonComponent implements OnInit {
   event2Likes: number = 0;
   event2Retweets: number = 0;
   event2Comments: number = 0;
+
+  event3Likes: number = 0;
+  event3Retweets: number = 0;
+  event3Comments: number = 0;
 
   constructor(public eventService: EventsService) { }
 
@@ -78,21 +83,23 @@ export class EventComparisonComponent implements OnInit {
 
     loadCharts(){
 
-      this.myEventList.forEach((event,i) => {
+      this.myEventList.forEach((event) => {
       
          event.summaryInformations.forEach(sumInfo =>{
-            if(i == 0 && sumInfo.platform == this.platformSelected){
+            if(event.hashtag == this.myEventNameList[0] && sumInfo.platform == this.platformSelected){
                this.event1Likes = sumInfo.averageLikes;
                this.event1Retweets = sumInfo.averageRetweets;
                this.event1Comments = sumInfo.averageComments;
             }
-            else if (i == 1 && sumInfo.platform == this.platformSelected){
+            else if (event.hashtag == this.myEventNameList[1] && sumInfo.platform == this.platformSelected){
                this.event2Likes = sumInfo.averageLikes;
                this.event2Retweets = sumInfo.averageRetweets;
                this.event2Comments = sumInfo.averageComments;
             }
-            else if (i == 2 && sumInfo.platform == this.platformSelected){
-
+            else if (event.hashtag == this.myEventNameList[2] && sumInfo.platform == this.platformSelected){
+               this.event3Likes = sumInfo.averageLikes;
+               this.event3Retweets = sumInfo.averageRetweets;
+               this.event3Comments = sumInfo.averageComments;
             }
          });
       });
@@ -282,6 +289,56 @@ series: [
    {
       name: 'Averages',
       data: [this.event2Likes, this.event2Retweets, this.event2Comments]
+   },
+]
+};
+
+this.barChartOptions4 ={chart: {
+   type: 'bar'
+},
+title: {
+   text: this.selectedEvents[2] + ' Statistics'
+},
+legend : {
+   layout: 'vertical',
+   align: 'left',
+   verticalAlign: 'top',
+   x: 250,
+   y: 100,
+   floating: true,
+   borderWidth: 1,
+  
+   backgroundColor: (
+      (Highcharts.theme) || 
+        '#FFFFFF'), shadow: true
+   },
+   xAxis:{
+      categories: ['Likes','Retweets', 'Comments'], title: {
+      text: null
+   } 
+},
+yAxis : {
+   min: 0, title: {
+      text: 'Amount', align: 'high'
+   },
+   labels: {
+      overflow: 'justify'
+   }
+},
+plotOptions : {
+   bar: {
+      dataLabels: {
+         enabled: true
+      }
+   }
+},
+credits:{
+   enabled: false
+},
+series: [
+   {
+      name: 'Averages',
+      data: [this.event3Likes, this.event3Retweets, this.event3Comments]
    },
 ]
 };
