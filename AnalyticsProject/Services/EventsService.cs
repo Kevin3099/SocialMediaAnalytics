@@ -41,6 +41,14 @@ namespace AnalyticsProject.Services
             int averageCommentIncrease = 0;
             int averageRetweetIncrease = 0;
 
+            int averageLikeForThisEvent = 0;
+            int averageCommentForThisEvent = 0;
+            int averageRetweetForThisEvent = 0;
+
+            int prevLike = 0;
+            int prevRt = 0;
+            int prevComment = 0;
+
             // List<string> mostCommonEffectiveWords = null;
             // DateTime bestPostTime = new DateTime();
             var mostCommonWords = new List<string>();
@@ -65,14 +73,21 @@ namespace AnalyticsProject.Services
                 }
                 //Change to increased numbers so get average off each event then minus it from previous then add increases and divide
                 if (info != null) {
-                averageLikeIncrease = averageLikeIncrease + info.averageLikes;
-                averageRetweetIncrease = averageRetweetIncrease + info.averageRetweets;
-                averageCommentIncrease = averageCommentIncrease + info.averageComments;
-                } else
-                {
-                    averageLikeIncrease = 5;
-                    averageRetweetIncrease = 5;
-                    averageCommentIncrease = 5;
+                averageLikeForThisEvent = averageLikeForThisEvent + info.averageLikes;
+                averageRetweetForThisEvent = averageRetweetForThisEvent + info.averageRetweets;
+                averageCommentForThisEvent = averageCommentForThisEvent + info.averageComments;
+
+                    if (prevLike != 0)
+                    {
+                        averageLikeIncrease = averageLikeIncrease + (averageLikeForThisEvent - prevLike);
+                        averageRetweetIncrease = averageRetweetIncrease + (averageRetweetForThisEvent - prevRt);
+                        averageCommentIncrease = averageCommentIncrease + (averageCommentForThisEvent - prevComment);
+                    }
+                    
+                prevLike = averageLikeForThisEvent;
+                prevRt = averageRetweetForThisEvent;
+                prevComment = averageCommentForThisEvent;
+
                 }
             }
 
