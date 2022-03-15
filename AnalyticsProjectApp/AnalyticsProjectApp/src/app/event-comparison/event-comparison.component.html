@@ -5,7 +5,7 @@
     <mat-form-field appearance="fill">
         <mat-label>Select Events to Compare</mat-label>
         <mat-select [(value)]="selectedEvents" required multiple>
-            <mat-option *ngFor="let event of myEventList" value="{{event}}">{{event}}</mat-option>  
+            <mat-option *ngFor="let event of myEventNameList" value="{{event}}">{{event}}</mat-option>  
         </mat-select>      
     </mat-form-field>
     <mat-form-field appearance="fill">
@@ -31,6 +31,18 @@
  <highcharts-chart
  [Highcharts] = "barHighCharts" 
  [options]="barChartOptions"
+ style = "width: 50%; height: 400px; display: block;">
+</highcharts-chart>
+</div>
+<div *ngIf="eventsPickedBool" fxLayoutAlign = "row">
+<highcharts-chart
+ [Highcharts] = "barHighCharts" 
+ [options]="barChartOptions2"
+ style = "width: 50%; height: 400px; display: block;">
+</highcharts-chart>
+<highcharts-chart
+ [Highcharts] = "barHighCharts" 
+ [options]="barChartOptions3"
  style = "width: 50%; height: 400px; display: block;">
 </highcharts-chart>
 </div>

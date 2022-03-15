@@ -64,9 +64,16 @@ namespace AnalyticsProject.Services
                     mostCommonWords = CalculateMostCommonWords("LinkedIn");
                 }
                 //Change to increased numbers so get average off each event then minus it from previous then add increases and divide
+                if (info != null) {
                 averageLikeIncrease = averageLikeIncrease + info.averageLikes;
                 averageRetweetIncrease = averageRetweetIncrease + info.averageRetweets;
                 averageCommentIncrease = averageCommentIncrease + info.averageComments;
+                } else
+                {
+                    averageLikeIncrease = 5;
+                    averageRetweetIncrease = 5;
+                    averageCommentIncrease = 5;
+                }
             }
 
             averageCommentIncrease = averageCommentIncrease / orderedList.Count();

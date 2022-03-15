@@ -1,15 +1,15 @@
 /****** Script for SelectTopNRows command from SSMS  ******/
 DELETE from FacebookDbs;
 
-Declare @DateStart	Date = '2022-02-28'
-		,@DateEnd	Date = '2022-01-01'
+Declare @DateStart	Date = '2022-03-28'
+		,@DateEnd	Date = '2022-02-01'
 
 Declare @x int;
 Declare @RandDate Date;
 
 SET @x = 1;
 
-While @x <= 150
+While @x <= 250
 BEGIN
 	SET @RandDate = DateAdd(Day, Rand() * DateDiff(Day, @DateStart, @DateEnd), @DateStart)
 	INSERT INTO FacebookDbs (Id,DatePosted,content,likes,retweets,comments) VALUES (NEWID(),@RandDate,'RLCS',FLOOR(RAND()*(1000-5+1)+5),FLOOR(RAND()*(1000-5+1)+5),FLOOR(RAND()*(1000-5+1)+5))
@@ -18,7 +18,7 @@ END
 
 SET @x = 1;
 
-While @x <= 150
+While @x <= 250
 BEGIN
 	SET @RandDate = DateAdd(Day, Rand() * DateDiff(Day, @DateStart, @DateEnd), @DateStart)
 	INSERT INTO FacebookDbs (Id,DatePosted,content,likes,retweets,comments) VALUES (NEWID(),@RandDate,'test',FLOOR(RAND()*(1000-5+1)+5),FLOOR(RAND()*(1000-5+1)+5),FLOOR(RAND()*(1000-5+1)+5))

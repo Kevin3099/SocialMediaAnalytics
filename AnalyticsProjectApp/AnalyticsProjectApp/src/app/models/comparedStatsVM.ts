@@ -4,7 +4,7 @@ export class comparedStatsVM  {
     public Id: any;
     public averageFollowerIncrease!: number;
     public averageLikesIncrease!: number;
-    public averageRetweetIncrease!: number;
+    public averageRetweetsIncrease!: number;
     public averageCommentsIncrease!: number;
     public bestPostTime!: Array<Date>;
     public mostCommonEffectiveWord!: Array<string>;
