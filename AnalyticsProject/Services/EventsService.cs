@@ -48,17 +48,17 @@ namespace AnalyticsProject.Services
             foreach (var x in orderedList)
             {
                 var info = new SummaryInformationVM();
-                if (platform == "twitter")
+                if (platform == "Twitter")
                 {
                     info = x.SummaryInformations.Where(x => x.Platform == "Twitter").FirstOrDefault();
                     mostCommonWords = CalculateMostCommonWords("Twitter");
                 }
-                else if (platform == "facebook")
+                else if (platform == "Facebook")
                 {
-                    info = x.SummaryInformations.Where(x => x.Platform == "facebook").FirstOrDefault();
-                    mostCommonWords = CalculateMostCommonWords("facebook");
+                    info = x.SummaryInformations.Where(x => x.Platform == "Facebook").FirstOrDefault();
+                    mostCommonWords = CalculateMostCommonWords("Facebook");
                 }
-                else if (platform == "linkedIn")
+                else if (platform == "LinkedIn")
                 {
                     info = x.SummaryInformations.Where(x => x.Platform == "LinkedIn").FirstOrDefault();
                     mostCommonWords = CalculateMostCommonWords("LinkedIn");

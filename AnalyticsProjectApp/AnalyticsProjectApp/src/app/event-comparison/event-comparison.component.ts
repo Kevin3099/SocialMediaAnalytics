@@ -98,6 +98,7 @@ export class EventComparisonComponent implements OnInit {
       });
     
     console.log(this.event1Comments,this.event1Likes,this.event1Retweets)
+    console.log(this.likesIncrease, this.retweetsIncrease, this.commentsIncrease);
 
     this.pieChartOptions = {   
        chart : {
