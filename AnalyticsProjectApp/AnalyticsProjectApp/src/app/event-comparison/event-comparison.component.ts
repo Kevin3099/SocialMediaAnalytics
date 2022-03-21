@@ -104,7 +104,7 @@ export class EventComparisonComponent implements OnInit {
          });
       });
     
-    console.log(this.event1Comments,this.event1Likes,this.event1Retweets)
+    console.log(this.event1Likes,this.event2Likes,this.event3Likes)
     console.log(this.likesIncrease, this.retweetsIncrease, this.commentsIncrease);
 
     this.pieChartOptions = {   
@@ -142,7 +142,6 @@ export class EventComparisonComponent implements OnInit {
           ]
        }]
     };
- 
     this.barChartOptions ={chart: {
       type: 'bar'
    },
@@ -338,7 +337,7 @@ credits:{
 series: [
    {
       name: 'Averages',
-      data: [this.event3Likes, this.event3Retweets, this.event3Comments]
+      data: [10,10,10]
    },
 ]
 };
