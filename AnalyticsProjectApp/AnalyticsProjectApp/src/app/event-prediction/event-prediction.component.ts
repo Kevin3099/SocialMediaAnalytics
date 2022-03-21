@@ -12,6 +12,7 @@ export class EventPredictionComponent implements OnInit {
   startDate: Date = new Date;
   endDate: Date = new Date;
   postCount: number = 0;
+  platform: string = "";
   postCountArray: Array<number> = [];
   postCountTuple: [number,boolean] = [0,false];
 
@@ -28,19 +29,4 @@ export class EventPredictionComponent implements OnInit {
   predictPost(){
   this.postBool = true;
   }
-
-  // createEvent(){
-  //   this.numSequence(this.postCount).forEach(x => {
-  //     this.postCountTuple = [x,false];
-  //   });
-  //   this.postCountArray = this.numSequence(this.postCount);
-  // }
-
-  // numSequence(n: number): Array<number> {
-  //   return Array(n);
-  // }
-
-  // predictPost(i:number){
-  //   console.log(i);
-  // }
 }

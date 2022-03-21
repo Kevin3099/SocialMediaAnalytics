@@ -50,35 +50,41 @@
                 name="postTime" required>
         </mat-form-field>
 
+        <mat-form-field appearance="fill">
+            <mat-label>Platform</mat-label>
+            <input matInput placeholder="Platform" type="time" [(ngModel)]="platform"
+                name="platform" required>
+        </mat-form-field>
+
         <button class="buttons" type=submit color="primary">Predict</button>
     </form>
 </div>
 <div *ngIf="postBool">
 <div fxLayout="row">
 <mat-card style="width:33%; margin:5px;">
-    <mat-card-title>5</mat-card-title>
+    <mat-card-title>42</mat-card-title>
     <mat-card-subtitle>Predicted Likes</mat-card-subtitle>
 </mat-card>
 <mat-card style="width:33%; margin:5px;">
-    <mat-card-title>5</mat-card-title>
+    <mat-card-title>12</mat-card-title>
     <mat-card-subtitle>Predicted Retweets</mat-card-subtitle>
 </mat-card>
 <mat-card style="width:33%; margin:5px;">
-    <mat-card-title>5</mat-card-title>
+    <mat-card-title>8</mat-card-title>
     <mat-card-subtitle>Predicted Comments</mat-card-subtitle>
 </mat-card>
 </div>
 <div fxLayout="row">
 <mat-card style="width:33%; margin:5px;">
-    <mat-card-title>5</mat-card-title>
+    <mat-card-title>18:32</mat-card-title>
     <mat-card-subtitle>Time Recommendation</mat-card-subtitle>
 </mat-card>
 <mat-card style="width:33%; margin:5px;">
-    <mat-card-title>5</mat-card-title>
-    <mat-card-subtitle>Include Hashtags</mat-card-subtitle>
+    <mat-card-title>#RLCS , #RocketLeague , #Major</mat-card-title>
+    <mat-card-subtitle>Recommended Hashtags</mat-card-subtitle>
 </mat-card>
 <mat-card style="width:33%; margin:5px;">
-    <mat-card-title>5</mat-card-title>
+    <mat-card-title>78%</mat-card-title>
     <mat-card-subtitle>Prediction Accuracy</mat-card-subtitle>
 </mat-card>
 </div>

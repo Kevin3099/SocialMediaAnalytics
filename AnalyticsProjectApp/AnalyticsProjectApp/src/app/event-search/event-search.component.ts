@@ -18,13 +18,6 @@ export class EventSearchComponent implements OnInit {
   public endDate: Date = new Date;
   platformSelected = "";
 
-//   now = new Date();
-//   public today = new Date()
-//   public lastWeek: Date = new Date(this.now.getFullYear(), this.now.getMonth(), this.now.getDate() - 7);
- 
-//   public toDate = this.today;
-//   public fromDate = this.lastWeek;
-
   searchBool: Boolean =  false;
   twitterBool: Boolean = false;
   facebookBool: Boolean = false;
@@ -52,6 +45,7 @@ export class EventSearchComponent implements OnInit {
   }
 
   searchEvents(){
+     console.log(this.startDate);
     this.event.fromDate = this.startDate;
     this.event.toDate = this.endDate;
 
@@ -99,20 +93,27 @@ export class EventSearchComponent implements OnInit {
   }
 
   search(){
-   // console.log(this.startDate);
-    // console.log(this.fromDate);
      this.searchEvents();
     this.searchBool = true;
     console.log(this.platformSelected)
 
     if(this.platformSelected.includes("Twitter")){
+      this.facebookBool = false;
       this.twitterBool = true;
+      this.linkedInBool = false;
+      this.allPlatformsBool = false;
     }
     else if(this.platformSelected.includes("Facebook")){
       this.facebookBool = true;
+      this.twitterBool = false;
+      this.linkedInBool = false;
+      this.allPlatformsBool = false;
     }
     else if(this.platformSelected.includes("LinkedIn")){
+      this.facebookBool = false;
+      this.twitterBool = false;
       this.linkedInBool = true;
+      this.allPlatformsBool = false;
     }
     else{
       this.allPlatformsBool = true;
@@ -128,7 +129,7 @@ loadChart() {
             plotShadow: false
          },
          title : {
-            text: 'Comparison of Total Likes, Retweets and Comments'   
+            text: 'Comparison of Total Likes and Retweets'   
          },
          tooltip : {
             pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -153,7 +154,6 @@ loadChart() {
             data: [
                ['Likes',   this.totalLikes],
                ['Retweets', this.totalRetweets],
-               ['Comments',  this.totalComments],
             ]
          }]
       };
@@ -178,7 +178,7 @@ loadChart() {
               '#FFFFFF'), shadow: true
          },
          xAxis:{
-            categories: ['Likes','Retweets', 'Comments'], title: {
+            categories: ['Likes','Retweets'], title: {
             text: null
          } 
       },
@@ -203,11 +203,11 @@ loadChart() {
       series: [
          {
             name: 'Averages',
-            data: [ this.averageLikes, this.averageRetweets, this.averageComments]
+            data: [ this.averageLikes, this.averageRetweets]
          }, 
          {
             name: 'Totals',
-            data: [ this.totalLikes,  this.totalRetweets, this.totalComments]
+            data: [ this.totalLikes,  this.totalRetweets]
          }
       ]
     };

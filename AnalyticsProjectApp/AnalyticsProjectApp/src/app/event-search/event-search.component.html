@@ -10,22 +10,21 @@
 
         <mat-form-field appearance="fill">
             <mat-label>Start Date</mat-label>
-            <input matInput [matDatepicker]="picker" [value]="startDate">
+            <input matInput [matDatepicker]="picker" [(ngModel)]="startDate" [ngModelOptions]="{standalone: true}" name="startDate">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>
 
           <mat-form-field appearance="fill">
             <mat-label>End Date</mat-label>
-            <input matInput [matDatepicker]="picker2" [value]="endDate">
+            <input matInput [matDatepicker]="picker2" [(ngModel)]="endDate" name="endDate">
             <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
             <mat-datepicker #picker2></mat-datepicker>
           </mat-form-field>   
 
             <mat-form-field appearance="fill">
                 <mat-label>Platforms</mat-label>
-                <mat-select [(value)]="platformSelected" required multiple>
-                    <mat-option value="allPlatforms">All Platforms</mat-option>
+                <mat-select [(value)]="platformSelected" required>
                     <mat-option value="Twitter">Twitter</mat-option>
                     <mat-option value="Facebook">Facebook</mat-option>
                     <mat-option value="LinkedIn">LinkedIn</mat-option>

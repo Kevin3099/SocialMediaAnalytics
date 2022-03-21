@@ -24,6 +24,15 @@ BEGIN
 	INSERT INTO FacebookDbs (Id,DatePosted,content,likes,retweets,comments) VALUES (NEWID(),@RandDate,'test',FLOOR(RAND()*(1000-5+1)+5),FLOOR(RAND()*(1000-5+1)+5),FLOOR(RAND()*(1000-5+1)+5))
 	SET @x = @x +1;
 END
+
+SET @x = 1;
+
+While @x <= 250
+BEGIN
+	SET @RandDate = DateAdd(Day, Rand() * DateDiff(Day, @DateStart, @DateEnd), @DateStart)
+	INSERT INTO FacebookDbs (Id,DatePosted,content,likes,retweets,comments) VALUES (NEWID(),@RandDate,'Ukraine',FLOOR(RAND()*(10000-5+1)+5),FLOOR(RAND()*(10000-5+1)+5),FLOOR(RAND()*(10000-5+1)+5))
+	SET @x = @x +1;
+END
 SELECT TOP (1000) [Id]
       ,[DatePosted]
       ,[content]
