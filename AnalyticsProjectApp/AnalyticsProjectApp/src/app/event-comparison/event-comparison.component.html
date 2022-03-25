@@ -22,7 +22,10 @@
 </div>
 </div>
 
-<div *ngIf="eventsPickedBool" fxLayoutAlign = "row">
+<div *ngIf="loadingBool">
+    <mat-spinner style="height: calc(100vh - 128px); width: 100%;" fxLayoutAlign="center center"></mat-spinner>
+    </div>
+<div *ngIf="eventsPickedBool && !loadingBool" fxLayoutAlign = "row">
     <highcharts-chart
     [Highcharts] = "pieHighcharts" 
     [options]="pieChartOptions"

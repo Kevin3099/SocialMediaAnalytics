@@ -28,6 +28,7 @@
   <button class="filterButton" [disabled]="!filterForm.valid" type="submit">Filter</button>
   <button class="filterButton" (click)="GenerateData()">Generate Data</button>
 </form>
+
 </mat-card>
 <div *ngIf="loadingBool">
 <mat-spinner style="height: calc(100vh - 128px); width: 100%;" fxLayoutAlign="center center"></mat-spinner>

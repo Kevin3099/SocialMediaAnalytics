@@ -42,6 +42,7 @@ export class HomePageComponent implements OnInit {
       (res: Array<summaryInformationVM>) => {
         console.log(res);
        this.dataSource.data = res;
+       this.loadingBool=false;
       },
     );
   }

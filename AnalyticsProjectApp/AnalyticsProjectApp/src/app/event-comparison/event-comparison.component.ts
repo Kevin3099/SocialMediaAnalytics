@@ -19,6 +19,7 @@ export class EventComparisonComponent implements OnInit {
   platformSelected = "";
   comparedStats: comparedStatsVM = new comparedStatsVM();
   eventsPickedBool: Boolean = false;
+  loadingBool: Boolean = false;
 
   pieHighcharts = Highcharts;
   barHighCharts = Highcharts;
@@ -49,7 +50,8 @@ export class EventComparisonComponent implements OnInit {
   search(){
     console.log(this.selectedEvents);
     console.log(this.myEventList);
-
+   
+   this.loadingBool = true;
     this.eventService.CompareEvents(this.platformSelected,this.selectedEvents).subscribe(
       (res: comparedStatsVM) => {
        this.comparedStats = res;
@@ -62,15 +64,18 @@ export class EventComparisonComponent implements OnInit {
       },
     )
     this.eventsPickedBool = true;
+    this.loadingBool = false;
 
   }
   getData(){
+     this.loadingBool = true
     this.eventService.MyEvents().subscribe(
       (res: Array<eventsVM>) => {
       res.forEach(event=> {
         this.myEventList.push(event) 
         this.myEventNameList.push(event.hashtag) 
       });
+      this.loadingBool = false;
       },
     );
     

@@ -23,6 +23,7 @@ export class EventSearchComponent implements OnInit {
   facebookBool: Boolean = false;
   linkedInBool: Boolean = false;
   allPlatformsBool: Boolean = false;
+  public loadingBool: Boolean = false;
   event = new eventsVM();
 
 
@@ -51,6 +52,7 @@ export class EventSearchComponent implements OnInit {
 
     this.event.hashtag = this.hashtag;
 
+    this.loadingBool = true
     this.eventService.SearchEvent(this.event).subscribe(
       (res: eventsVM) => {
         console.log(res);
@@ -84,6 +86,7 @@ export class EventSearchComponent implements OnInit {
             this.averageRetweets = summaryInfo.averageRetweets;
             this.averageComments = summaryInfo.averageComments;
          }
+         this.loadingBool = false;
       });
       this.loadChart();
       },

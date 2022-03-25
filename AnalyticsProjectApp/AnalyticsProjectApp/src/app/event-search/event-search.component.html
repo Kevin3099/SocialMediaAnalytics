@@ -35,8 +35,12 @@
     </form>
 </div>
 
+<div *ngIf="loadingBool">
+    <mat-spinner style="height: calc(100vh - 128px); width: 100%;" fxLayoutAlign="center center"></mat-spinner>
+    </div>
 
-<div class="panelWidth" *ngIf="searchBool">
+
+<div class="panelWidth" *ngIf="searchBool && !loadingBool">
     <h1>Search Results</h1>
     <mat-card *ngIf="twitterBool || allPlatformsBool">
         <h3>Twitter</h3>
