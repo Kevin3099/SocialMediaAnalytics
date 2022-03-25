@@ -17,6 +17,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -74,6 +75,7 @@ import { HighchartsChartModule } from 'highcharts-angular';
     MatDatepickerModule,
     HighchartsChartModule,
     MatNativeDateModule,
+    MatProgressSpinnerModule,
 
     FormsModule
   ],

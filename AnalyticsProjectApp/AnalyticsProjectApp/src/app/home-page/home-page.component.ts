@@ -30,12 +30,14 @@ export class HomePageComponent implements OnInit {
   public fromDate = this.lastWeek;
   public platformSelected = "All Platforms";
   public filter = new filterVM;
+  public loadingBool: Boolean = false;
 
   ngOnInit(): void {    
     this.getData();
   }
 
   getData(){
+    this.loadingBool = true;
     this.homeService.AllData().subscribe(
       (res: Array<summaryInformationVM>) => {
         console.log(res);
@@ -50,10 +52,12 @@ export class HomePageComponent implements OnInit {
     this.filter.fromDate = this.fromDate;
     this.filter.platform = this.platformSelected;
 
+    this.loadingBool = true;
     this.homeService.FilteredDataByDateAndPlatform(this.filter).subscribe(
       (res: Array<summaryInformationVM>) => {
         console.log(res);
        this.dataSource.data = res;
+       this.loadingBool = false;
       },
     );
   }
@@ -71,9 +75,11 @@ export class HomePageComponent implements OnInit {
     this.filter.fromDate = this.fromDate;
     this.filter.platform = this.platformSelected;
     console.log("test");
+    this.loadingBool = true;
     this.homeService.GenerateData(this.filter).subscribe(
       (res: any) => {
         this.getData();
+        this.loadingBool = false;
       },
     );
     

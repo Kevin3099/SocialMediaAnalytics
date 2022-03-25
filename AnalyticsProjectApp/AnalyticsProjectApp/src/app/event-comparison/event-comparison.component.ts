@@ -31,19 +31,15 @@ export class EventComparisonComponent implements OnInit {
 
   likesIncrease: number = 5;
   retweetsIncrease: number = 5;
-  commentsIncrease: number = 5;
 
   event1Likes: number = 0;
   event1Retweets: number = 0;
-  event1Comments: number = 0;
 
   event2Likes: number = 0;
   event2Retweets: number = 0;
-  event2Comments: number = 0;
 
   event3Likes: number = 0;
   event3Retweets: number = 0;
-  event3Comments: number = 0;
 
   constructor(public eventService: EventsService) { }
 
@@ -61,7 +57,6 @@ export class EventComparisonComponent implements OnInit {
 
        this.likesIncrease = this.comparedStats.averageLikesIncrease;
        this.retweetsIncrease = this.comparedStats.averageRetweetsIncrease;
-       this.commentsIncrease = this.comparedStats.averageCommentsIncrease;
 
        this.loadCharts();
       },
@@ -86,26 +81,23 @@ export class EventComparisonComponent implements OnInit {
       this.myEventList.forEach((event) => {
       
          event.summaryInformations.forEach(sumInfo =>{
-            if(event.hashtag == this.myEventNameList[0] && sumInfo.platform == this.platformSelected){
+            if(event.hashtag == this.selectedEvents[0] && sumInfo.platform == this.platformSelected){
                this.event1Likes = sumInfo.averageLikes;
                this.event1Retweets = sumInfo.averageRetweets;
-               this.event1Comments = sumInfo.averageComments;
             }
-            else if (event.hashtag == this.myEventNameList[1] && sumInfo.platform == this.platformSelected){
+            else if (event.hashtag == this.selectedEvents[1] && sumInfo.platform == this.platformSelected){
                this.event2Likes = sumInfo.averageLikes;
                this.event2Retweets = sumInfo.averageRetweets;
-               this.event2Comments = sumInfo.averageComments;
             }
-            else if (event.hashtag == this.myEventNameList[2] && sumInfo.platform == this.platformSelected){
+            else if (event.hashtag == this.selectedEvents[2] && sumInfo.platform == this.platformSelected){
                this.event3Likes = sumInfo.averageLikes;
                this.event3Retweets = sumInfo.averageRetweets;
-               this.event3Comments = sumInfo.averageComments;
             }
          });
       });
     
     console.log(this.event1Likes,this.event2Likes,this.event3Likes)
-    console.log(this.likesIncrease, this.retweetsIncrease, this.commentsIncrease);
+    console.log(this.likesIncrease, this.retweetsIncrease);
 
     this.pieChartOptions = {   
        chart : {
@@ -138,7 +130,6 @@ export class EventComparisonComponent implements OnInit {
           data: [
              ['Average Like Increase',   this.likesIncrease],
              ['Average Retweet Increase',       this.retweetsIncrease],
-             ['Average Comment Increase',    this.commentsIncrease],
           ]
        }]
     };
@@ -162,7 +153,7 @@ export class EventComparisonComponent implements OnInit {
            '#FFFFFF'), shadow: true
       },
       xAxis:{
-         categories: ['Likes','Retweets', 'Comments'], title: {
+         categories: ['Likes','Retweets'], title: {
          text: null
       } 
    },
@@ -187,7 +178,7 @@ export class EventComparisonComponent implements OnInit {
    series: [
       {
          name: 'Averages',
-         data: [this.likesIncrease, this.retweetsIncrease, this.commentsIncrease]
+         data: [this.likesIncrease, this.retweetsIncrease]
       },
    ]
  };
@@ -212,7 +203,7 @@ legend : {
         '#FFFFFF'), shadow: true
    },
    xAxis:{
-      categories: ['Likes','Retweets', 'Comments'], title: {
+      categories: ['Likes','Retweets'], title: {
       text: null
    } 
 },
@@ -237,7 +228,7 @@ credits:{
 series: [
    {
       name: 'Averages',
-      data: [this.event1Likes, this.event1Retweets, this.event1Comments]
+      data: [this.event1Likes, this.event1Retweets]
    },
 ]
 };
@@ -262,7 +253,7 @@ legend : {
         '#FFFFFF'), shadow: true
    },
    xAxis:{
-      categories: ['Likes','Retweets', 'Comments'], title: {
+      categories: ['Likes','Retweets'], title: {
       text: null
    } 
 },
@@ -287,7 +278,7 @@ credits:{
 series: [
    {
       name: 'Averages',
-      data: [this.event2Likes, this.event2Retweets, this.event2Comments]
+      data: [this.event2Likes, this.event2Retweets]
    },
 ]
 };
@@ -312,7 +303,7 @@ legend : {
         '#FFFFFF'), shadow: true
    },
    xAxis:{
-      categories: ['Likes','Retweets', 'Comments'], title: {
+      categories: ['Likes','Retweets'], title: {
       text: null
    } 
 },
@@ -337,7 +328,7 @@ credits:{
 series: [
    {
       name: 'Averages',
-      data: [10,10,10]
+      data: [this.event3Likes, this.event3Retweets]
    },
 ]
 };

@@ -51,10 +51,13 @@
         </mat-form-field>
 
         <mat-form-field appearance="fill">
-            <mat-label>Platform</mat-label>
-            <input matInput placeholder="Platform" type="time" [(ngModel)]="platform"
-                name="platform" required>
-        </mat-form-field>
+                <mat-label>Platforms</mat-label>
+                <mat-select [(value)]="platform" required>
+                    <mat-option value="Twitter">Twitter</mat-option>
+                    <mat-option value="Facebook">Facebook</mat-option>
+                    <mat-option value="LinkedIn">LinkedIn</mat-option>
+                  </mat-select>
+            </mat-form-field>
 
         <button class="buttons" type=submit color="primary">Predict</button>
     </form>
