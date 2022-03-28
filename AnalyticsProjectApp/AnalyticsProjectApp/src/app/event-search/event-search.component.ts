@@ -5,6 +5,8 @@ import { eventsVM } from '../models/eventsVM';
 import { filterVM } from '../models/filterVM';
 import { EventsService } from '../services/events.service';
 import * as Highcharts from 'highcharts';
+import exporting from 'highcharts/modules/exporting';
+exporting(Highcharts);
 
 @Component({
   selector: 'app-event-search',
@@ -88,6 +90,7 @@ export class EventSearchComponent implements OnInit {
          }
          this.loadingBool = false;
       });
+      this.loadingBool = false;
       this.loadChart();
       },
     );
@@ -151,6 +154,13 @@ loadChart() {
                }
             }
          },
+         exporting: {
+            chartOptions: {
+              title: {
+                text: 'Header'
+              },
+            }
+          },
          series : [{
             type: 'pie',
             name: 'Percentage Share',
@@ -203,6 +213,13 @@ loadChart() {
       credits:{
          enabled: false
       },
+      exporting: {
+         chartOptions: {
+           title: {
+             text: 'Header'
+           },
+         }
+       },
       series: [
          {
             name: 'Averages',

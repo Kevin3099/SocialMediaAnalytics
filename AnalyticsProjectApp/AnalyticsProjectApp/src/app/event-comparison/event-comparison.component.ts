@@ -129,6 +129,13 @@ export class EventComparisonComponent implements OnInit {
              }
           }
        },
+       exporting: {
+         chartOptions: {
+           title: {
+             text: 'Header'
+           },
+         }
+       },
        series : [{
           type: 'pie',
           name: 'Percentage Share',
@@ -180,6 +187,13 @@ export class EventComparisonComponent implements OnInit {
    credits:{
       enabled: false
    },
+   exporting: {
+      chartOptions: {
+        title: {
+          text: 'Header'
+        },
+      }
+    },
    series: [
       {
          name: 'Averages',
@@ -230,6 +244,13 @@ plotOptions : {
 credits:{
    enabled: false
 },
+exporting: {
+   chartOptions: {
+     title: {
+       text: 'Header'
+     },
+   }
+ },
 series: [
    {
       name: 'Averages',
@@ -280,6 +301,13 @@ plotOptions : {
 credits:{
    enabled: false
 },
+exporting: {
+   chartOptions: {
+     title: {
+       text: 'Header'
+     },
+   }
+ },
 series: [
    {
       name: 'Averages',
@@ -330,6 +358,13 @@ plotOptions : {
 credits:{
    enabled: false
 },
+exporting: {
+   chartOptions: {
+     title: {
+       text: 'Header'
+     },
+   }
+ },
 series: [
    {
       name: 'Averages',
