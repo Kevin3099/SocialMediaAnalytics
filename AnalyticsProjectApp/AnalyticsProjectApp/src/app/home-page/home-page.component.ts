@@ -20,6 +20,9 @@ export class HomePageComponent implements OnInit {
   table: string[] = ['dateFrom','dateTo','platforms','countOfPosts','averageLikes','averageRetweets','averageComments','totalLikes','totalRetweets','totalComments'];//,'moreInfo'
   dataSource = new MatTableDataSource<summaryInformationVM>();
 
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+
   constructor(public homeService: HomeService,private router: Router){}
 
   now = new Date();
@@ -42,6 +45,8 @@ export class HomePageComponent implements OnInit {
       (res: Array<summaryInformationVM>) => {
         console.log(res);
        this.dataSource.data = res;
+       this.dataSource.paginator = this.paginator;
+       this.dataSource.sort = this.sort;
        this.loadingBool=false;
       },
     );
@@ -58,6 +63,8 @@ export class HomePageComponent implements OnInit {
       (res: Array<summaryInformationVM>) => {
         console.log(res);
        this.dataSource.data = res;
+       this.dataSource.paginator = this.paginator;
+       this.dataSource.sort = this.sort;
        this.loadingBool = false;
       },
     );
