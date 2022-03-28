@@ -26,6 +26,26 @@ namespace AnalyticsProject.Helpers
         public string AccessToken { set; get; }
         public string AccessTokenSecret { set; get; }
 
+
+        public void GetTimeLineTweets(String user) {
+            var url = $"https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name={user}&exclude_replies=true&include_rts=false";
+            var httpRequest = (HttpWebRequest)WebRequest.Create(url);
+
+            httpRequest.Accept = "application/json";
+            httpRequest.Headers["Authorization"] = Constants.twitterBearerToken;
+            var result = "";
+
+            var httpResponse = (HttpWebResponse)httpRequest.GetResponse();
+            using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+            {
+                result = streamReader.ReadToEnd();
+                Console.WriteLine(result);
+            }
+
+            Console.WriteLine(httpResponse.StatusCode);
+            var timeLineTweets = JSONParserForMLTwitter(result);
+            return timeLineTweets;
+        }
         public SummaryInformation GetSummaryInformationForUser(String user)
         {
             var url = $"https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name={user}&exclude_replies=true&include_rts=false";
@@ -152,8 +172,6 @@ namespace AnalyticsProject.Helpers
 
             return Summary;
         }
-
-
     }
 }
 

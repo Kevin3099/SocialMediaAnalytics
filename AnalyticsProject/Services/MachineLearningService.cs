@@ -1,4 +1,5 @@
 ﻿using AnalyticsProject.DataModels;
+using AnalyticsProject.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,8 @@ namespace AnalyticsProject.Services
 {
     public interface IMachineLearningService
     {
-        void GetNames();
+        void DataGeneration();
+        PredictedPostVM PostPrediction(PredictedPostVM myPost);
     }
     public class MachineLearningService : ServiceBase, IMachineLearningService
     {
@@ -16,10 +18,13 @@ namespace AnalyticsProject.Services
         {
         }
 
-        public void GetNames()
+        public void DataGeneration()
         {
 
-            //  return vm;
+        }
+
+        public PredictedPostVM PostPrediction(PredictedPostVM myPost) {
+            return null;
         }
     }
 }
