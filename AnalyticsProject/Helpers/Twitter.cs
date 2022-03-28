@@ -4,6 +4,7 @@ using System.Net;
 using AnalyticsProject.Properties;
 using Newtonsoft.Json.Linq;
 using AnalyticsProject.DataModels;
+using System.Collections.Generic;
 
 namespace AnalyticsProject.Helpers
 {
@@ -27,8 +28,8 @@ namespace AnalyticsProject.Helpers
         public string AccessTokenSecret { set; get; }
 
 
-        public void GetTimeLineTweets(String user) {
-            var url = $"https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name={user}&exclude_replies=true&include_rts=false";
+        public List<TwitterMLDb> GetTimeLineTweets(String user) {
+            var url = $"https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name={user}&exclude_replies=true&include_rts=false&count=100";
             var httpRequest = (HttpWebRequest)WebRequest.Create(url);
 
             httpRequest.Accept = "application/json";
@@ -43,9 +44,34 @@ namespace AnalyticsProject.Helpers
             }
 
             Console.WriteLine(httpResponse.StatusCode);
-            var timeLineTweets = JSONParserForMLTwitter(result);
+
+            var timeLineTweets = JSONParserForMLTwitter(result,user);
             return timeLineTweets;
         }
+
+        public List<TwitterMLDb> GetRelatedTweets(String user,string hashtag)
+        {
+            var url = $"https://api.twitter.com/1.1/search/tweets.json?q={hashtag}&exclude_replies=true&count=200&include_rts=false";
+            var httpRequest = (HttpWebRequest)WebRequest.Create(url);
+
+            httpRequest.Accept = "application/json";
+            httpRequest.Headers["Authorization"] = Constants.twitterBearerToken;
+            var result = "";
+
+            var httpResponse = (HttpWebResponse)httpRequest.GetResponse();
+            using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+            {
+                result = streamReader.ReadToEnd();
+                Console.WriteLine(result);
+            }
+
+            Console.WriteLine(httpResponse.StatusCode);
+
+            var tweets = JSONParserForMLTwitterHashtag(result,user,hashtag);
+            return tweets;
+        }
+
+
         public SummaryInformation GetSummaryInformationForUser(String user)
         {
             var url = $"https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name={user}&exclude_replies=true&include_rts=false";
@@ -171,6 +197,52 @@ namespace AnalyticsProject.Helpers
             };
 
             return Summary;
+        }
+
+        private List<TwitterMLDb> JSONParserForMLTwitter(string result,string user)
+        {
+            List<TwitterMLDb> myData = new List<TwitterMLDb>();
+            dynamic dataArray = JArray.Parse(result);
+            Console.WriteLine(dataArray[0]);
+            foreach (var post in dataArray)
+            {
+                var myPost = new TwitterMLDb()
+                {
+                    Id = new Guid(),
+                    user = user,
+                  //  postDate = post.created_at,
+                    postContent = post.text,
+                    postTime = post.created_at,
+                    platform = "Twitter",
+                    likes = post.favorite_count,
+                    retweets = post.retweet_count
+                };
+                myData.Add(myPost);
+            }
+            return myData;
+        }
+
+        private List<TwitterMLDb> JSONParserForMLTwitterHashtag(string result, string user,string hashtag)
+        {
+            List<TwitterMLDb> myData = new List<TwitterMLDb>();
+            dynamic dataArray = JObject.Parse(result);
+   //         Console.WriteLine(dataArray[0]);
+            foreach (var post in dataArray.statuses)
+            {
+                var myPost = new TwitterMLDb()
+                {
+                    Id = new Guid(),
+                    user = user,
+                    //  postDate = post.created_at,
+                    postContent = post.text,
+                    postTime = post.created_at,
+                    platform = "Twitter",
+                    likes = post.favorite_count,
+                    retweets = post.retweet_count
+                };
+                myData.Add(myPost);
+            }
+            return myData;
         }
     }
 }

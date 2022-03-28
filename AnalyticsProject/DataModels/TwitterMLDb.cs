@@ -7,6 +7,7 @@ namespace AnalyticsProject.DataModels
 {
     public class TwitterMLDb
     {
+        public Guid Id { get; set; }
         public string user { get; set; }
         public DateTimeOffset postDate { get; set; }
         public string postContent { get; set; }

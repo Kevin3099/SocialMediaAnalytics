@@ -11,15 +11,22 @@ using System.Threading.Tasks;
 
 namespace AnalyticsProject.Controllers
 {
-    [Route("api/Home")]
+    [Route("api/MachineLearning")]
     [ApiController]
-    [Authorize]
-    public class MachineLearningController : Controller
+   // [Authorize]
+    public class MachineLearningController : ControllerBaseX
     {
         public IMachineLearningService Svc { get; }
         public MachineLearningController(IMachineLearningService machineLearningService)
         {
             Svc = machineLearningService;
+        }
+
+        [HttpGet]
+        [Route("DataGeneration")]
+        public void DataGeneration()
+        {
+            var result = Execute(Svc.DataGeneration);
         }
     }
 }

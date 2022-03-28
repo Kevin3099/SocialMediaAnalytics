@@ -1,4 +1,6 @@
 ﻿using AnalyticsProject.DataModels;
+using AnalyticsProject.Helpers;
+using AnalyticsProject.Properties;
 using AnalyticsProject.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -20,8 +22,16 @@ namespace AnalyticsProject.Services
 
         public void DataGeneration()
         {
-
-        }
+            Twitter twitter = new Twitter(Constants.consumerKey, Constants.consumerKeySecret, Constants.access_token, Constants.access_token_secret);
+          //  List<TwitterMLDb> data = twitter.GetTimeLineTweets("KevsterO98");
+            List<TwitterMLDb> moreData = twitter.GetRelatedTweets("KevsterO98","RocketLeague");
+        //    data.AddRange(moreData);
+            foreach(var x in moreData)
+            {
+                Ctx.TwitterMLDbs.Add(x);
+            }
+            Ctx.SaveChanges();
+        }   
 
         public PredictedPostVM PostPrediction(PredictedPostVM myPost) {
             return null;

@@ -13,6 +13,8 @@ namespace AnalyticsProject.DataModels
           public DbSet<FacebookDb> FacebookDbs { get; set; }
           public DbSet<LinkedInDb> LinkedInDbs { get; set; }
 
+          public DbSet<TwitterMLDb> TwitterMLDbs { get; set; }
+
 
         public SMAContext(DbContextOptions<SMAContext> options)
                 : base(options)
