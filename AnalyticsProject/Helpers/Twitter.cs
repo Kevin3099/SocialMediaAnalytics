@@ -5,6 +5,7 @@ using AnalyticsProject.Properties;
 using Newtonsoft.Json.Linq;
 using AnalyticsProject.DataModels;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace AnalyticsProject.Helpers
 {
@@ -206,6 +207,10 @@ namespace AnalyticsProject.Helpers
             Console.WriteLine(dataArray[0]);
             foreach (var post in dataArray)
             {
+                Regex rgx = new Regex("[^a-zA-Z0-9 -]");
+                Console.WriteLine(post.text);
+                string str1 = post.text;
+                post.text = rgx.Replace(str1, "");
                 var myPost = new TwitterMLDb()
                 {
                     Id = new Guid(),
@@ -229,6 +234,9 @@ namespace AnalyticsProject.Helpers
    //         Console.WriteLine(dataArray[0]);
             foreach (var post in dataArray.statuses)
             {
+                Regex rgx = new Regex("[^a-zA-Z0-9]");
+                string str1 = post.text;
+                post.text = rgx.Replace(str1, "");
                 var myPost = new TwitterMLDb()
                 {
                     Id = new Guid(),

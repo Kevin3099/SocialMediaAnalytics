@@ -23,10 +23,10 @@ namespace AnalyticsProject.Services
         public void DataGeneration()
         {
             Twitter twitter = new Twitter(Constants.consumerKey, Constants.consumerKeySecret, Constants.access_token, Constants.access_token_secret);
-          //  List<TwitterMLDb> data = twitter.GetTimeLineTweets("KevsterO98");
+            List<TwitterMLDb> data = twitter.GetTimeLineTweets("KevsterO98");
             List<TwitterMLDb> moreData = twitter.GetRelatedTweets("KevsterO98","RocketLeague");
-        //    data.AddRange(moreData);
-            foreach(var x in moreData)
+            data.AddRange(moreData);
+            foreach(var x in data)
             {
                 Ctx.TwitterMLDbs.Add(x);
             }
