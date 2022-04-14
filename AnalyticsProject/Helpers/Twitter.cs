@@ -210,13 +210,13 @@ namespace AnalyticsProject.Helpers
                 Regex rgx = new Regex("[^a-zA-Z0-9 -]");
                 Console.WriteLine(post.text);
                 string str1 = post.text;
-                post.text = rgx.Replace(str1, "");
+                str1 = rgx.Replace(str1, "");
                 var myPost = new TwitterMLDb()
                 {
                     Id = new Guid(),
                     user = user,
                   //  postDate = post.created_at,
-                    postContent = post.text,
+                    postContent = str1,
                     postTime = post.created_at,
                     platform = "Twitter",
                     likes = post.favorite_count,
@@ -236,13 +236,13 @@ namespace AnalyticsProject.Helpers
             {
                 Regex rgx = new Regex("[^a-zA-Z0-9]");
                 string str1 = post.text;
-                post.text = rgx.Replace(str1, "");
+                str1 = rgx.Replace(str1, "");
                 var myPost = new TwitterMLDb()
                 {
                     Id = new Guid(),
                     user = user,
                     //  postDate = post.created_at,
-                    postContent = post.text,
+                    postContent = str1,
                     postTime = post.created_at,
                     platform = "Twitter",
                     likes = post.favorite_count,

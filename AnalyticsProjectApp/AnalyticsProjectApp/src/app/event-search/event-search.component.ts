@@ -157,7 +157,7 @@ loadChart() {
          exporting: {
             chartOptions: {
               title: {
-                text: 'Header'
+                text: 'Comparison of Total Likes and Retweets'
               },
             }
           },
