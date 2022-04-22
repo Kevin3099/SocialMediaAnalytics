@@ -28,7 +28,7 @@ namespace AnalyticsProject.Services
           
             List<SummaryInformationVM> db = new List<SummaryInformationVM>();
             var SIList = Ctx.SummaryInformations
-                .Where(x => x.DateTo.Date == DateTime.Now.Date && x.DateFrom.Date == DateTime.Now.AddDays(-7).Date)
+              //  .Where(x => x.DateTo.Date == DateTime.Now.Date && x.DateFrom.Date == DateTime.Now.AddDays(-7).Date)
                 .Select(x => new SummaryInformationVM(x)).ToList();
 
             if (SIList.Count == 0) {
@@ -37,7 +37,7 @@ namespace AnalyticsProject.Services
                     DateFrom = DateTime.Now.AddDays(-7).Date,
                     DateTo = DateTime.Now.Date
                 };
-                GenerateData(filter, "kevsterO98");
+          //      GenerateData(filter, "kevsterO98");
             }
             return SIList;
         }
