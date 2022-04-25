@@ -23,6 +23,7 @@ namespace AnalyticsProject.Services
         public void DataGeneration()
         {
             Twitter twitter = new Twitter(Constants.consumerKey, Constants.consumerKeySecret, Constants.access_token, Constants.access_token_secret);
+            // Won't be hardcoded in the future
             List<TwitterMLDb> data = twitter.GetTimeLineTweets("KevsterO98");
             List<TwitterMLDb> moreData = twitter.GetRelatedTweets("KevsterO98","RocketLeague");
             data.AddRange(moreData);
@@ -34,20 +35,8 @@ namespace AnalyticsProject.Services
         }   
 
         public PredictedPostVM PostPrediction(PredictedPostVM myPost) {
+            // ran out of time - ML in Project - Add ML - Build Model
             return null;
         }
     }
 }
-
-// STEPS 
-// Get Data in, Get Parameters off User - Time planned to post - Hashtags - User - Followers
-// Check for sufficient data to make a prediction 
-// if yes continue if no stop
-// if yes - bring in all data, (All posts using hashtag within time limit by users with similar following) 
-// split into train and test
-// remove outliers on train
-// Check a few models
-// Use best predictor
-// test all on test data
-// return percentage accuracy
-// Generate prediction for users post

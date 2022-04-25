@@ -11,6 +11,7 @@ namespace AnalyticsProject.Helpers
 {
     public class LinkedIn
     {
+        //Authentication
         public const string OauthVersion = "1.0";
         public const string OauthSignatureMethod = "HMAC-SHA1";
 
@@ -25,6 +26,7 @@ namespace AnalyticsProject.Helpers
             return "Not Implemented Yet";
         }
 
+        // Same as Facebook but for LinkedIn, Seperated to bring in linkedIn down the line.
         public SummaryInformation GetSummaryInformationForUser(string user, FilterVM filter, List<LinkedInDbVM> LiList)
         {
             int totalLikes = 0;
@@ -64,6 +66,7 @@ namespace AnalyticsProject.Helpers
             return Summary;
         }
 
+        // Same as Facebook but for LinkedIn, Seperated to bring in linkedIn down the line.
         public SummaryInformation GetSummaryInformationForEvents(EventsVM newEvent, List<LinkedInDbVM> LiList)
         {
             var totalLikes = 0;

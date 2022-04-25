@@ -134,7 +134,6 @@ namespace AnalyticsProject.Services
                  .Include(x => x.SummaryInformations)
                  .Select(x => new EventsVM(x)).ToList();
 
-            //Temporary Fix Bad Practice
             foreach (EventsVM x in myEventList)
             {
                 x.SummaryInformations = Ctx.SummaryInformations
@@ -145,14 +144,12 @@ namespace AnalyticsProject.Services
             return myEventList;
         }
 
-
-        // DATES NOT PASSED DOWN PROPERLY
         public EventsVM SearchEvent(EventsVM newEvent)
         {
             var searchedEvent = Ctx.Events
                 .Where(x => x.Hashtag == newEvent.Hashtag)
-                .Include(x => x.SummaryInformations) // Include not adding Summary list
-                .Select(x => new EventsVM(x)).FirstOrDefault(); // Fix at later point
+                .Include(x => x.SummaryInformations)
+                .Select(x => new EventsVM(x)).FirstOrDefault(); 
 
             if (searchedEvent != null && searchedEvent.DateTo == newEvent.DateTo && searchedEvent.DateFrom == newEvent.DateFrom)
             {
@@ -215,6 +212,8 @@ namespace AnalyticsProject.Services
         }
 
         private List<string> CalculateMostCommonWords(string platform) {
+            //Ran out of time to implement
+
             // get event
             // if statement for each platform
             // if linkedIn
@@ -226,6 +225,8 @@ namespace AnalyticsProject.Services
             return null;
         }
         private List<DateTime> CalculateBestPostTimes() {
+            // Ran out of time to implement 
+
             // figure out way to convert to 24 hour clock and ignore data .getHour??
             // loop over posts if above average - check time - add to count for that hour
             // highest counted hour, average posts in that hour 

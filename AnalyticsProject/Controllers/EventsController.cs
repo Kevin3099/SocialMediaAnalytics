@@ -15,14 +15,17 @@ namespace AnalyticsProject.Controllers
     [Route("api/Event")]
     [ApiController]
   //  [Authorize]
+  // Setting up Events Controller
     public class EventsController : ControllerBaseX
     {
+        // Defining services to be used
         public IEventsService Svc { get; }
         public EventsController(IEventsService eventsService)
         {
             Svc = eventsService;
         }
 
+        //Method to Call Service and use Search Event Method
         [HttpGet]
         [Route("SearchEvent")]
         public ActionResult<EventsVM> SearchEvent(DateTime toDate, DateTime fromDate, string platform, string hashtag)
@@ -43,7 +46,7 @@ namespace AnalyticsProject.Controllers
             var result = Execute(Svc.SearchEvent, newEvent);
             return result;
         }
-
+        // Calls MyEvents when API is called
         [HttpGet]
         [Route("MyEvents")]
         public ActionResult<List<EventsVM>> MyEvents()
@@ -51,7 +54,7 @@ namespace AnalyticsProject.Controllers
             var result = Execute(Svc.MyEvents);
             return result;
         }
-
+        // Calls Filtered My Events when API is Called
         [HttpGet]
         [Route("FilteredMyEvents")]
         public ActionResult<List<EventsVM>> FilteredMyEvents(FilterVM filter, string hashtag)
@@ -60,11 +63,14 @@ namespace AnalyticsProject.Controllers
             var result = Execute(Svc.FilteredMyEvents,filter,hashtag);
             return result;
         }
+
+        // Calls Compare Events when API is Called
         [HttpGet]
         [Route("CompareEvents")]
         public ActionResult<ComparedStatsVM> CompareEvents(string platform, string hashtag0, string hashtag1, string hashtag2, string hashtag3) {
             List<EventsVM> myEventsList = new List<EventsVM>();
 
+            // Can compare up to 5 different events from the JQuery String
             EventsVM myEvent = new EventsVM();
             EventsVM myEvent1 = new EventsVM();
             EventsVM myEvent2 = new EventsVM();

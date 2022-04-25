@@ -11,6 +11,7 @@ namespace AnalyticsProject.Helpers
 {
     public class Facebook
     {
+        // Authentication Methods
         public const string OauthVersion = "1.0";
         public const string OauthSignatureMethod = "HMAC-SHA1";
 
@@ -25,6 +26,7 @@ namespace AnalyticsProject.Helpers
             return "Not Implemented Yet";
         }
 
+        // Creates the Summary Information object for the user
         public SummaryInformation GetSummaryInformationForUser(string user, FilterVM filter, List<FacebookDbVM> fbList)
         {
 
@@ -34,7 +36,8 @@ namespace AnalyticsProject.Helpers
             int averageLikes = 0;
             int averageRetweets = 0;
             int averageComments = 0;
-
+            
+            //Looping through list of posts passed in and calculating stats based off that list.
             foreach (FacebookDbVM post in fbList)
             {
                 totalLikes = post.likes + totalLikes;
@@ -44,6 +47,7 @@ namespace AnalyticsProject.Helpers
                 averageRetweets = totalRetweets / fbList.Count;
                 averageComments = totalComments / fbList.Count;
             }
+            //Building the summary object to pass back
             var Summary = new SummaryInformation()
             {
                 Platform = "Facebook",
@@ -64,6 +68,7 @@ namespace AnalyticsProject.Helpers
             return Summary;
         }
 
+        // Similar to above but for events, need a few extra parameters.
         public SummaryInformation GetSummaryInformationForEvents(EventsVM newEvent, List<FacebookDbVM> fbList)
         {
             int totalLikes = 0;
@@ -82,6 +87,8 @@ namespace AnalyticsProject.Helpers
                 averageRetweets = totalRetweets / fbList.Count;
                 averageComments = totalComments / fbList.Count;
             }
+            // Creating the summary object like above but adding in Event Hashtag
+            // will change in future development to use actual facebook api
             var Summary = new SummaryInformation()
             {
                 Platform = "Facebook",

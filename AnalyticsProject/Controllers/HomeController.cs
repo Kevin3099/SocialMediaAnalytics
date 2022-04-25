@@ -30,21 +30,5 @@ namespace AnalyticsProject.Controllers
         {
             return "Hello";
         }
-
-    /*    [HttpGet()]
-        [Route("Get1")]
-        public ActionResult<List<HomePageVM>> Get1()
-        {
-            var result = Execute(Svc.GetNames);
-            return result;
-        }
-
-          [HttpPost]
-          [Route("Add")]
-          public ActionResult<VM> Add([FromBody] VM add)
-          {
-              var result = Execute(Svc.Add, add);
-              return result;
-          }*/
     }
 }

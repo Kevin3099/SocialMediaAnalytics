@@ -14,7 +14,6 @@ namespace AnalyticsProject.Controllers
 {
     [Route("api/SummaryInformation")]
     [ApiController]
-   // [Authorize]
     public class SummaryInformationController : ControllerBaseX
     {
         public ISummaryInformationService Svc { get; }
@@ -23,6 +22,7 @@ namespace AnalyticsProject.Controllers
             Svc = summaryInformationService;
         }
 
+        // Method to Get Summary information for User
         [HttpGet]
         [Route("AllDataLastWeek")]
         public ActionResult<List<SummaryInformationVM>> getAll()
@@ -31,29 +31,31 @@ namespace AnalyticsProject.Controllers
             return result;
         }
 
+        //Method to get Filtered Data for User
         [HttpGet]
         [Route("filteredDataByDateAndPlatform")]
         public ActionResult<List<SummaryInformationVM>> FilteredGet(DateTime toDate,DateTime fromDate,string platform)
         {
+            // Making Filter Object out of items passed in JQuery String
             var filter = new FilterVM
             {
                 DateTo = toDate,
                 DateFrom = fromDate,
                 Platform = platform
             };
-
+            // Calling service using Execute method in ControllerBaseX
             var result = Execute(Svc.FilteredGet, filter);
             return result;
         }
     
-
+        // Delete's Data
     [HttpGet]
     [Route("DeleteData")]
     public void DeleteAll()
     {
         Execute(Svc.DeleteAll);
     }
-
+        // Calls Generate's Data method from service
         [HttpGet]
         [Route("GenerateData")]
         public ActionResult<List<SummaryInformationVM>> GenerateData(DateTime toDate, DateTime fromDate, string platform, string user)
@@ -64,6 +66,8 @@ namespace AnalyticsProject.Controllers
                 DateFrom = fromDate,
                 Platform = platform
             };
+
+            // Hard Coding in User for now, will change in future development
             user = "KevsterO98";
 
             var result = Execute(Svc.GenerateData, filter, user);
@@ -71,7 +75,3 @@ namespace AnalyticsProject.Controllers
         }
     }
 }
-//getall
-//filteredGet
-//deleteAll
-//generate data

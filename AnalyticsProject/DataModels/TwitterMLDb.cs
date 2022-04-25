@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 namespace AnalyticsProject.DataModels
 {
+    // Twitter Data Object for Predictions
     public class TwitterMLDb
     {
         public Guid Id { get; set; }

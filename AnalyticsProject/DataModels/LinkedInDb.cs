@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace AnalyticsProject.DataModels
 {
+    //LinkedIn Dummy Data Object for Database
     public class LinkedInDb
     {
         public Guid Id { get; set; }

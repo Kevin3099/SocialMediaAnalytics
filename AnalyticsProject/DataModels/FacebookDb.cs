@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace AnalyticsProject.DataModels
 {
+    //Facebook Database Object for Dummy Data
     public class FacebookDb
     {
         public Guid Id { get; set; }

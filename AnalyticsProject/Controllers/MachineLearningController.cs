@@ -13,7 +13,6 @@ namespace AnalyticsProject.Controllers
 {
     [Route("api/MachineLearning")]
     [ApiController]
-   // [Authorize]
     public class MachineLearningController : ControllerBaseX
     {
         public IMachineLearningService Svc { get; }
@@ -22,6 +21,8 @@ namespace AnalyticsProject.Controllers
             Svc = machineLearningService;
         }
 
+
+        // Calls Data Generation Method for predictions
         [HttpGet]
         [Route("DataGeneration")]
         public void DataGeneration()

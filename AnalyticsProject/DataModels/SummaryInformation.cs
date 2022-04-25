@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace AnalyticsProject.DataModels
 {
+ // Summary Information Object in the database is defined here
     public class SummaryInformation
     {
         public string Platform { get; set; }

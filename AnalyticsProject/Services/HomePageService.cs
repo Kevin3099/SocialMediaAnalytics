@@ -20,15 +20,6 @@ namespace AnalyticsProject.Services
 
         public void GetNames()
         {
-            /*    var db = Ctx.HomePages.ToList();
-                var vm = new List<HomePageVM>();
-
-                foreach (var homePage in db)
-                {
-                    var homeVM = new HomePageVM(homePage);
-                    vm.Add(homeVM);
-                }*/
-            //  return vm;
         } 
     }
 }
