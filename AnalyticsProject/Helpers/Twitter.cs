@@ -128,15 +128,14 @@ namespace AnalyticsProject.Helpers
             dynamic dataArray = JArray.Parse(result);
             int totalLikes = 0;
             int totalRetweets = 0;
-            int totalComments = 100;
-            int averageComments = 10;
+            int totalComments = 8;
 
             // Looping through array and calculating stats for tweets
             foreach (var post in dataArray)
             {
                 totalLikes = post.favorite_count + totalLikes;
                 totalRetweets = post.retweet_count + totalRetweets;
-                totalComments = 5;
+                totalComments = 8;
             }
 
             //Need to convert type before doing any calculations on it
@@ -145,6 +144,9 @@ namespace AnalyticsProject.Helpers
 
             int averageRetweets = dataArray.Count;
             averageRetweets = totalRetweets / averageRetweets;
+
+            int averageComments = dataArray.Count;
+            averageComments = totalComments / averageComments;
 
             //Creating Summary Object
             var Summary = new SummaryInformation()
@@ -175,14 +177,13 @@ namespace AnalyticsProject.Helpers
             dynamic dataArray = JObject.Parse(result);
             int totalLikes = 0;
             int totalRetweets = 0;
-            int totalComments = 100;
-            int averageComments = 10;
+            int totalComments = 0;
             // Looping through data to get stats
             foreach (var post in dataArray.statuses)
             {
                 totalLikes = post.favorite_count + totalLikes;
                 totalRetweets = post.retweet_count + totalRetweets;
-                totalComments = 25;
+                totalComments = 7;
             }
 
             //Need to convert type before doing any calculations on it
@@ -190,6 +191,8 @@ namespace AnalyticsProject.Helpers
             averageLikes = totalLikes / averageLikes;
             int averageRetweets = dataArray.search_metadata.count;
             averageRetweets = totalRetweets / averageRetweets;
+            int averageComments = dataArray.search_metadata.count;
+            averageComments = totalRetweets / averageComments;
 
             var Summary = new SummaryInformation()
             {
@@ -227,7 +230,7 @@ namespace AnalyticsProject.Helpers
                 Console.WriteLine(post.text);
                 string str1 = post.text;
                 str1 = rgx.Replace(str1, " ");
-                // Creating object and adding it to the list to return
+                // Creating object and adding it to the list
                 var myPost = new TwitterMLDb()
                 {
                     Id = new Guid(),
@@ -251,7 +254,7 @@ namespace AnalyticsProject.Helpers
             {
                 Regex rgx = new Regex("[^a-zA-Z0-9]");
                 string str1 = post.text;
-                str1 = rgx.Replace(str1, " ");
+                str1 = rgx.Replace(str1, "");
                 var myPost = new TwitterMLDb()
                 {
                     Id = new Guid(),

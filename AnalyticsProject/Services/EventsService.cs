@@ -41,9 +41,10 @@ namespace AnalyticsProject.Services
             int averageCommentIncrease = 0;
             int averageRetweetIncrease = 0;
 
-            int averageLikeForThisEvent = 0;
-            int averageCommentForThisEvent = 0;
-            int averageRetweetForThisEvent = 0;
+            int totalAverageLikeDifference = 0;
+            int totalAverageRetweetDifference = 0;
+            int totalAverageCommentDifference = 0;
+            var count = 0;
 
             int prevLike = 0;
             int prevRt = 0;
@@ -72,31 +73,30 @@ namespace AnalyticsProject.Services
                     mostCommonWords = CalculateMostCommonWords("LinkedIn");
                 }
                 //Change to increased numbers so get average off each event then minus it from previous then add increases and divide
-                if (info != null) {
-                averageLikeForThisEvent = averageLikeForThisEvent + info.averageLikes;
-                averageRetweetForThisEvent = averageRetweetForThisEvent + info.averageRetweets;
-                averageCommentForThisEvent = averageCommentForThisEvent + info.averageComments;
+                if (info != null)
+                {
 
                     if (prevLike != 0)
                     {
-                        averageLikeIncrease = averageLikeIncrease + (averageLikeForThisEvent - prevLike);
-                        averageRetweetIncrease = averageRetweetIncrease + (averageRetweetForThisEvent - prevRt);
-                        averageCommentIncrease = averageCommentIncrease + (averageCommentForThisEvent - prevComment);
+                        int averageLikeDifference = info.averageLikes - prevLike;
+                        int averageRetweetDifference = info.averageRetweets - prevRt;
+                        int averageCommentDifference = info.averageComments - prevComment;
+
+                        totalAverageLikeDifference = totalAverageLikeDifference + averageLikeDifference;
+                        totalAverageRetweetDifference = totalAverageRetweetDifference + averageRetweetDifference;
+                        totalAverageCommentDifference = totalAverageCommentDifference + averageCommentIncrease;
+
+                        count++;
                     }
-                    
-                prevLike = averageLikeForThisEvent;
-                prevRt = averageRetweetForThisEvent;
-                prevComment = averageCommentForThisEvent;
+                    prevLike = info.averageLikes;
+                    prevRt = info.averageRetweets;
+                    prevComment = info.averageComments;
 
                 }
             }
-
-            averageCommentIncrease = averageCommentIncrease / orderedList.Count();
-            averageLikeIncrease = averageLikeIncrease / orderedList.Count();
-            averageRetweetIncrease = averageRetweetIncrease / orderedList.Count();
-
-            
-           // var bestPostTimes = CalculateBestPostTimes();
+            averageLikeIncrease = totalAverageLikeDifference / count;
+            averageRetweetIncrease = totalAverageRetweetDifference / count;
+            averageCommentIncrease = totalAverageCommentDifference / count;
 
             var comparedEvents = new ComparedStatsVM()
             {
@@ -117,7 +117,6 @@ namespace AnalyticsProject.Services
                 .Include(x => x.SummaryInformations)
                 .Select(x => new EventsVM(x)).ToList();
             
-            //Temporary Fix bad practice
             foreach(EventsVM x in myEventList)
             {
                 x.SummaryInformations = Ctx.SummaryInformations

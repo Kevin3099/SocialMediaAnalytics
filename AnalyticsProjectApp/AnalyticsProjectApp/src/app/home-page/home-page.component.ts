@@ -50,6 +50,7 @@ export class HomePageComponent implements OnInit {
        this.loadingBool=false;
       },
     );
+
   }
 
   getFilteredData(){
